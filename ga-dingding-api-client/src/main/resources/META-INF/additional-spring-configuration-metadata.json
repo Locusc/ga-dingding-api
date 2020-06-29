@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "gad.api.client.access-key",
+      "type": "java.lang.String",
+      "description": "Description for gad.api.client.access-key."
+  }
+] }

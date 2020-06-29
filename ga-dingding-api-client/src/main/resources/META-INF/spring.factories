@@ -1,0 +1,3 @@
+# Auto Configuration
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  cn.locusc.ga.dingding.api.client.config.GadExecutableClientAutoConfiguration
