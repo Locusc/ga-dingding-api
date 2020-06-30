@@ -11,8 +11,6 @@
 
     <artifactId>ga-dingding-api-common</artifactId>
     <packaging>jar</packaging>
-
-    <name>ga.dingding.api.common</name>
     <url>https://github.com/Locusc/</url>
 
 </project>

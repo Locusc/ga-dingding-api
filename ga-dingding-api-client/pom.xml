@@ -11,14 +11,12 @@
 
     <artifactId>ga-dingding-api-client</artifactId>
     <packaging>jar</packaging>
-
-    <name>ga.dingding.api.client</name>
     <url>https://github.com/Locusc/</url>
 
     <dependencies>
         <dependency>
             <groupId>cn.locusc</groupId>
-            <artifactId>ga.dingding.api.common</artifactId>
+            <artifactId>ga-dingding-api-common</artifactId>
             <version>1.0.0</version>
             <scope>compile</scope>
         </dependency>

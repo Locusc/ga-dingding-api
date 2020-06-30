@@ -6,7 +6,7 @@
 ```xml
     <dependency>
         <groupId>cn.locusc</groupId>
-        <artifactId>ga.dingding.api.client</artifactId>
+        <artifactId>ga-dingding-api-client</artifactId>
         <version>1.0.0</version>
     </dependency>
 ```

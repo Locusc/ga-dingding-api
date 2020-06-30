@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>cn.locusc</groupId>
-    <artifactId>ga.dingding.api</artifactId>
+    <artifactId>ga-dingding-api</artifactId>
     <packaging>pom</packaging>
     <version>1.0.0</version>
     <description>第三方应用请求政务钉钉服务端API工具</description>
