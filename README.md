@@ -7,7 +7,7 @@
     <dependency>
         <groupId>cn.locusc</groupId>
         <artifactId>ga.dingding.api.client</artifactId>
-        <version>1.0.5</version>
+        <version>1.0.0</version>
     </dependency>
 ```
 ## application.yml 配置：
