@@ -13,9 +13,9 @@ import org.springframework.util.CollectionUtils;
 
 
 /**
- * @Author Jay Chan
- * @Description 政务钉钉请求api总类
- * @Date 20:51 2020/6/24
+ * @author Jay Chan
+ * 政务钉钉请求api总类
+ * 20:51 2020/6/24
  **/
 @Service
 public class GadApiTemplate extends GadClientTemplate implements GadBECBApiService,
@@ -24,8 +24,8 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
 
     /* 消息会话接口实现 */
     /**
-     * @Description 发送IM消息 JSONObject入参
-     * @Param [jsonObject]
+     * 发送IM消息
+     * @param jsonObject JSONObject入参
      * @return java.lang.String
      **/
     @Override
@@ -40,8 +40,8 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
     }
 
     /**
-     * @Description 发送IM消息 ImChatIsvSendMsgObject入参
-     * @Param [imChatIsvSendMsgObject]
+     * 发送IM消息
+     * @param imChatIsvSendMsgObject ImChatIsvSendMsgObject入参
      * @return java.lang.String
      **/
     @Override
@@ -56,8 +56,8 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
     }
 
     /**
-     * @Description 创建群聊会话 JSONObject入参
-     * @Param [jsonObject]
+     * 创建群聊会话
+     * @param jsonObject JSONObject入参
      * @return java.lang.String
      **/
     @Override
@@ -79,8 +79,8 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
     }
 
     /**
-     * @Description 创建群聊会话 ImChatIsvCreatGroupChatObject入参
-     * @Param [imChatIsvCreatGroupChatObject]
+     * 创建群聊会话
+     * @param imChatIsvCreatGroupChatObject ImChatIsvCreatGroupChatObject入参
      * @return java.lang.String
      **/
     @Override
@@ -101,8 +101,8 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
 
     /* 业务实事件回调接口实现 */
     /**
-     * @Description 移除失败回调
-     * @Param [eventCallbackFailedId]
+     * 移除失败回调
+     * @param eventCallbackFailedId eventCallbackFailedId
      * @return java.lang.String
      **/
     @Override
@@ -117,8 +117,8 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
     }
 
     /**
-     * @Description 重试失败回调
-     * @Param [eventCallbackFailedId]
+     * 重试失败回调
+     * @param eventCallbackFailedId eventCallbackFailedId
      * @return java.lang.String
      **/
     @Override
@@ -133,8 +133,7 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
     }
 
     /**
-     * @Description 查询回调失败信息
-     * @Param []
+     * 查询回调失败信息
      * @return java.lang.String
      **/
     @Override
@@ -144,8 +143,8 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
     }
 
     /**
-     * @Description 删除事件回调的定义信息
-     * @Param [eventCallbackId]
+     * 删除事件回调的定义信息
+     * @param eventCallbackId eventCallbackId
      * @return java.lang.String
      **/
     @Override
@@ -160,8 +159,9 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
     }
 
     /**
-     * @Description 更新事件回调的定义信息
-     * @Param [eventCallbackId, callbackUrl]
+     * 更新事件回调的定义信息
+     * @param eventCallbackId eventCallbackId
+     * @param callbackUrl callbackUrl
      * @return java.lang.String
      **/
     @Override
@@ -181,8 +181,7 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
     }
 
     /**
-     * @Description 查询定义的事件列表
-     * @Param []
+     * 查询定义的事件列表
      * @return java.lang.String
      **/
     @Override
@@ -192,8 +191,9 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
     }
 
     /**
-     * @Description 查询定义的事件列表
-     * @Param [eventTag, callbackUrl]
+     * 注册消息回调
+     * @param eventTag eventTag
+     * @param callbackUrl callbackUrl
      * @return java.lang.String
      **/
     @Override
@@ -214,8 +214,8 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
 
     /* JSAPI鉴权接口实现 */
     /**
-     * @Description JSAPI鉴权接口
-     * @Param [accessToken]
+     * /get_jsapi_token.json JSAPI鉴权
+     * @param accessToken accessToken
      * @return java.lang.String
      **/
     @Override
@@ -231,8 +231,8 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
 
     /* 日程接口实现 */
     /**
-     * @Description 取消日历事件接口
-     * @Param [jsonObject]
+     * 取消日历事件
+     * @param jsonObject JSONObject入参
      * @return java.lang.String
      **/
     @Override
@@ -241,8 +241,8 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
     }
 
     /**
-     * @Description 创建日历事件
-     * @Param [jsonObject]
+     * 创建日历事件
+     * @param jsonObject  JSONObject入参
      * @return java.lang.String
      **/
     @Override
@@ -251,8 +251,8 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
     }
 
     /**
-     * @Description 日程:获取日历详情
-     * @Param [jsonObject]
+     * 日程:获取日历详情
+     * @param jsonObject  JSONObject入参
      * @return java.lang.String
      **/
     @Override
@@ -262,8 +262,9 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
 
     /* 待办接口实现 */
     /**
-     * @Description 取消实例接口
-     * @Param [userId, packageUuid]
+     * 取消实例接口
+     * @param userId userId
+     * @param packageUuid packageUuid
      * @return java.lang.String
      **/
     @Override
@@ -275,8 +276,9 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
     }
 
     /**
-     * @Description 关闭实例接口
-     * @Param [userId, packageUuid]
+     * 关闭实例接口
+     * @param userId userId
+     * @param packageUuid packageUuid
      * @return java.lang.String
      **/
     @Override
@@ -288,8 +290,10 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
     }
 
     /**
-     * @Description 取消待办任务
-     * @Param [cancelPakcage, userId, taskUuid]
+     * 取消待办任务
+     * @param cancelPakcage cancelPakcage
+     * @param userId userId
+     * @param taskUuid taskUuid
      * @return java.lang.String
      **/
     @Override
@@ -302,8 +306,11 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
     }
 
     /**
-     * @Description 完成待办任务
-     * @Param [closePackage, userId, taskUuid, packageUuid]
+     * 完成待办任务
+     * @param closePackage closePackage
+     * @param userId userId
+     * @param taskUuid taskUuid
+     * @param packageUuid packageUuid
      * @return java.lang.String
      **/
     @Override
@@ -312,13 +319,13 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
                 .addParameter("closePackage", String.valueOf(closePackage))
                 .addParameter("userId", userId)
                 .addParameter("taskUuid", taskUuid)
-                .addParameter("packageUuid", packageUuid);;
+                .addParameter("packageUuid", packageUuid);
         return postClient.post();
     }
 
     /**
-     * @Description 创建待办接口v2
-     * @Param [tcV2OpenApiTaskCreateObject]
+     * 创建待办接口v2
+     * @param tcV2OpenApiTaskCreateObject tcV2OpenApiTaskCreateObject入参
      * @return java.lang.String
      **/
     @Override
@@ -338,8 +345,8 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
     }
 
     /**
-     * @Description 创建待办接口v2 jsonObject入参
-     * @Param [jsonObject]
+     * 创建待办接口v2
+     * @param jsonObject jsonObject入参
      * @return java.lang.String
      **/
     @Override
@@ -360,8 +367,8 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
 
     /* 工作通知消息接口实现 */
     /**
-     * @Description 工作通知消息 messageWorkNotificationObject入参
-     * @Param [messageWorkNotificationObject]
+     * 工作通知消息
+     * @param messageWorkNotificationObject messageWorkNotificationObject入参
      * @return java.lang.String
      **/
     @Override
@@ -396,8 +403,8 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
     }
 
     /**
-     * @Description 工作通知消息 jsonObject入参
-     * @Param [jsonObject]
+     * 工作通知消息
+     * @param jsonObject jsonObject入参
      * @return java.lang.String
      **/
     @Override
@@ -434,8 +441,8 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
     }
 
     /**
-     * @Description 发送短信 messageSendSmsObject入参
-     * @Param [messageWorkNotificationObject]
+     * 发送消息
+     * @param messageSendSmsObject messageSendSmsObject入参
      * @return java.lang.String
      **/
     @Override
@@ -450,8 +457,8 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
     }
 
     /**
-     * @Description 发送短信 jsonObject入参
-     * @Param [jsonObject]
+     * 发送消息
+     * @param jsonObject jsonObject入参
      * @return java.lang.String
      **/
     @Override
@@ -475,8 +482,8 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
 
     /* 获取通讯录部门信息接口实现 */
     /**
-     * @Description 修改员工 JSONObject入参
-     * @Param [JSONObject]
+     * 修改员工
+     * @param jsonObject JSONObject入参
      * @return java.lang.String
      **/
     @Override
@@ -503,8 +510,8 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
     }
 
     /**
-     * @Description 创建员工的任职 JSONObject入参
-     * @Param [jsonObject]
+     * 创建员工的任职
+     * @param jsonObject JSONObject入参
      * @return java.lang.String
      **/
     @Override
@@ -529,8 +536,8 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
     }
 
     /**
-     * @Description 移动组织 JSONObject入参
-     * @Param [jsonObject]
+     * 移动组织
+     * @param jsonObject JSONObject入参
      * @return java.lang.String
      **/
     @Override
@@ -544,8 +551,8 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
     }
 
     /**
-     * @Description 删除组织 JSONObject入参
-     * @Param [jsonObject]
+     * 删除组织
+     * @param jsonObject JSONObject入参
      * @return java.lang.String
      **/
     @Override
@@ -558,8 +565,8 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
     }
 
     /**
-     * @Description 更新组织 JSONObject入参
-     * @Param [jsonObject]
+     * 更新组织
+     * @param jsonObject JSONObject入参
      * @return java.lang.String
      **/
     @Override
@@ -600,8 +607,8 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
     }
 
     /**
-     * @Description 创建组织 JSONObject入参
-     * @Param [jsonObject]
+     * 创建组织 、
+     * @param jsonObject JSONObject入参
      * @return java.lang.String
      **/
     @Override
@@ -643,8 +650,8 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
     }
 
     /**
-     * @Description 根据组织 Code 列表查询详情 JSONObject入参
-     * @Param [jsonObject]
+     * 根据组织 Code 列表查询详情
+     * @param jsonObject JSONObject入参
      * @return java.lang.String
      **/
     @Override
@@ -662,8 +669,8 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
     }
 
     /**
-     * @Description 根据组织查询组织汇报线 JSONObject入参
-     * @Param [jsonObject]
+     * 根据组织查询组织汇报线
+     * @param jsonObject JSONObject入参
      * @return java.lang.String
      **/
     @Override
@@ -675,8 +682,8 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
     }
 
     /**
-     * @Description 分页查询组织下的员⼯ Code JSONObject入参
-     * @Param [jsonObject]
+     * 分页查询组织下的员⼯ Code
+     * @param jsonObject JSONObject入参
      * @return java.lang.String
      **/
     @Override
@@ -692,8 +699,8 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
     }
 
     /**
-     * @Description 根据组织code查询详情 JSONObject入参
-     * @Param [jsonObject]
+     * 根据组织code查询详情
+     * @param jsonObject JSONObject入参
      * @return java.lang.String
      **/
     @Override
@@ -705,8 +712,8 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
     }
 
     /**
-     * @Description 分页获取下⼀级组织 Code 列表 JSONObject入参
-     * @Param [jsonObject]
+     * 分页获取下⼀级组织 Code 列表
+     * @param jsonObject JSONObject入参
      * @return java.lang.String
      **/
     @Override
@@ -722,8 +729,8 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
     }
 
     /**
-     * @Description 根据租户ID获取租户根组织
-     * @Param [tenantId]
+     * 根据租户ID获取租户根组织
+     * @param tenantId 租户ID
      * @return java.lang.String
      **/
     @Override
@@ -734,8 +741,8 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
     }
 
     /**
-     * @Description 分页获取下一级行政区划列表 JSONObject入参
-     * @Param [jsonObject]
+     * 分页获取下一级行政区划列表
+     * @param jsonObject JSONObject入参
      * @return java.lang.String
      **/
     @Override
@@ -750,8 +757,8 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
     }
 
     /**
-     * @Description 根据行政区划查询行政区划线 JSONObject入参
-     * @Param [jsonObject]
+     * 根据行政区划查询行政区划线
+     * @param jsonObject JSONObject入参
      * @return java.lang.String
      **/
     @Override
@@ -763,8 +770,8 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
     }
 
     /**
-     * @Description 根据行政区划 Code 列表查询 JSONObject入参
-     * @Param [jsonObject]
+     * 根据行政区划 Code 列表查询
+     * @param jsonObject JSONObject入参
      * @return java.lang.String
      **/
     @Override
@@ -782,8 +789,8 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
     }
 
     /**
-     * @Description 分页获取下一级条线列表 JSONObject入参
-     * @Param [jsonObject]
+     * 分页获取下一级条线列表
+     * @param jsonObject JSONObject入参
      * @return java.lang.String
      **/
     @Override
@@ -798,8 +805,8 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
     }
 
     /**
-     * @Description 根据条线查询条线线 JSONObject入参
-     * @Param [jsonObject]
+     * 根据条线查询条线线
+     * @param jsonObject JSONObject入参
      * @return java.lang.String
      **/
     @Override
@@ -811,8 +818,8 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
     }
 
     /**
-     * @Description 根据条线 Code 列表查询 JSONObject入参
-     * @Param [jsonObject]
+     * 根据条线 Code 列表查询
+     * @param jsonObject JSONObject入参
      * @return java.lang.String
      **/
     @Override
@@ -835,8 +842,8 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
 
     /* 获取通讯录用户信息接口实现 */
     /**
-     * @Description 冻结和解冻账号 JSONObject入参
-     * @Param [jsonObject]
+     * 冻结和解冻账号
+     * @param jsonObject JSONObject入参
      * @return java.lang.String
      **/
     @Override
@@ -851,8 +858,8 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
     }
 
     /**
-     * @Description 根据员工 Code获取员工标签code列表 JSONObject入参
-     * @Param [jsonObject]
+     * 根据员工 Code获取员工标签code列表
+     * @param jsonObject JSONObject入参
      * @return java.lang.String
      **/
     @Override
@@ -864,8 +871,8 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
     }
 
     /**
-     * @Description 删除员工的任职 JSONObject入参
-     * @Param [jsonObject]
+     * 删除员工的任职
+     * @param jsonObject JSONObject入参
      * @return java.lang.String
      **/
     @Override
@@ -879,8 +886,8 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
     }
 
     /**
-     * @Description 更新员工的任职 JSONObject入参
-     * @Param [jsonObject]
+     * 更新员工的任职
+     * @param jsonObject JSONObject入参
      * @return java.lang.String
      **/
     @Override
@@ -905,8 +912,8 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
     }
 
     /**
-     * @Description 删除员工 JSONObject入参
-     * @Param [jsonObject]
+     * 删除员工
+     * @param jsonObject JSONObject入参
      * @return java.lang.String
      **/
     @Override
@@ -919,8 +926,8 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
     }
 
     /**
-     * @Description 失效员工 JSONObject入参
-     * @Param [jsonObject]
+     * 失效员工
+     * @param jsonObject JSONObject入参
      * @return java.lang.String
      **/
     @Override
@@ -933,8 +940,8 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
     }
 
     /**
-     * @Description 新增员工 JSONObject入参
-     * @Param [jsonObject]
+     * 新增员工
+     * @param jsonObject JSONObject入参
      * @return java.lang.String
      **/
     @Override
@@ -966,8 +973,8 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
     }
 
     /**
-     * @Description 根据组织 CODE、员⼯ Code 列表， 批量获取员工在该组织的任职 JSONObject入参
-     * @Param [jsonObject]
+     * 根据组织 CODE、员⼯ Code 列表， 批量获取员工在该组织的任职
+     * @param jsonObject JSONObject入参
      * @return java.lang.String
      **/
     @Override
@@ -986,8 +993,8 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
     }
 
     /**
-     * @Description 根据员⼯ Code 列表查询详情 JSONObject入参
-     * @Param [jsonObject]
+     * 根据员⼯ Code 列表查询详情
+     * @param jsonObject JSONObject入参
      * @return java.lang.String
      **/
     @Override
@@ -1005,8 +1012,8 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
     }
 
     /**
-     * @Description 根据员工code获取员工的任职 JSONObject入参
-     * @Param [jsonObject]
+     * 根据员工code获取员工的任职
+     * @param jsonObject JSONObject入参
      * @return java.lang.String
      **/
     @Override
@@ -1020,8 +1027,8 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
     }
 
     /**
-     * @Description 根据员工 Code 查询详情 JSONObject入参
-     * @Param [jsonObject]
+     * 根据员工 Code 查询详情
+     * @param jsonObject JSONObject入参
      * @return java.lang.String
      **/
     @Override
@@ -1033,8 +1040,8 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
     }
 
     /**
-     * @Description 通过员工 Code 列表获取员⼯账号 ID JSONObject入参
-     * @Param [jsonObject]
+     * 通过员工 Code 列表获取员⼯账号 ID
+     * @param jsonObject JSONObject入参
      * @return java.lang.String
      **/
     @Override
@@ -1050,9 +1057,10 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
         }
         return postClient.post();
     }
+
     /**
-     * @Description 批量根据accountId、tenantId、organizationCode查询这个账号是否在这个租户的这些组织内 JSONObject入参
-     * @Param [jsonObject]
+     * 批量根据accountId、tenantId、organizationCode查询这个账号是否在这个租户的这些组织内
+     * @param jsonObject JSONObject入参
      * @return java.lang.String
      **/
     @Override
@@ -1075,8 +1083,8 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
     }
 
     /**
-     * @Description 根据组织code和批量员工 Code 获取员工的邮箱信息 JSONObject入参
-     * @Param [jsonObject]
+     * 根据组织code和批量员工 Code 获取员工的邮箱信息
+     * @param jsonObject JSONObject入参
      * @return java.lang.String
      **/
     @Override
@@ -1099,8 +1107,8 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
     }
 
     /**
-     * @Description 批量 通过账号Id 列表获取人员Code JSONObject入参
-     * @Param [jsonObject]
+     * 批量 通过账号Id 列表获取人员Code
+     * @param jsonObject JSONObject入参
      * @return java.lang.String
      **/
     @Override
@@ -1118,8 +1126,8 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
     }
 
     /**
-     * @Description 根据手机号码获取人员编码 JSONObject入参
-     * @Param [jsonObject]
+     * 根据手机号码获取人员编码
+     * @param jsonObject JSONObject入参
      * @return java.lang.String
      **/
     @Override
@@ -1134,8 +1142,9 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
 
     /* 企业内免登录接口实现 */
     /**
-     * @Description 根据authCode获取登录token
-     * @Param [accessToken, authCode]
+     * 根据authCode获取登录token
+     * @param accessToken accessToken
+     * @param authCode authCode
      * @return java.lang.String
      **/
     @Override
@@ -1155,8 +1164,9 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
     }
 
     /**
-     * @Description 根据authCode换取用户信息
-     * @Param [accessToken, authCode]
+     * 根据authCode换取用户信息
+     * @param accessToken accessToken
+     * @param authCode authCode
      * @return java.lang.String
      **/
     @Override
@@ -1172,8 +1182,9 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
     }
 
     /**
-     * @Description 获取应用access_token
-     * @Param [appKey, appSecret]
+     * 获取应用access_token
+     * @param appKey appKey
+     * @param appSecret appSecret
      * @return java.lang.String
      **/
     @Override

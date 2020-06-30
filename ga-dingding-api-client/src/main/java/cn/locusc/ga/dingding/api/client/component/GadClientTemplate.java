@@ -8,9 +8,9 @@ import org.springframework.stereotype.Component;
 import javax.annotation.Resource;
 
 /**
- * @Author Jay Chan
- * @Description 封装政务钉钉官方SDK
- * @Date 16:42 2020/6/24
+ * @author Jay Chan
+ * 封装政务钉钉官方SDK
+ * 16:42 2020/6/24
  **/
 @Component
 public class GadClientTemplate {
@@ -19,24 +19,25 @@ public class GadClientTemplate {
     private ExecutableClient executableClient;
 
     /**
-     * @Description execute方法
-     * @Param [httpRequest]
+     * execute方法
+     * @param httpRequest httpRequest
      * @return java.lang.String
+     * @throws GwException GwException
      **/
     public String executeGad(AbstractRequest httpRequest) throws GwException {
         return executableClient.execute(httpRequest);
     }
 
     /**
-     * @Description 初始化方法
+     * 初始化方法
      **/
     public void initGad() {
         executableClient.init();
     }
 
     /**
-     * @Description Get请求
-     * @Param [api]
+     * Get请求
+     * @param api 请求地址
      * @return com.alibaba.xxpt.gateway.shared.client.http.GetClient
      **/
     public GetClient newGadGetClient(String api) {
@@ -44,8 +45,9 @@ public class GadClientTemplate {
     }
 
     /**
-     * @Description Get请求
-     * @Param [api, timeout] 请求地址, 超时时间
+     * Get请求
+     * @param api 请求地址
+     * @param timeout 超时事件
      * @return com.alibaba.xxpt.gateway.shared.client.http.GetClient
      **/
     public GetClient newGadGetClient(String api, int timeout) {
@@ -53,8 +55,9 @@ public class GadClientTemplate {
     }
 
     /**
-     * @Description Get请求
-     * @Param [api, version] 请求地址, 版本号
+     * Get请求
+     * @param api 请求地址
+     * @param version 版本号
      * @return com.alibaba.xxpt.gateway.shared.client.http.GetClient
      **/
     public GetClient newGadGetClient(String api, String version) {
@@ -62,8 +65,10 @@ public class GadClientTemplate {
     }
 
     /**
-     * @Description Get请求
-     * @Param [api, version, timeout] 请求地址, 版本号, 超时时间
+     * Get请求
+     * @param api 请求地址
+     * @param version 版本号
+     * @param timeout 超时时间
      * @return com.alibaba.xxpt.gateway.shared.client.http.GetClient
      **/
     public GetClient newGadGetClient(String api, String version, int timeout) {
@@ -71,8 +76,8 @@ public class GadClientTemplate {
     }
 
     /**
-     * @Description Post请求
-     * @Param [api] 请求地址
+     * Post请求
+     * @param api 请求地址
      * @return com.alibaba.xxpt.gateway.shared.client.http.PostClient
      **/
     public PostClient newGadPostClient(String api) {
@@ -80,8 +85,9 @@ public class GadClientTemplate {
     }
 
     /**
-     * @Description Post请求
-     * @Param [api, timeout] 请求地址, 超时时间
+     * Post请求
+     * @param api 请求地址
+     * @param timeout 超时时间
      * @return com.alibaba.xxpt.gateway.shared.client.http.PostClient
      **/
     public PostClient newGadPostClient(String api, int timeout) {
@@ -89,8 +95,9 @@ public class GadClientTemplate {
     }
 
     /**
-     * @Description Post请求
-     * @Param [api, version] 请求地址, 版本号
+     * Post请求
+     * @param api 请求地址
+     * @param version 版本号
      * @return com.alibaba.xxpt.gateway.shared.client.http.PostClient
      **/
     public PostClient newGadPostClient(String api, String version) {
@@ -98,8 +105,10 @@ public class GadClientTemplate {
     }
 
     /**
-     * @Description Post请求
-     * @Param [api, version, timeout] 请求地址, 版本号, 超时时间
+     * Post请求
+     * @param api 请求地址
+     * @param version 版本号
+     * @param timeout 超时时间
      * @return com.alibaba.xxpt.gateway.shared.client.http.PostClient
      **/
     public PostClient newGadPostClient(String api, String version, int timeout) {
@@ -107,7 +116,7 @@ public class GadClientTemplate {
     }
 
     /**
-     * @Description 获取Uri
+     * 获取Uri
      * @return java.lang.String
      **/
     public String getGadUri() {
@@ -115,7 +124,7 @@ public class GadClientTemplate {
     }
 
     /**
-     * @Description 获取RoutePlanner
+     * 获取RoutePlanner
      * @return org.apache.http.conn.routing.HttpRoutePlanner
      **/
     public HttpRoutePlanner getGadRoutePlanner() {
@@ -123,7 +132,7 @@ public class GadClientTemplate {
     }
 
     /**
-     * @Description 获取Idletime
+     * 获取Idletime
      * @return long
      **/
     public long getGadIdletime() {
@@ -131,7 +140,7 @@ public class GadClientTemplate {
     }
 
     /**
-     * @Description 获取HttpClient
+     * 获取HttpClient
      * @return org.apache.http.impl.client.CloseableHttpClient
      **/
     public CloseableHttpClient getGadHttpClient() {
@@ -139,56 +148,56 @@ public class GadClientTemplate {
     }
 
     /**
-     * @Description 设置routePlanner
-     * @Param [routePlanner]
+     * 设置routePlanner
+     * @param routePlanner routePlanner
      **/
     private void setGadRoutePlanner(HttpRoutePlanner routePlanner) {
         executableClient.setRoutePlanner(routePlanner);
     }
 
     /**
-     * @Description 设置协议
-     * @Param [protocol]
+     * 设置协议
+     * @param protocol 协议类型
      **/
     private void setGadProtocol(String protocol) {
         executableClient.setProtocal(protocol);
     }
 
     /**
-     * @Description 设置idletime
-     * @Param [idletime]
+     * 设置idletime
+     * @param idletime idletime
      **/
     private void setGadIdletime(long idletime) {
         executableClient.setIdletime(idletime);
     }
 
     /**
-     * @Description 设置网关域名
+     * 设置网关域名
      * https://openplatform-portal.dg-work.cn/portal/#/helpdoc?docKey=kfzn&slug=zbyq0h
-     * @Param [domainName]
+     * @param domainName 网关域名
      **/
     private void setGadDomainName(String domainName) {
         executableClient.setDomainName(domainName);
     }
 
     /**
-     * @Description 设置appSecret
-     * @Param [secretKey]
+     * 设置appSecret
+     * @param secretKey appSecret
      **/
     private void setGadSecretKey(String secretKey) {
         executableClient.setSecretKey(secretKey);
     }
 
     /**
-     * @Description 设置appKey
-     * @Param [accessKey]
+     * 设置appKey
+     * @param accessKey appKey
      **/
     private void setGadAccessKey(String accessKey) {
         executableClient.setAccessKey(accessKey);
     }
 
     /**
-     * @Description 销毁方法
+     * 销毁方法
      **/
     public void destroyGad() {
         executableClient.destroy();

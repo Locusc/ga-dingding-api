@@ -3,14 +3,16 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>ga.dingding.api</artifactId>
+        <artifactId>ga-dingding-api</artifactId>
         <groupId>cn.locusc</groupId>
         <version>1.0.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>ga.dingding.api.common</artifactId>
+    <artifactId>ga-dingding-api-common</artifactId>
+    <packaging>jar</packaging>
 
-
+    <name>ga.dingding.api.common</name>
+    <url>https://github.com/Locusc/</url>
 
 </project>

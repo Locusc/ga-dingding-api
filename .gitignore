@@ -25,5 +25,6 @@ hs_err_pid*
 # IntelliJ IDEA
 *.iml
 .idea/
+target/
 /ga-dingding-api-client/target/
 /ga-dingding-api-common/target/

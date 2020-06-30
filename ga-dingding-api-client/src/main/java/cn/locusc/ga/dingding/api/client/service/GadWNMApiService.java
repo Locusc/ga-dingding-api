@@ -12,29 +12,29 @@ import com.alibaba.fastjson.JSONObject;
 interface GadWNMApiService {
     
     /**
-     * @Description 工作通知消息 messageWorkNotificationObject入参
-     * @Param [messageWorkNotificationObject]
+     * 工作通知消息 messageWorkNotificationObject入参
+     * @param messageWorkNotificationObject
      * @return java.lang.String
      **/
     String messageWorkNotification(MessageWorkNotificationObject messageWorkNotificationObject);
 
     /**
-     * @Description 工作通知消息 messageSendSmsObject入参
-     * @Param [messageWorkNotificationObject]
+     * 发送消息 messageSendSmsObject入参
+     * @param messageSendSmsObject
      * @return java.lang.String
      **/
     String messageSendSms(MessageSendSmsObject messageSendSmsObject);
 
     /**
-     * @Description 工作通知消息 jsonObject入参
-     * @Param [jsonObject]
+     * 工作通知消息 jsonObject入参
+     * @param jsonObject
      * @return java.lang.String
      **/
     String messageWorkNotification(JSONObject jsonObject);
 
     /**
-     * @Description 工作通知消息 jsonObject入参
-     * @Param [jsonObject]
+     * 发送消息 jsonObject入参
+     * @param jsonObject
      * @return java.lang.String
      **/
     String messageSendSms(JSONObject jsonObject);

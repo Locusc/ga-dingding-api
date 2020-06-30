@@ -10,9 +10,9 @@ import org.springframework.context.annotation.Configuration;
 import javax.annotation.Resource;
 
 /**
- * @Author Jay Chan
- * @Description 政务钉钉官方请求SDK Config
- * @Date 15:18 2020/6/24
+ * @author Jay Chan
+ * 政务钉钉官方请求SDK Config
+ * 15:18 2020/6/24
  **/
 @Configuration
 @ComponentScan(basePackages = "cn.locusc.ga.dingding.api.client")
@@ -24,7 +24,7 @@ class GadExecutableClientAutoConfiguration {
     private GadExecutableClientProperties gadExecutableClientProperties;
 
     /**
-     * @Description 初始政务钉钉官方请求SDK
+     * 初始政务钉钉官方请求SDK
      * @return com.alibaba.xxpt.gateway.shared.client.http.ExecutableClient
      **/
     @Bean
