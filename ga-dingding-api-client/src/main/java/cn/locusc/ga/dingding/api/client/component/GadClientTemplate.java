@@ -148,6 +148,14 @@ public class GadClientTemplate {
     }
 
     /**
+     * 获取timeout
+     * @return Integer
+     **/
+    public Integer getGadTimeout() {
+        return executableClient.getTimeout();
+    }
+
+    /**
      * 设置routePlanner
      * @param routePlanner routePlanner
      **/
@@ -194,6 +202,14 @@ public class GadClientTemplate {
      **/
     private void setGadAccessKey(String accessKey) {
         executableClient.setAccessKey(accessKey);
+    }
+
+    /**
+     * 设置timeout
+     * @param timeout 超时时间
+     **/
+    private void setGadTimeout(Integer timeout) {
+        executableClient.setTimeout(timeout);
     }
 
     /**

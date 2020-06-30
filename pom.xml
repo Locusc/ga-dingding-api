@@ -75,8 +75,8 @@
         <!-- 政务钉钉官方请求SDK -->
         <dependency>
             <groupId>com.alibaba</groupId>
-            <artifactId>xxpt.gateway.shared.client</artifactId>
-            <version>1.1.5</version>
+            <artifactId>zwdd-sdk-java-1.1.9</artifactId>
+            <version>1.1.9</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
         <dependency>
