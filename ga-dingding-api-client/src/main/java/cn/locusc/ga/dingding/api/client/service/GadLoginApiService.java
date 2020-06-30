@@ -25,9 +25,7 @@ interface GadLoginApiService {
 
     /**
      * 获取应用access_token
-     * @param appKey
-     * @param appSecret
      * @return java.lang.String
      **/
-    String rpcOauth2GetToken(String appKey, String appSecret);
+    String rpcOauth2GetToken();
 }

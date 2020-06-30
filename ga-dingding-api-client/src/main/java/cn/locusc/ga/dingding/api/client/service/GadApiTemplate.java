@@ -5,11 +5,14 @@ import cn.locusc.ga.dingding.api.client.common.constant.*;
 import cn.locusc.ga.dingding.api.client.entity.*;
 import cn.locusc.ga.dingding.api.client.common.exception.GadIndexOutOfBoundsException;
 import cn.locusc.ga.dingding.api.client.common.exception.GadNullPointerException;
+import cn.locusc.ga.dingding.api.client.properties.GadExecutableClientProperties;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.xxpt.gateway.shared.client.http.PostClient;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
+
+import javax.annotation.Resource;
 
 
 /**
@@ -21,6 +24,9 @@ import org.springframework.util.CollectionUtils;
 public class GadApiTemplate extends GadClientTemplate implements GadBECBApiService,
         GadChatApiService, GadJsApiAuthService, GadLoginApiService, GadScheduleApiService,
         GadToDoApiService, GadWNMApiService, GadABUIApiService, GadABDIApiService {
+
+    @Resource
+    private GadExecutableClientProperties gadExecutableClientProperties;
 
     /* 消息会话接口实现 */
     /**
@@ -1183,15 +1189,13 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
 
     /**
      * 获取应用access_token
-     * @param appKey appKey
-     * @param appSecret appSecret
      * @return java.lang.String
      **/
     @Override
-    public String rpcOauth2GetToken(String appKey, String appSecret) {
+    public String rpcOauth2GetToken() {
         PostClient postClient = this.newGadPostClient(GadLoginApiConstants.RPC_OAUTH2_GET_TOKEN)
-                .addParameter("appKey", appKey)
-                .addParameter("appSecret", appSecret);
+                .addParameter("appKey", gadExecutableClientProperties.getAccessKey())
+                .addParameter("appSecret", gadExecutableClientProperties.getSecretKey());
         return postClient.post();
     }
 
