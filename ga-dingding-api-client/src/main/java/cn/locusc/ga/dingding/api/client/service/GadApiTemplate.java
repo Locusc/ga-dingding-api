@@ -23,10 +23,179 @@ import javax.annotation.Resource;
 @Service
 public class GadApiTemplate extends GadClientTemplate implements GadBECBApiService,
         GadChatApiService, GadJsApiAuthService, GadLoginApiService, GadScheduleApiService,
-        GadToDoApiService, GadWNMApiService, GadABUIApiService, GadABDIApiService {
+        GadToDoApiService, GadWNMApiService, GadABUIApiService, GadABDIApiService, GadTraceService {
 
     @Resource
     private GadExecutableClientProperties gadExecutableClientProperties;
+
+    /* 轨迹服务接口实现 */
+    /**
+     * 外部服务查询用户轨迹
+     * @param jsonObject jsonObject入参
+     * @return java.lang.String
+     **/
+    @Override
+    public String GbsTraceQueryUserByIsv(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadTraceConstants.GBS_TRACE_QUERY_USER_BY_ISV)
+                .addParameter("appName", jsonObject.getString("appName"))
+                .addParameter("bizScene", jsonObject.getString("bizScene"))
+                .addParameter("accessToken", jsonObject.getString("accessToken"))
+                .addParameter("deviceId", jsonObject.getString("deviceId"))
+                .addParameter("clientType", jsonObject.getString("clientType"))
+                .addParameter("osType", jsonObject.getString("osType"))
+                .addParameter("traceId", jsonObject.getString("traceId"))
+                .addParameter("tenantId", String.valueOf(jsonObject.getLong("tenantId")))
+                .addParameter("startTime", String.valueOf(jsonObject.getLong("startTime")))
+                .addParameter("endTime", String.valueOf(jsonObject.getLong("endTime")))
+                .addParameter("userId", String.valueOf(jsonObject.getLong("userId")))
+                .addParameter("employeeCode", jsonObject.getString("employeeCode"));
+        return postClient.post();
+    }
+
+    /**
+     * 外部服务查询用户轨迹
+     * @param jsonObject jsonObject入参
+     * @return java.lang.String
+     **/
+    @Override
+    public String GbsTraceQueryUserTrace(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadTraceConstants.GBS_TRACE_QUERY_USER_TRACE)
+                .addParameter("appName", jsonObject.getString("appName"))
+                .addParameter("bizScene", jsonObject.getString("bizScene"))
+                .addParameter("accessToken", jsonObject.getString("accessToken"))
+                .addParameter("deviceId", jsonObject.getString("deviceId"))
+                .addParameter("clientType", jsonObject.getString("clientType"))
+                .addParameter("osType", jsonObject.getString("osType"))
+                .addParameter("traceId", jsonObject.getString("traceId"))
+                .addParameter("startTime", String.valueOf(jsonObject.getLong("startTime")))
+                .addParameter("endTime", String.valueOf(jsonObject.getLong("endTime")))
+                .addParameter("userId", String.valueOf(jsonObject.getLong("userId")));
+        return postClient.post();
+    }
+
+    /**
+     * 外部服务停止轨迹上报
+     * @param jsonObject jsonObject入参
+     * @return java.lang.String
+     **/
+    @Override
+    public String GbsTraceStopTraceCollectByIsv(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadTraceConstants.GBS_TRACE_STOP_TRACE_COLLECT_BY_ISV)
+                .addParameter("appName", jsonObject.getString("appName"))
+                .addParameter("bizScene", jsonObject.getString("bizScene"))
+                .addParameter("accessToken", jsonObject.getString("accessToken"))
+                .addParameter("deviceId", jsonObject.getString("deviceId"))
+                .addParameter("clientType", jsonObject.getString("clientType"))
+                .addParameter("osType", jsonObject.getString("osType"))
+                .addParameter("traceId", jsonObject.getString("traceId"))
+                .addParameter("tenantId", String.valueOf(jsonObject.getLong("tenantId")))
+                .addParameter("userId", String.valueOf(jsonObject.getLong("userId")))
+                .addParameter("employeeCode", jsonObject.getString("employeeCode"));
+        return postClient.post();
+    }
+
+    /**
+     * 外部服务开启轨迹采集
+     * @param jsonObject jsonObject入参
+     * @return java.lang.String
+     **/
+    @Override
+    public String GbsTraceStartTraceCollectByIsv(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadTraceConstants.GBS_TRACE_START_TRACE_COLLECT_BY_ISV);
+//                .addParameter("appName", jsonObject.getString("appName"))
+//                .addParameter("bizScene", jsonObject.getString("bizScene"))
+//                .addParameter("accessToken", jsonObject.getString("accessToken"))
+//                .addParameter("deviceId", jsonObject.getString("deviceId"))
+//                .addParameter("clientType", jsonObject.getString("clientType"))
+//                .addParameter("osType", jsonObject.getString("osType"))
+//                .addParameter("traceId", jsonObject.getString("traceId"))
+//                .addParameter("tenantId", String.valueOf(jsonObject.getLong("tenantId")))
+//                .addParameter("userId", String.valueOf(jsonObject.getLong("userId")))
+//                .addParameter("frequency", jsonObject.getJSONObject("frequency").toJSONString())
+//                .addParameter("employeeCode", jsonObject.getString("employeeCode"))
+//                .addParameter("reportPeriod", String.valueOf(jsonObject.getInteger("reportPeriod")))
+//                .addParameter("collectPeriod", String.valueOf(jsonObject.getInteger("collectPeriod")))
+//                .addParameter("pushPeriod", String.valueOf(jsonObject.getInteger("pushPeriod")));
+        jsonObject.forEach((k, v) -> {
+            postClient.addParameter(k, (String) v);
+        });
+        return postClient.post();
+    }
+
+    /**
+     * isv或外部服务生成轨迹id
+     * @param jsonObject jsonObject入参
+     * @return java.lang.String
+     **/
+    @Override
+    public String GbsTraceGenerateTraceIdByIsv(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadTraceConstants.GBS_TRACE_GENERATE_TRACE_ID_BY_ISV)
+                .addParameter("appName", jsonObject.getString("appName"))
+                .addParameter("bizScene", jsonObject.getString("bizScene"))
+                .addParameter("accessToken", jsonObject.getString("accessToken"))
+                .addParameter("deviceId", jsonObject.getString("deviceId"))
+                .addParameter("clientType", jsonObject.getString("clientType"))
+                .addParameter("osType", jsonObject.getString("osType"))
+                .addParameter("tenantId", String.valueOf(jsonObject.getLong("tenantId")))
+                .addParameter("userId", String.valueOf(jsonObject.getLong("userId")))
+                .addParameter("employeeCode", jsonObject.getString("employeeCode"));
+        return postClient.post();
+    }
+
+    /**
+     * 接收轨迹数据
+     * @param jsonObject jsonObject入参
+     * @return java.lang.String
+     **/
+    @Override
+    public String GbsTraceReceiveTraceData(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadTraceConstants.GBS_TRACE_RECEIVE_TRACE_DATA)
+                .addParameter("appName", jsonObject.getString("appName"))
+                .addParameter("bizScene", jsonObject.getString("bizScene"))
+                .addParameter("accessToken", jsonObject.getString("accessToken"))
+                .addParameter("deviceId", jsonObject.getString("deviceId"))
+                .addParameter("clientType", jsonObject.getString("clientType"))
+                .addParameter("osType", jsonObject.getString("osType"))
+                .addParameter("traceId", jsonObject.getString("traceId"))
+                .addParameter("positions", jsonObject.getString("positions"));
+        return postClient.post();
+    }
+
+    /**
+     * 停止轨迹上报
+     * @param jsonObject jsonObject入参
+     * @return java.lang.String
+     **/
+    @Override
+    public String GbsTraceStopTraceCollect(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadTraceConstants.GBS_TRACE_STOP_TRACE_COLLECT)
+                .addParameter("appName", jsonObject.getString("appName"))
+                .addParameter("bizScene", jsonObject.getString("bizScene"))
+                .addParameter("accessToken", jsonObject.getString("accessToken"))
+                .addParameter("deviceId", jsonObject.getString("deviceId"))
+                .addParameter("clientType", jsonObject.getString("clientType"))
+                .addParameter("osType", jsonObject.getString("osType"))
+                .addParameter("traceId", jsonObject.getString("traceId"))
+                .addParameter("userId", String.valueOf(jsonObject.getLong("userId")));
+        return postClient.post();
+    }
+
+    /**
+     * 轨迹id生成
+     * @param jsonObject jsonObject入参
+     * @return java.lang.String
+     **/
+    @Override
+    public String GbsTraceGenerateTraceId(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadTraceConstants.GBS_TRACE_GENERATE_TRACE_ID)
+                .addParameter("appName", jsonObject.getString("appName"))
+                .addParameter("bizScene", jsonObject.getString("bizScene"))
+                .addParameter("clientType", jsonObject.getString("clientType"))
+                .addParameter("osType", jsonObject.getString("osType"))
+                .addParameter("traceId", jsonObject.getString("traceId"))
+                .addParameter("userId", String.valueOf(jsonObject.getLong("userId")));
+        return postClient.post();
+    }
 
     /* 消息会话接口实现 */
     /**
