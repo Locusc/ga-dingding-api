@@ -7,7 +7,7 @@
     <dependency>
         <groupId>cn.locusc</groupId>
         <artifactId>ga-dingding-api-client</artifactId>
-        <version>1.0.1</version>
+        <version>1.1.0</version>
     </dependency>
 ```
 ## application.yml 配置：
@@ -33,15 +33,18 @@ gad:
 4. authCode只能在政务钉钉APP内部使用前端接口获取，PC端无法获取。
 ## 已完成：
 * [x] 官方请求SDK的功能 
+* [x] DING
+* [x] 轨迹服务
 * [x] 消息
 * [x] 业务事件回调
 * [x] JSAPI鉴权
+* [x] 文件存储
 * [x] 待办
+* [x] 工作通知消息
 * [x] 获取通讯录部门信息
 * [x] 获取通讯录用户信息
 * [x] 企业内应用免登
 ## 未完成：
-* [ ] 轨迹服务
 * [ ] 日程
 * [ ] 一些其他的接口 比如: 获取所有的部门code以及部门详情，获取部门下所有用户code以及用户详情
 * [ ] Python版本

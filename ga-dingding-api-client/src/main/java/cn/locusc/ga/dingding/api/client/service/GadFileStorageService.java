@@ -5,7 +5,7 @@ package cn.locusc.ga.dingding.api.client.service;
  * 政务钉钉媒体文件下载接口
  * 14:58 2020/7/11
  **/
-public interface GadFileStorageService {
+interface GadFileStorageService {
 
     /**
      * 媒体文件下载

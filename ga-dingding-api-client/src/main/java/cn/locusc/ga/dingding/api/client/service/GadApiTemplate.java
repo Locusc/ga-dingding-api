@@ -24,10 +24,35 @@ import javax.annotation.Resource;
 public class GadApiTemplate extends GadClientTemplate implements GadBECBApiService,
         GadChatApiService, GadJsApiAuthService, GadLoginApiService, GadScheduleApiService,
         GadToDoApiService, GadWNMApiService, GadABUIApiService, GadABDIApiService,
-        GadTraceService, GadFileStorageService {
+        GadTraceService, GadFileStorageService, GadDingService {
 
     @Resource
     private GadExecutableClientProperties gadExecutableClientProperties;
+
+    /* DING接口实现 */
+    /**
+     * DING API开放
+     * @param jsonObject jsonObject入参
+     * @return java.lang.String
+     **/
+    @Override
+    public String GovDingIsvSend(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadDingConstants.GOV_DING_ISV_SEND)
+                .addParameter("notifyType", jsonObject.getJSONObject("creator").toJSONString())
+                .addParameter("notifyType", jsonObject.getString("notifyType"))
+                .addParameter("tenantId", String.valueOf(jsonObject.getLong("tenantId")))
+                .addParameter("textType", jsonObject.getString("textType"))
+                .addParameter("body", jsonObject.getString("body"))
+                .addParameter("bodyType", jsonObject.getString("bodyType"));
+        if(!CollectionUtils.isEmpty(jsonObject.getJSONArray("receivers"))) {
+            jsonObject.getJSONArray("receivers").forEach(receiver -> {
+                postClient.addParameter("bodyType", String.valueOf(receiver));
+            });
+        } else {
+            postClient.addParameter("receivers", jsonObject.getJSONObject("receivers").toJSONString());
+        }
+        return postClient.post();
+    }
 
     /* 轨迹服务接口实现 */
     /**
