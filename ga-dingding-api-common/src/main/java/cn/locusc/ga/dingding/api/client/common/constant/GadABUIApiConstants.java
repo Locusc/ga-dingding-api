@@ -38,6 +38,16 @@ public class GadABUIApiConstants {
     public static final String ABUI_DEACTIVATE_GOV_EMPLOYEE = "/mozi/employee/deactivateGovEmployee";
 
     /**
+     * 修改员工
+     **/
+    public static final String ABUI_UPDATE_GOV_EMPLOYEE = "/mozi/employee/updateGovEmployee";
+
+    /**
+     * 创建员工的任职
+     **/
+    public static final String ABUI_CREATE_GOV_EMPLOYEE_POSITION = "/mozi/employee/createGovEmployeePosition";
+
+    /**
      * 新增员工
      **/
     public static final String ABUI_CREATE_GOV_EMPLOYEE = "/mozi/employee/createGovEmployee";
@@ -73,6 +83,11 @@ public class GadABUIApiConstants {
     public static final String ABUI_LIST_ACCOUNT_ORG_BY_ID_AND_CODES = "/mozi/employee/listAccountOrgByIdAndCodes";
 
     /**
+     * 人员返聘
+     **/
+    public static final String ABUI_REHIRED_GOV_EMPLOYEE= "/mozi/employee/rehiredGovEmployee";
+
+    /**
      * 根据组织code和批量员工 Code 获取员工的邮箱信息
      **/
     public static final String ABUI_LIST_GOV_ORG_EMPLOYEE_EMAIL_BY_CODES = "/mozi/employee/listGovOrgEmployeeEmailByCodes";
@@ -81,6 +96,16 @@ public class GadABUIApiConstants {
      * 批量 通过账号Id 列表获取人员Code
      **/
     public static final String ABUI_LIST_GOV_EMPLOYEE_CODES_BY_ACCOUNT_IDS = "/mozi/employee/listGovEmployeeCodesByAccountIds";
+
+    /**
+     * 查询映射关系通过数梦Id
+     **/
+    public static final String ABUI_GET_EMP_CODE_BY_DT_USER_ID = "/zzd/idMap/getEmpCodeByDtUserId";
+
+    /**
+     * 查询映射关系通过钉钉id
+     **/
+    public static final String ABUI_GET_EMP_CODE_BY_DING_USER_ID = "/zzd/idMap/getEmpCodeByDingUserId";
 
     /**
      * 根据手机号码获取人员编码

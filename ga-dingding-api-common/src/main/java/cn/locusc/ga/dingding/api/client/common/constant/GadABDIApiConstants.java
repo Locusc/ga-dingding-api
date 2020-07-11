@@ -8,16 +8,6 @@ package cn.locusc.ga.dingding.api.client.common.constant;
 public class GadABDIApiConstants {
 
     /**
-     * 修改员工
-     **/
-    public static final String ABDI_UPDATE_GOV_EMPLOYEE = "/mozi/employee/updateGovEmployee";
-
-    /**
-     * 创建员工的任职
-     **/
-    public static final String ABDI_CREATE_GOV_EMPLOYEE_POSITION = "/mozi/employee/createGovEmployeePosition";
-
-    /**
      * 移动组织
      **/
     public static final String ABDI_MOVE_GOV_ORGANIZATION = "/mozi/organization/moveGovOrganization";
@@ -41,6 +31,7 @@ public class GadABDIApiConstants {
      * 根据组织 Code 列表查询详情
      **/
     public static final String ABDI_LIST_ORGANIZATION_BY_CODES = "/mozi/organization/listOrganizationsByCodes";
+
     /**
      * 根据组织查询组织汇报线
      **/

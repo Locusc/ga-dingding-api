@@ -9,16 +9,16 @@ interface GadLoginApiService {
 
     /**
      * 根据authCode获取登录token
-     * @param accessToken
-     * @param authCode
+     * @param accessToken 应用access_token
+     * @param authCode 临时授权码
      * @return java.lang.String
      **/
     String rpcOauth2DingTalkAppToken(String accessToken, String authCode);
 
     /**
      * 根据authCode换取用户信息
-     * @param accessToken
-     * @param authCode
+     * @param accessToken 应用access_token
+     * @param authCode 临时授权码
      * @return java.lang.String
      **/
     String rpcOauth2DingTalkAppUser(String accessToken, String authCode);

@@ -45,5 +45,31 @@ public class GadTraceConstants {
     /**
      * 轨迹id生成
      **/
-    public static final String GBS_TRACE_GENERATE_TRACE_ID= "/gbs/trace/generateTraceId";
+    public static final String GBS_TRACE_GENERATE_TRACE_ID = "/gbs/trace/generateTraceId";
+
+    /**
+     * 获取轨迹推送失败消息
+     **/
+    public static final String BIP_REGISTER_FAILED_TASKS = "/bip/register/failedTasks";
+
+    /**
+     * 应用注销轨迹推送
+     **/
+    public static final String BIP_REGISTER_CANCELL = "/bip/register/cancell";
+
+    /**
+     * 获取轨迹推送注册
+     **/
+    public static final String BIP_REGISTER_GET_EVENTS = "/bip/register/getEvents";
+
+    /**
+     * 应用更新轨迹推送事件数据
+     **/
+    public static final String BIP_REGISTER_UPDATE_EVENT = "/bip/register/updateEvent";
+
+    /**
+     * 轨迹推送注册
+     **/
+    public static final String BIP_REGISTER_REGISTER_APP = "/bip/register/registerApp";
+
 }

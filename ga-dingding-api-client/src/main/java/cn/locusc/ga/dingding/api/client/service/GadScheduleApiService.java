@@ -10,23 +10,17 @@ import com.alibaba.fastjson.JSONObject;
 interface GadScheduleApiService {
     
     /**
-     * 取消日历事件 JSONObject入参
-     * @param jsonObject
+     * 取消日历事件
+     * @param jsonObject JSONObject入参
      * @return java.lang.String
      **/
     String calendarCancelCalendarEvent(JSONObject jsonObject);
 
     /**
-     * 创建日历事件 JSONObject入参
-     * @param jsonObject
+     * 创建日历事件
+     * @param jsonObject JSONObject入参
      * @return java.lang.String
      **/
     String calendarCreateCalendarEvent(JSONObject jsonObject);
 
-    /**
-     * 日程:获取日历详情
-     * @param jsonObject
-     * @return java.lang.String
-     **/
-    String calendarGetCalendarDetail(JSONObject jsonObject);
 }

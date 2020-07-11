@@ -24,12 +24,10 @@ public class TcV2OpenApiTaskCreateObject implements Serializable {
     @NonNull
     private String subject;
 
-
     /**
      * 创建人信息
      **/
     private String creatorInfo;
-
 
     /**
      * 创建人ID
@@ -43,13 +41,11 @@ public class TcV2OpenApiTaskCreateObject implements Serializable {
     @NonNull
     private String tenantId;
 
-
     /**
      * 业务系统自定义ID
      **/
     @NonNull
     private String bizTaskId;
-
 
     /**
      * 移动端URL
@@ -63,13 +59,11 @@ public class TcV2OpenApiTaskCreateObject implements Serializable {
     @NonNull
     private String assigneeId;
 
-
     /**
      * URL
      **/
     @NonNull
     private String url;
-
 
     /**
      * 实例唯一ID，任务会关联在这个实例下，不传的时候会同步创建一个新的实例

@@ -23,7 +23,8 @@ import javax.annotation.Resource;
 @Service
 public class GadApiTemplate extends GadClientTemplate implements GadBECBApiService,
         GadChatApiService, GadJsApiAuthService, GadLoginApiService, GadScheduleApiService,
-        GadToDoApiService, GadWNMApiService, GadABUIApiService, GadABDIApiService, GadTraceService {
+        GadToDoApiService, GadWNMApiService, GadABUIApiService, GadABDIApiService,
+        GadTraceService, GadFileStorageService {
 
     @Resource
     private GadExecutableClientProperties gadExecutableClientProperties;
@@ -101,24 +102,24 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
      **/
     @Override
     public String GbsTraceStartTraceCollectByIsv(JSONObject jsonObject) {
-        PostClient postClient = this.newGadPostClient(GadTraceConstants.GBS_TRACE_START_TRACE_COLLECT_BY_ISV);
-//                .addParameter("appName", jsonObject.getString("appName"))
-//                .addParameter("bizScene", jsonObject.getString("bizScene"))
-//                .addParameter("accessToken", jsonObject.getString("accessToken"))
-//                .addParameter("deviceId", jsonObject.getString("deviceId"))
-//                .addParameter("clientType", jsonObject.getString("clientType"))
-//                .addParameter("osType", jsonObject.getString("osType"))
-//                .addParameter("traceId", jsonObject.getString("traceId"))
-//                .addParameter("tenantId", String.valueOf(jsonObject.getLong("tenantId")))
-//                .addParameter("userId", String.valueOf(jsonObject.getLong("userId")))
-//                .addParameter("frequency", jsonObject.getJSONObject("frequency").toJSONString())
-//                .addParameter("employeeCode", jsonObject.getString("employeeCode"))
-//                .addParameter("reportPeriod", String.valueOf(jsonObject.getInteger("reportPeriod")))
-//                .addParameter("collectPeriod", String.valueOf(jsonObject.getInteger("collectPeriod")))
-//                .addParameter("pushPeriod", String.valueOf(jsonObject.getInteger("pushPeriod")));
-        jsonObject.forEach((k, v) -> {
-            postClient.addParameter(k, (String) v);
-        });
+        PostClient postClient = this.newGadPostClient(GadTraceConstants.GBS_TRACE_START_TRACE_COLLECT_BY_ISV)
+                .addParameter("appName", jsonObject.getString("appName"))
+                .addParameter("bizScene", jsonObject.getString("bizScene"))
+                .addParameter("accessToken", jsonObject.getString("accessToken"))
+                .addParameter("deviceId", jsonObject.getString("deviceId"))
+                .addParameter("clientType", jsonObject.getString("clientType"))
+                .addParameter("osType", jsonObject.getString("osType"))
+                .addParameter("traceId", jsonObject.getString("traceId"))
+                .addParameter("tenantId", String.valueOf(jsonObject.getLong("tenantId")))
+                .addParameter("userId", String.valueOf(jsonObject.getLong("userId")))
+                .addParameter("frequency", jsonObject.getJSONObject("frequency").toJSONString())
+                .addParameter("employeeCode", jsonObject.getString("employeeCode"))
+                .addParameter("reportPeriod", String.valueOf(jsonObject.getInteger("reportPeriod")))
+                .addParameter("collectPeriod", String.valueOf(jsonObject.getInteger("collectPeriod")))
+                .addParameter("pushPeriod", String.valueOf(jsonObject.getInteger("pushPeriod")));
+//        jsonObject.forEach((k, v) -> {
+//            postClient.addParameter(k, (String) v);
+//        });
         return postClient.post();
     }
 
@@ -194,6 +195,68 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
                 .addParameter("osType", jsonObject.getString("osType"))
                 .addParameter("traceId", jsonObject.getString("traceId"))
                 .addParameter("userId", String.valueOf(jsonObject.getLong("userId")));
+        return postClient.post();
+    }
+
+    /**
+     * 获取轨迹推送失败消息
+     * @param eventTag 注册事件类型
+     * @return java.lang.String
+     **/
+    @Override
+    public String BipRegisterFailedTasks(String eventTag) {
+        PostClient postClient = this.newGadPostClient(GadTraceConstants.BIP_REGISTER_FAILED_TASKS)
+                .addParameter("eventTag", eventTag);
+        return postClient.post();
+    }
+
+    /**
+     * 应用注销轨迹推送
+     * @param id 注册id
+     * @return java.lang.String
+     **/
+    @Override
+    public String BipRegisterCancell(String id) {
+        PostClient postClient = this.newGadPostClient(GadTraceConstants.BIP_REGISTER_CANCELL)
+                .addParameter("id", id);
+        return postClient.post();
+    }
+
+    /**
+     * 获取轨迹推送注册
+     * @return java.lang.String
+     **/
+    @Override
+    public String BipRegisterGetEvents() {
+        PostClient postClient = this.newGadPostClient(GadTraceConstants.BIP_REGISTER_GET_EVENTS);
+        return postClient.post();
+    }
+
+    /**
+     * 应用更新轨迹推送事件数据
+     * @param id 应用注册id
+     * @param callBackUrl 回调地址
+     * @return java.lang.String
+     **/
+    @Override
+    public String BipRegisterUpdateEvent(String id, String callBackUrl) {
+        PostClient postClient = this.newGadPostClient(GadTraceConstants.BIP_REGISTER_UPDATE_EVENT)
+                .addParameter("id", id)
+                .addParameter("callBackUrl", callBackUrl);
+        return postClient.post();
+    }
+
+    /**
+     * 应用更新轨迹推送事件数据
+     * @param eventTag 注册事件类型，轨迹实时推送填：real_time_trace
+     * @param callBackUrl 数据推送的回调地址
+     * @return java.lang.String
+     **/
+    @Override
+    public String BipRegisterRegisterApp(String eventTag, String callBackUrl) {
+        PostClient postClient = this.newGadPostClient(GadTraceConstants.BIP_REGISTER_REGISTER_APP)
+                .addParameter("eventTag", eventTag)
+                .addParameter("callBackUrl", callBackUrl);
         return postClient.post();
     }
 
@@ -387,6 +450,28 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
         return postClient.post();
     }
 
+    /**
+     * 注册消息回调（支持加密、签名）
+     * @param eventTag eventTag
+     * @param callbackUrl callbackUrl
+     * @return java.lang.String
+     **/
+    @Override
+    public String messageV2RegisterEventCallback(String eventTag, String callbackUrl) {
+        PostClient postClient = this.newGadPostClient(GadBECBApiConstants.MESSAGE_V2_REGISTER_EVENT_CALLBACK);
+        if(StringUtils.isEmpty(eventTag)) {
+            throw new GadNullPointerException("eventTag is empty in messageRegisterEventCallback");
+        } else {
+            postClient.addParameter("eventTag", eventTag);
+        }
+        if(StringUtils.isEmpty(callbackUrl)) {
+            throw new GadNullPointerException("callbackUrl is empty in messageRegisterEventCallback");
+        } else {
+            postClient.addParameter("callbackUrl", callbackUrl);
+        }
+        return postClient.post();
+    }
+
     /* JSAPI鉴权接口实现 */
     /**
      * /get_jsapi_token.json JSAPI鉴权
@@ -401,6 +486,21 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
         } else {
             throw new GadNullPointerException("accessToken is empty in getJsApiToken");
         }
+        return postClient.post();
+    }
+
+    /* 文件存储接口实现 */
+    /**
+     * 媒体文件下载
+     * @param accessToken 校验权限的appToken
+     * @param mediaId 上传成功后返回的mediaId
+     * @return java.lang.String
+     **/
+    @Override
+    public String mediaDownload(String accessToken, String mediaId) {
+        PostClient postClient = this.newGadPostClient(GadJsApiAuthConstants.GET_JS_API_TOKEN)
+                .addParameter("access_token", accessToken)
+                .addParameter("media_id", mediaId);
         return postClient.post();
     }
 
@@ -425,21 +525,11 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
         return null;
     }
 
-    /**
-     * 日程:获取日历详情
-     * @param jsonObject  JSONObject入参
-     * @return java.lang.String
-     **/
-    @Override
-    public String calendarGetCalendarDetail(JSONObject jsonObject) {
-        return null;
-    }
-
     /* 待办接口实现 */
     /**
      * 取消实例接口
-     * @param userId userId
-     * @param packageUuid packageUuid
+     * @param userId 用户ID
+     * @param packageUuid 实例唯一ID
      * @return java.lang.String
      **/
     @Override
@@ -452,8 +542,8 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
 
     /**
      * 关闭实例接口
-     * @param userId userId
-     * @param packageUuid packageUuid
+     * @param userId 用户ID
+     * @param packageUuid 实例唯一ID
      * @return java.lang.String
      **/
     @Override
@@ -466,9 +556,9 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
 
     /**
      * 取消待办任务
-     * @param cancelPakcage cancelPakcage
-     * @param userId userId
-     * @param taskUuid taskUuid
+     * @param cancelPakcage 同步处理实例
+     * @param userId 用户ID
+     * @param taskUuid 任务唯一ID
      * @return java.lang.String
      **/
     @Override
@@ -482,19 +572,17 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
 
     /**
      * 完成待办任务
-     * @param closePackage closePackage
-     * @param userId userId
-     * @param taskUuid taskUuid
-     * @param packageUuid packageUuid
+     * @param closePackage 同步处理实例
+     * @param userId 用户ID
+     * @param taskUuid 任务唯一ID
      * @return java.lang.String
      **/
     @Override
-    public String tcOpenApiTaskFinish(Boolean closePackage, String userId, String taskUuid, String packageUuid) {
+    public String tcOpenApiTaskFinish(Boolean closePackage, String userId, String taskUuid) {
         PostClient postClient = this.newGadPostClient(GadToDoApiConstants.TC_OPEN_API_TASK_FINISH)
                 .addParameter("closePackage", String.valueOf(closePackage))
                 .addParameter("userId", userId)
-                .addParameter("taskUuid", taskUuid)
-                .addParameter("packageUuid", packageUuid);
+                .addParameter("taskUuid", taskUuid);
         return postClient.post();
     }
 
@@ -616,100 +704,63 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
     }
 
     /**
-     * 发送消息
-     * @param messageSendSmsObject messageSendSmsObject入参
-     * @return java.lang.String
-     **/
-    @Override
-    public String messageSendSms(MessageSendSmsObject messageSendSmsObject) {
-        PostClient postClient = this.newGadPostClient(GadWNMApiConstants.MESSAGE_SEND_SMS)
-                .addParameter("templateId", messageSendSmsObject.getTemplateId())
-                .addParameter("jsonContent", messageSendSmsObject.getJsonContent().toJSONString());
-        messageSendSmsObject.getPhoneNumber().forEach(num -> {
-            postClient.addParameter("phoneNumber", num);
-        });
-        return postClient.post();
-    }
-
-    /**
-     * 发送消息
+     * 发送工作台红点
      * @param jsonObject jsonObject入参
      * @return java.lang.String
      **/
     @Override
-    public String messageSendSms(JSONObject jsonObject) {
-        PostClient postClient = this.newGadPostClient(GadWNMApiConstants.MESSAGE_SEND_SMS)
-                .addParameter("templateId", jsonObject.getString("templateId"));
-        if(StringUtils.isNotEmpty(jsonObject.getString("jsonContent"))) {
-            postClient.addParameter("jsonContent",  jsonObject.getString("jsonContent"));
-        } else if(!jsonObject.getString("jsonContent").isEmpty()) {
-            postClient.addParameter("jsonContent",  jsonObject.getJSONObject("jsonContent").toJSONString());
-        }
-        if(!CollectionUtils.isEmpty(jsonObject.getJSONArray("phoneNumber"))) {
-            jsonObject.getJSONArray("phoneNumber").forEach(num -> {
-                postClient.addParameter("phoneNumber", String.valueOf(num));
-            });
+    public String messageSendPortalNotification(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadWNMApiConstants.NOTIFICATION_MESSAGE_SEND_PORTAL_NOTIFICATION)
+                .addParameter("accountId", String.valueOf(jsonObject.getLong("accountId")))
+                .addParameter("tenantId", String.valueOf(jsonObject.getLong("tenantId")));
+        if(StringUtils.isNotEmpty(jsonObject.getString("addNum"))) {
+            postClient.addParameter("addNum", jsonObject.getString("addNum"));
         } else {
-            postClient.addParameter("phoneNumber", jsonObject.getString("phoneNumber"));
+            if(!CollectionUtils.isEmpty(jsonObject.getJSONArray("bizMsgIds"))) {
+                jsonObject.getJSONArray("bizMsgIds").forEach(id -> {
+                    postClient.addParameter("bizMsgIds", (String) id);
+                });
+            } else {
+                postClient.addParameter("bizMsgIds", jsonObject.getString("bizMsgIds"));
+            }
         }
         return postClient.post();
     }
 
-    /* 获取通讯录部门信息接口实现 */
     /**
-     * 修改员工
-     * @param jsonObject JSONObject入参
+     * 清除工作台红点
+     * @param jsonObject jsonObject入参
      * @return java.lang.String
      **/
     @Override
-    public String deptUpdateGovEmployee(JSONObject jsonObject) {
-        PostClient postClient = this.newGadPostClient(GadABDIApiConstants.ABDI_UPDATE_GOV_EMPLOYEE)
-                .addParameter("govEmpJobLevelCode", jsonObject.getString("govEmpJobLevelCode"))
-                .addParameter("govEmpBudgetedPostCode", jsonObject.getString("govEmpBudgetedPostCode"))
-                .addParameter("operator", jsonObject.getString("operator"))
-                .addParameter("employeeCode", jsonObject.getString("employeeCode"))
-                .addParameter("govEmpCellPhoneShortNo", jsonObject.getString("govEmpCellPhoneShortNo"))
-                .addParameter("govEmpGenderCode", jsonObject.getString("govEmpGenderCode"))
-                .addParameter("govEmpRemarks", jsonObject.getString("govEmpRemarks"))
-                .addParameter("govEmpBirthDate", jsonObject.getDate("govEmpBirthDate").toString())
-                .addParameter("employeeName", jsonObject.getString("employeeName"))
-                .addParameter("govEmpCellPhoneNo", jsonObject.getString("govEmpCellPhoneNo"))
-                .addParameter("govEmpHomeAddress", jsonObject.getString("govEmpHomeAddress"))
+    public String messageClearPortalNotification(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadWNMApiConstants.NOTIFICATION_MESSAGE_CLEAR_PORTAL_NOTIFICATION)
                 .addParameter("accountId", String.valueOf(jsonObject.getLong("accountId")))
-                .addParameter("areaCode", jsonObject.getString("areaCode"))
-                .addParameter("govEmpAvatar", jsonObject.getString("govEmpAvatar"))
-                .addParameter("govEmpIdentityCardNo", jsonObject.getString("govEmpIdentityCardNo"))
-                .addParameter("govEmpPoliticalStatusCode", jsonObject.getString("govEmpPoliticalStatusCode"))
+                .addParameter("tenantId", String.valueOf(jsonObject.getLong("tenantId")));
+        if(!CollectionUtils.isEmpty(jsonObject.getJSONArray("bizMsgIds"))) {
+            jsonObject.getJSONArray("bizMsgIds").forEach(id -> {
+                postClient.addParameter("bizMsgIds", (String) id);
+            });
+        } else {
+            postClient.addParameter("bizMsgIds", jsonObject.getString("bizMsgIds"));
+        }
+        return postClient.post();
+    }
+
+    /**
+     * 查询工作台红点
+     * @param jsonObject jsonObject入参
+     * @return java.lang.String
+     **/
+    @Override
+    public String messageQueryPortalNotification(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadWNMApiConstants.NOTIFICATION_MESSAGE_QUERY_PORTAL_NOTIFICATION)
+                .addParameter("accountId", String.valueOf(jsonObject.getLong("accountId")))
                 .addParameter("tenantId", String.valueOf(jsonObject.getLong("tenantId")));
         return postClient.post();
     }
 
-    /**
-     * 创建员工的任职
-     * @param jsonObject JSONObject入参
-     * @return java.lang.String
-     **/
-    @Override
-    public String deptCreateGovEmployeePosition(JSONObject jsonObject) {
-        PostClient postClient = this.newGadPostClient(GadABDIApiConstants.ABDI_CREATE_GOV_EMPLOYEE_POSITION)
-                .addParameter("creator", jsonObject.getString("creator"))
-                .addParameter("posJobRankCode", jsonObject.getString("posJobRankCode"))
-                .addParameter("govEmpPosPhoneNo", jsonObject.getString("govEmpPosPhoneNo"))
-                .addParameter("govJobAttributesCode", jsonObject.getString("govJobAttributesCode"))
-                .addParameter("orderInOrganization", String.valueOf(jsonObject.getLong("orderInOrganization")))
-                .addParameter("mainJob", String.valueOf(jsonObject.getBoolean("mainJob")))
-                .addParameter("employeeCode", jsonObject.getString("employeeCode"))
-                .addParameter("govEmpPosEmail", jsonObject.getString("govEmpPosEmail"))
-                .addParameter("organizationCode", jsonObject.getString("organizationCode"))
-                .addParameter("tenantId", String.valueOf(jsonObject.getLong("tenantId")))
-                .addParameter("govEmpPosEmployeeRoleCode", jsonObject.getString("govEmpPosEmployeeRoleCode"))
-                .addParameter("govEmpPosFaxNo", jsonObject.getString("govEmpPosFaxNo"))
-                .addParameter("govEmpPosJob", jsonObject.getString("govEmpPosJob"))
-                .addParameter("govEmpPosAddress", jsonObject.getString("govEmpPosAddress"))
-                .addParameter("order", String.valueOf(jsonObject.getLong("order")));
-        return postClient.post();
-    }
-
+    /* 获取通讯录部门信息接口实现 */
     /**
      * 移动组织
      * @param jsonObject JSONObject入参
@@ -863,7 +914,7 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
      **/
     @Override
     public String deptPageOrganizationEmployeeCodes(JSONObject jsonObject) {
-        PostClient postClient = this.newGadPostClient(GadABDIApiConstants.ABDI_GET_ORGANIZATION_LINE)
+        PostClient postClient = this.newGadPostClient(GadABDIApiConstants.ABDI_PAGE_ORGANIZATION_EMPLOYEE_CODES)
                 .addParameter("returnTotalSize", String.valueOf(jsonObject.getBoolean("returnTotalSize")))
                 .addParameter("employeePositionStatus", jsonObject.getString("employeePositionStatus"))
                 .addParameter("pageSize", String.valueOf(jsonObject.getInteger("pageSize")))
@@ -1115,6 +1166,60 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
     }
 
     /**
+     * 修改员工
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    @Override
+    public String employeeUpdateGovEmp(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadABUIApiConstants.ABUI_UPDATE_GOV_EMPLOYEE)
+                .addParameter("govEmpJobLevelCode", jsonObject.getString("govEmpJobLevelCode"))
+                .addParameter("govEmpBudgetedPostCode", jsonObject.getString("govEmpBudgetedPostCode"))
+                .addParameter("operator", jsonObject.getString("operator"))
+                .addParameter("employeeCode", jsonObject.getString("employeeCode"))
+                .addParameter("govEmpCellPhoneShortNo", jsonObject.getString("govEmpCellPhoneShortNo"))
+                .addParameter("govEmpGenderCode", jsonObject.getString("govEmpGenderCode"))
+                .addParameter("govEmpRemarks", jsonObject.getString("govEmpRemarks"))
+                .addParameter("govEmpBirthDate", jsonObject.getDate("govEmpBirthDate").toString())
+                .addParameter("employeeName", jsonObject.getString("employeeName"))
+                .addParameter("govEmpCellPhoneNo", jsonObject.getString("govEmpCellPhoneNo"))
+                .addParameter("govEmpHomeAddress", jsonObject.getString("govEmpHomeAddress"))
+                .addParameter("accountId", String.valueOf(jsonObject.getLong("accountId")))
+                .addParameter("areaCode", jsonObject.getString("areaCode"))
+                .addParameter("govEmpAvatar", jsonObject.getString("govEmpAvatar"))
+                .addParameter("govEmpIdentityCardNo", jsonObject.getString("govEmpIdentityCardNo"))
+                .addParameter("govEmpPoliticalStatusCode", jsonObject.getString("govEmpPoliticalStatusCode"))
+                .addParameter("tenantId", String.valueOf(jsonObject.getLong("tenantId")));
+        return postClient.post();
+    }
+
+    /**
+     * 创建员工的任职
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    @Override
+    public String employeeCreateGovEmpPosition(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadABUIApiConstants.ABUI_CREATE_GOV_EMPLOYEE_POSITION)
+                .addParameter("creator", jsonObject.getString("creator"))
+                .addParameter("posJobRankCode", jsonObject.getString("posJobRankCode"))
+                .addParameter("govEmpPosPhoneNo", jsonObject.getString("govEmpPosPhoneNo"))
+                .addParameter("govJobAttributesCode", jsonObject.getString("govJobAttributesCode"))
+                .addParameter("orderInOrganization", String.valueOf(jsonObject.getLong("orderInOrganization")))
+                .addParameter("mainJob", String.valueOf(jsonObject.getBoolean("mainJob")))
+                .addParameter("employeeCode", jsonObject.getString("employeeCode"))
+                .addParameter("govEmpPosEmail", jsonObject.getString("govEmpPosEmail"))
+                .addParameter("organizationCode", jsonObject.getString("organizationCode"))
+                .addParameter("tenantId", String.valueOf(jsonObject.getLong("tenantId")))
+                .addParameter("govEmpPosEmployeeRoleCode", jsonObject.getString("govEmpPosEmployeeRoleCode"))
+                .addParameter("govEmpPosFaxNo", jsonObject.getString("govEmpPosFaxNo"))
+                .addParameter("govEmpPosJob", jsonObject.getString("govEmpPosJob"))
+                .addParameter("govEmpPosAddress", jsonObject.getString("govEmpPosAddress"))
+                .addParameter("order", String.valueOf(jsonObject.getLong("order")));
+        return postClient.post();
+    }
+
+    /**
      * 新增员工
      * @param jsonObject JSONObject入参
      * @return java.lang.String
@@ -1258,6 +1363,28 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
     }
 
     /**
+     * 人员返聘
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    @Override
+    public String employeeRehiredGovEmp(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadABUIApiConstants.ABUI_REHIRED_GOV_EMPLOYEE)
+                .addParameter("govEmpPosPhoneNo", jsonObject.getString("govEmpPosPhoneNo"))
+                .addParameter("orderInOrganization", String.valueOf(jsonObject.getLong("orderInOrganization")))
+                .addParameter("operator", jsonObject.getString("operator"))
+                .addParameter("employeeCode", jsonObject.getString("employeeCode"))
+                .addParameter("govEmpPosEmail", jsonObject.getString("govEmpPosEmail"))
+                .addParameter("organizationCode", jsonObject.getString("organizationCode"))
+                .addParameter("tenantId", String.valueOf(jsonObject.getLong("tenantId")))
+                .addParameter("govEmpPosEmployeeRoleCode", jsonObject.getString("govEmpPosEmployeeRoleCode"))
+                .addParameter("govEmpPosFaxNo", jsonObject.getString("govEmpPosFaxNo"))
+                .addParameter("govEmpPosJob", jsonObject.getString("govEmpPosJob"))
+                .addParameter("govEmpPosAddress", jsonObject.getString("govEmpPosAddress"));
+        return postClient.post();
+    }
+
+    /**
      * 根据组织code和批量员工 Code 获取员工的邮箱信息
      * @param jsonObject JSONObject入参
      * @return java.lang.String
@@ -1301,6 +1428,30 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
     }
 
     /**
+     * 查询映射关系通过数梦Id
+     * @param dtUserId 数梦用户id
+     * @return java.lang.String
+     **/
+    @Override
+    public String employeeGetEmpCodeByDtUserId(String dtUserId) {
+        PostClient postClient = this.newGadPostClient(GadABUIApiConstants.ABUI_GET_EMP_CODE_BY_DT_USER_ID)
+                .addParameter("dtUserId", dtUserId);
+        return postClient.post();
+    }
+
+    /**
+     * 查询映射关系通过钉钉id
+     * @param dingUserId 钉钉id
+     * @return java.lang.String
+     **/
+    @Override
+    public String employeeGetEmpCodeByDingUserId(String dingUserId) {
+        PostClient postClient = this.newGadPostClient(GadABUIApiConstants.ABUI_GET_EMP_CODE_BY_DING_USER_ID)
+                .addParameter("dingUserId", dingUserId);
+        return postClient.post();
+    }
+
+    /**
      * 根据手机号码获取人员编码
      * @param jsonObject JSONObject入参
      * @return java.lang.String
@@ -1318,8 +1469,8 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
     /* 企业内免登录接口实现 */
     /**
      * 根据authCode获取登录token
-     * @param accessToken accessToken
-     * @param authCode authCode
+     * @param accessToken 应用access_token
+     * @param authCode 临时授权码
      * @return java.lang.String
      **/
     @Override
@@ -1328,20 +1479,20 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
         if(StringUtils.isEmpty(accessToken)) {
             throw new GadNullPointerException("accessToken is empty in rpcOauth2DingTalkAppToken");
         } else {
-            postClient.addParameter("accessToken", accessToken);
+            postClient.addParameter("access_token", accessToken);
         }
         if(StringUtils.isEmpty(authCode)) {
             throw new GadNullPointerException("authCode is empty in rpcOauth2DingTalkAppToken");
         } else {
-            postClient.addParameter("authCode", authCode);
+            postClient.addParameter("auth_code", authCode);
         }
         return postClient.post();
     }
 
     /**
      * 根据authCode换取用户信息
-     * @param accessToken accessToken
-     * @param authCode authCode
+     * @param accessToken 应用access_token
+     * @param authCode 临时授权码
      * @return java.lang.String
      **/
     @Override
@@ -1350,9 +1501,13 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
         if(StringUtils.isEmpty(accessToken)) {
             throw new GadNullPointerException("accessToken is empty in rpcOauth2DingTalkAppUser");
         } else {
-            postClient.addParameter("accessToken", accessToken);
+            postClient.addParameter("access_token", accessToken);
         }
-        postClient.addParameter("authCode", authCode);
+        if(StringUtils.isEmpty(authCode)) {
+            throw new GadNullPointerException("authCode is empty in rpcOauth2DingTalkAppUser");
+        } else {
+            postClient.addParameter("auth_code", authCode);
+        }
         return postClient.post();
     }
 

@@ -52,6 +52,20 @@ interface GadABUIApiService {
     String employeeDeactivateGovEmp(JSONObject jsonObject);
 
     /**
+     * 修改员工
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    String employeeUpdateGovEmp(JSONObject jsonObject);
+
+    /**
+     * 创建员工的任职
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    String employeeCreateGovEmpPosition(JSONObject jsonObject);
+
+    /**
      * 新增员工
      * @param jsonObject JSONObject入参
      * @return java.lang.String
@@ -101,6 +115,13 @@ interface GadABUIApiService {
     String employeeListAccountOrgByIdAndCodes(JSONObject jsonObject);
 
     /**
+     * 人员返聘
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    String employeeRehiredGovEmp(JSONObject jsonObject);
+
+    /**
      * 根据组织code和批量员工 Code 获取员工的邮箱信息
      * @param jsonObject JSONObject入参
      * @return java.lang.String
@@ -113,6 +134,20 @@ interface GadABUIApiService {
      * @return java.lang.String
      **/
     String employeeListGovEmpCodesByAccountIds(JSONObject jsonObject);
+
+    /**
+     * 查询映射关系通过数梦Id
+     * @param dtUserId 数梦用户id
+     * @return java.lang.String
+     **/
+    String employeeGetEmpCodeByDtUserId(String dtUserId);
+
+    /**
+     * 查询映射关系通过钉钉id
+     * @param dingUserId 钉钉id
+     * @return java.lang.String
+     **/
+    String employeeGetEmpCodeByDingUserId(String dingUserId);
 
     /**
      * 根据手机号码获取人员编码

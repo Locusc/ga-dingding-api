@@ -12,49 +12,48 @@ interface GadToDoApiService {
 
     /**
      * 取消实例接口
-     * @param userId
-     * @param packageUuid
+     * @param userId 用户ID
+     * @param packageUuid 实例唯一ID
      * @return java.lang.String
      **/
     String tcOpenApiPackageCancel(String userId, String packageUuid);
 
     /**
      * 关闭实例接口
-     * @param userId
-     * @param packageUuid
+     * @param userId 用户ID
+     * @param packageUuid 实例唯一ID
      * @return java.lang.String
      **/
     String tcOpenApiPackageClose(String userId, String packageUuid);
 
     /**
      * 取消待办任务
-     * @param cancelPakcage
-     * @param userId
-     * @param taskUuid
+     * @param cancelPakcage 同步处理实例
+     * @param userId 用户ID
+     * @param taskUuid 任务唯一ID
      * @return java.lang.String
      **/
     String tcOpenApiTaskCancel(Boolean cancelPakcage, String userId, String taskUuid);
 
     /**
      * 完成待办任务
-     * @param closePackage
-     * @param userId
-     * @param taskUuid
-     * @param packageUuid
+     * @param closePackage 同步处理实例
+     * @param userId 用户ID
+     * @param taskUuid 任务唯一ID
      * @return java.lang.String
      **/
-    String tcOpenApiTaskFinish(Boolean closePackage, String userId, String taskUuid, String packageUuid);
+    String tcOpenApiTaskFinish(Boolean closePackage, String userId, String taskUuid);
 
     /**
-     * 创建待办接口v2 tcV2OpenApiTaskCreateObject入参
-     * @param tcV2OpenApiTaskCreateObject
+     * 创建待办接口v2
+     * @param tcV2OpenApiTaskCreateObject tcV2OpenApiTaskCreateObject入参
      * @return java.lang.String
      **/
     String tcV2OpenApiTaskCreate(TcV2OpenApiTaskCreateObject tcV2OpenApiTaskCreateObject);
 
     /**
-     * 创建待办接口v2 jsonObject入参
-     * @param jsonObject
+     * 创建待办接口v2
+     * @param jsonObject jsonObject入参
      * @return java.lang.String
      **/
     String tcV2OpenApiTaskCreate(JSONObject jsonObject);

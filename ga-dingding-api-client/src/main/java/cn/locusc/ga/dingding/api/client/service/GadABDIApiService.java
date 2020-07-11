@@ -10,20 +10,6 @@ import com.alibaba.fastjson.JSONObject;
 interface GadABDIApiService {
 
     /**
-     * 修改员工
-     * @param jsonObject JSONObject入参
-     * @return java.lang.String
-     **/
-    String deptUpdateGovEmployee(JSONObject jsonObject);
-
-    /**
-     * 创建员工的任职
-     * @param jsonObject JSONObject入参
-     * @return java.lang.String
-     **/
-    String deptCreateGovEmployeePosition(JSONObject jsonObject);
-
-    /**
      * 移动组织
      * @param jsonObject JSONObject入参
      * @return java.lang.String

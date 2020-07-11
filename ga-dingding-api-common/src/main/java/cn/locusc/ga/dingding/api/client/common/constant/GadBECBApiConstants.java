@@ -42,4 +42,10 @@ public class GadBECBApiConstants {
      **/
     public static final String MESSAGE_REGISTER_EVENT_CALLBACK = "/openplatform/message/register_event_callback";
 
+    /**
+     * 注册消息回调（支持加密、签名）
+     **/
+    public static final String MESSAGE_V2_REGISTER_EVENT_CALLBACK = "/openplatform/message/v2/register_event_callback";
+
+
 }

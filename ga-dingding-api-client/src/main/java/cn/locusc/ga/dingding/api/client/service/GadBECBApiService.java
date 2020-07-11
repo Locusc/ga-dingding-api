@@ -9,14 +9,14 @@ interface GadBECBApiService {
 
     /**
      * 移除失败回调
-     * @param eventCallbackFailedId
+     * @param eventCallbackFailedId 失败的id
      * @return java.lang.String
      **/
     String messageRemoveCallbackFailed(Long eventCallbackFailedId);
 
     /**
      * 重试失败回调
-     * @param eventCallbackFailedId
+     * @param eventCallbackFailedId 回调失败的id
      * @return java.lang.String
      **/
     String messageRetryCallbackFailed(Long eventCallbackFailedId);
@@ -29,15 +29,15 @@ interface GadBECBApiService {
 
     /**
      * 删除事件回调的定义信息
-     * @param eventCallbackId
+     * @param eventCallbackId 订阅回调的id
      * @return java.lang.String
      **/
     String messageDeleteEventCallbackDefine(Long eventCallbackId);
 
     /**
      * 更新事件回调的定义信息
-     * @param eventCallbackId
-     * @param callbackUrl
+     * @param eventCallbackId 注册的回调id
+     * @param callbackUrl 注册的http地址
      * @return java.lang.String
      **/
     String messageUpdateEventCallbackDefined(Long eventCallbackId, String callbackUrl);
@@ -50,9 +50,17 @@ interface GadBECBApiService {
 
     /**
      * 注册消息回调
-     * @param eventTag
-     * @param callbackUrl
+     * @param eventTag 消息事件标识
+     * @param callbackUrl 消息回调http地址
      * @return java.lang.String
      **/
     String messageRegisterEventCallback(String eventTag, String callbackUrl);
+
+    /**
+     * 注册消息回调
+     * @param eventTag 消息事件标识
+     * @param callbackUrl 消息回调http地址
+     * @return java.lang.String
+     **/
+    String messageV2RegisterEventCallback(String eventTag, String callbackUrl);
 }

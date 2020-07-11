@@ -13,8 +13,18 @@ public class GadWNMApiConstants {
     public static final String MESSAGE_WORK_NOTIFICATION = "/message/workNotificationn";
 
     /**
-     * 发送短信
+     * 发送工作台红点
      **/
-    public static final String MESSAGE_SEND_SMS = "/message/sendSms";
+    public static final String NOTIFICATION_MESSAGE_SEND_PORTAL_NOTIFICATION = "/notification/message/sendPortalNotification";
+
+    /**
+     * 清除工作台红点
+     **/
+    public static final String NOTIFICATION_MESSAGE_CLEAR_PORTAL_NOTIFICATION = "/notification/message/clearPortalNotification";
+
+    /**
+     * 查询工作台红点
+     **/
+    public static final String NOTIFICATION_MESSAGE_QUERY_PORTAL_NOTIFICATION = "/notification/message/queryPortalNotification";
 
 }
