@@ -21,7 +21,7 @@ gad:
       protocol: 协议类型
 ```
 ## 使用：
-[方法文档](http://www.locusc.cn)
+[方法文档](https://www.gad-docs.locusc.cn/)
 ```java
     @Resource
     public GadApiTemplate gadApiTemplate;
