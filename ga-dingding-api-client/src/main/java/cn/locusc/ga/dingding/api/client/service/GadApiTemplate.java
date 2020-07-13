@@ -858,7 +858,7 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
     }
 
     /**
-     * 创建组织 、
+     * 创建组织
      * @param jsonObject JSONObject入参
      * @return java.lang.String
      **/
