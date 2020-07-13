@@ -79,7 +79,7 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
     }
 
     /**
-     * 外部服务查询用户轨迹
+     * 查询用户轨迹
      * @param jsonObject jsonObject入参
      * @return java.lang.String
      **/
@@ -272,7 +272,7 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
     }
 
     /**
-     * 应用更新轨迹推送事件数据
+     * 轨迹推送注册
      * @param eventTag 注册事件类型，轨迹实时推送填：real_time_trace
      * @param callBackUrl 数据推送的回调地址
      * @return java.lang.String
