@@ -111,4 +111,9 @@ public class GadABUIApiConstants {
      * 根据手机号码获取人员编码
      **/
     public static final String ABUI_GET_BY_MOBILE = "/mozi/employee/get_by_mobile";
+
+    /**
+     * 移动任职
+     **/
+    public static final String ABUI_GET_MOVE_EMP_POSITION = "/mozi/employee/moveEmployeePosition";
 }

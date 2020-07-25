@@ -155,4 +155,11 @@ interface GadABUIApiService {
      * @return java.lang.String
      **/
     String employeeGetByMobile(JSONObject jsonObject);
+
+    /**
+     * 移动任职
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    String employeeGetMoveEmpPosition(JSONObject jsonObject);
 }

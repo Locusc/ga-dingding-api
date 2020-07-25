@@ -24,7 +24,7 @@ import javax.annotation.Resource;
 public class GadApiTemplate extends GadClientTemplate implements GadBECBApiService,
         GadChatApiService, GadJsApiAuthService, GadLoginApiService, GadScheduleApiService,
         GadToDoApiService, GadWNMApiService, GadABUIApiService, GadABDIApiService,
-        GadTraceService, GadFileStorageService, GadDingService {
+        GadTraceService, GadFileStorageService, GadDingService, GadAMBApiService {
 
     @Resource
     private GadExecutableClientProperties gadExecutableClientProperties;
@@ -287,78 +287,72 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
 
     /* 消息会话接口实现 */
     /**
-     * 发送IM消息
+     * 创建群会话
      * @param jsonObject JSONObject入参
      * @return java.lang.String
      **/
     @Override
-    public String imChatIsvSendMsg(JSONObject jsonObject) {
-        PostClient postClient = this.newGadPostClient(GadChatApiConstants.IM_CHAT_ISV_SEND_MSG)
+    public String chatCreate(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadChatApiConstants.CHAT_CREATE)
+                .addParameter("accountId", String.valueOf(jsonObject.getLong("accountId")))
+                .addParameter("disableRead", String.valueOf(jsonObject.getInteger("disableRead")))
+                .addParameter("tenantId", String.valueOf(jsonObject.getLong("tenantId")))
+                .addParameter("name", jsonObject.getString("name"))
+                .addParameter("managementType", String.valueOf(jsonObject.getInteger("managementType")));
+        if(StringUtils.isNotEmpty(jsonObject.getString("useridlist"))) {
+            postClient.addParameter("useridlist", jsonObject.getString("useridlist"));
+        } else if (!CollectionUtils.isEmpty(jsonObject.getJSONArray("useridlist"))) {
+            jsonObject.getJSONArray("useridlist").forEach(uid -> {
+                postClient.addParameter("useridlist", String.valueOf(uid));
+            });
+        } else {
+            throw new GadNullPointerException("useridlist is empty in chatCreate.");
+        }
+        return postClient.post();
+    }
+
+    /**
+     * 发送消息
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    @Override
+    public String chatSendMsg(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadChatApiConstants.CHAT_SEND_MSG)
                 .addParameter("msg", jsonObject.getString("msg"))
                 .addParameter("senderId", jsonObject.getString("senderId"))
                 .addParameter("receiverId", jsonObject.getString("receiverId"))
-                .addParameter("cid", jsonObject.getString("cid"))
+                .addParameter("chatId", jsonObject.getString("chatId"))
+                .addParameter("tenantId", String.valueOf(jsonObject.getLong("tenantId")))
                 .addParameter("chatType", String.valueOf(jsonObject.getInteger("chatType")));
         return postClient.post();
     }
 
     /**
-     * 发送IM消息
-     * @param imChatIsvSendMsgObject ImChatIsvSendMsgObject入参
-     * @return java.lang.String
-     **/
-    @Override
-    public String imChatIsvSendMsg(ImChatIsvSendMsgObject imChatIsvSendMsgObject) {
-        PostClient postClient = this.newGadPostClient(GadChatApiConstants.IM_CHAT_ISV_SEND_MSG)
-                .addParameter("msg", imChatIsvSendMsgObject.getMsg())
-                .addParameter("senderId", imChatIsvSendMsgObject.getSenderId())
-                .addParameter("receiverId", imChatIsvSendMsgObject.getReceiverId())
-                .addParameter("cid", imChatIsvSendMsgObject.getCid())
-                .addParameter("chatType", String.valueOf(imChatIsvSendMsgObject.getChatType()));
-        return postClient.post();
-    }
-
-    /**
-     * 创建群聊会话
+     * 获取群成员
      * @param jsonObject JSONObject入参
      * @return java.lang.String
      **/
     @Override
-    public String imChatIsvCreatGroupChat(JSONObject jsonObject) {
-        PostClient postClient = this.newGadPostClient(GadChatApiConstants.IM_CHAT_ISV_CREAT_GROUP_CHAT)
-                .addParameter("tenantId", String.valueOf(jsonObject.getLong("tenantId")))
-                .addParameter("ownerId", jsonObject.getString("ownerId"))
-                .addParameter("title", jsonObject.getString("title"));
-        if(StringUtils.isNotEmpty(jsonObject.getString("uids"))) {
-            postClient.addParameter("uids", jsonObject.getString("uids"));
-        } else if (!CollectionUtils.isEmpty(jsonObject.getJSONArray("uids"))) {
-            jsonObject.getJSONArray("uids").forEach(uid -> {
-                postClient.addParameter("uids", String.valueOf(uid));
-            });
-        } else {
-            throw new GadNullPointerException("uids is empty in imChatIsvCreatGroupChat.");
-        }
+    public String chatGroupGetUsers(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadChatApiConstants.CHAT_GROUP_GET_USERS)
+                .addParameter("chatId", jsonObject.getString("chatId"));
         return postClient.post();
     }
 
     /**
-     * 创建群聊会话
-     * @param imChatIsvCreatGroupChatObject ImChatIsvCreatGroupChatObject入参
+     * 获取消息已读人数
+     * @param jsonObject JSONObject入参
      * @return java.lang.String
      **/
     @Override
-    public String imChatIsvCreatGroupChat(ImChatIsvCreatGroupChatObject imChatIsvCreatGroupChatObject) {
-        PostClient postClient = this.newGadPostClient(GadChatApiConstants.IM_CHAT_ISV_CREAT_GROUP_CHAT)
-                .addParameter("tenantId", String.valueOf(imChatIsvCreatGroupChatObject.getTenantId()))
-                .addParameter("ownerId", imChatIsvCreatGroupChatObject.getOwnerId())
-                .addParameter("title", imChatIsvCreatGroupChatObject.getTitle());
-        if(!CollectionUtils.isEmpty(imChatIsvCreatGroupChatObject.getUids())) {
-            imChatIsvCreatGroupChatObject.getUids().forEach(uid -> {
-                postClient.addParameter("uids", uid);
-            });
-        } else {
-            throw new GadNullPointerException("uids is empty in imChatIsvCreatGroupChat.");
-        }
+    public String chatGroupMessageReadUsers(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadChatApiConstants.CHAT_GROUP_MESSAGE_READ_USERS)
+                .addParameter("tenantId", String.valueOf(jsonObject.getLong("tenantId")))
+                .addParameter("accountId", String.valueOf(jsonObject.getLong("accountId")))
+                .addParameter("messageId", jsonObject.getString("messageId"))
+                .addParameter("pageSize", String.valueOf(jsonObject.getInteger("pageSize")))
+                .addParameter("cursor", String.valueOf(jsonObject.getLong("cursor")));
         return postClient.post();
     }
 
@@ -1488,6 +1482,36 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
                 .addParameter("areaCode", jsonObject.getString("areaCode"))
                 .addParameter("namespace", jsonObject.getString("namespace"))
                 .addParameter("mobile", jsonObject.getString("mobile"));
+        return postClient.post();
+    }
+
+    /**
+     * 移动任职
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    @Override
+    public String employeeGetMoveEmpPosition(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadABUIApiConstants.ABUI_GET_MOVE_EMP_POSITION)
+                .addParameter("toOrganizationCode", jsonObject.getString("toOrganizationCode"))
+                .addParameter("fromOrganizationCode", jsonObject.getString("fromOrganizationCode"))
+                .addParameter("operator", jsonObject.getString("operator"))
+                .addParameter("employeeCode", jsonObject.getString("employeeCode"))
+                .addParameter("tenantId", String.valueOf(jsonObject.getLong("tenantId")));
+        return postClient.post();
+    }
+
+    /* 应用管理后台免登接口实现 */
+    /**
+     * 服务端通过临时授权码获取授权用户的个人信息
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    @Override
+    public String rpcOauth2GetUserInfoByCode(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadAMBApiConstants.RPC_OAUTH2_GET_USER_INFO_BY_CODE)
+                .addParameter("code", jsonObject.getString("code"))
+                .addParameter("access_token", jsonObject.getString("access_token"));
         return postClient.post();
     }
 

@@ -8,12 +8,24 @@ package cn.locusc.ga.dingding.api.client.common.constant;
 public class GadChatApiConstants {
 
     /**
-     * 发送IM消息
+     * 创建群会话
      **/
-    public static final String IM_CHAT_ISV_SEND_MSG = "/im/chat/isv/sendMsg";
+    public static final String CHAT_CREATE = "/chat/create";
 
     /**
-     * 创建群聊会话
+     * 发送消息
      **/
-    public static final String IM_CHAT_ISV_CREAT_GROUP_CHAT = "/im/chat/isv/creatGroupChat";
+    public static final String CHAT_SEND_MSG = "/chat/sendMsg";
+
+    /**
+     * 获取群成员
+     **/
+    public static final String CHAT_GROUP_GET_USERS = "/chat/group/getUsers";
+
+    /**
+     * 获取消息已读人数
+     **/
+    public static final String CHAT_GROUP_MESSAGE_READ_USERS= "/chat/group/messageReadUsers";
+
+
 }

@@ -1,8 +1,5 @@
 package cn.locusc.ga.dingding.api.client.service;
 
-
-import cn.locusc.ga.dingding.api.client.entity.ImChatIsvCreatGroupChatObject;
-import cn.locusc.ga.dingding.api.client.entity.ImChatIsvSendMsgObject;
 import com.alibaba.fastjson.JSONObject;
 
 /**
@@ -13,31 +10,31 @@ import com.alibaba.fastjson.JSONObject;
 interface GadChatApiService {
 
     /**
-     * 发送IM消息 JSONObject入参
-     * @param jsonObject
+     * 创建群会话
+     * @param jsonObject  JSONObject入参
      * @return java.lang.String
      **/
-    String imChatIsvSendMsg(JSONObject jsonObject);
+    String chatCreate(JSONObject jsonObject);
 
     /**
-     * 发送IM消息 ImChatIsvSendMsgObject入参
-     * @param imChatIsvSendMsgObject
+     * 发送消息
+     * @param jsonObject  JSONObject入参
      * @return java.lang.String
      **/
-    String imChatIsvSendMsg(ImChatIsvSendMsgObject imChatIsvSendMsgObject);
+    String chatSendMsg(JSONObject jsonObject);
 
     /**
-     * 创建群聊会话 JSONObject入参
-     * @param jsonObject
+     * 获取群成员
+     * @param jsonObject JSONObject入参
      * @return java.lang.String
      **/
-    String imChatIsvCreatGroupChat(JSONObject jsonObject);
+    String chatGroupGetUsers(JSONObject jsonObject);
 
     /**
-     * 创建群聊会话 ImChatIsvCreatGroupChatObject入参
-     * @param imChatIsvCreatGroupChatObject
+     * 获取消息已读人数
+     * @param jsonObject JSONObject入参
      * @return java.lang.String
      **/
-    String imChatIsvCreatGroupChat(ImChatIsvCreatGroupChatObject imChatIsvCreatGroupChatObject);
+    String chatGroupMessageReadUsers(JSONObject jsonObject);
 
 }
