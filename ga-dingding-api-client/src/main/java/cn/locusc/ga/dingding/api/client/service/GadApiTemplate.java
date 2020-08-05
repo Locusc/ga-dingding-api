@@ -1501,6 +1501,18 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
         return postClient.post();
     }
 
+    /**
+     * 获取通讯录权限范围
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    @Override
+    public String employeeAuthScopes(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadABUIApiConstants.ABUI_AUTH_SCOPES)
+                .addParameter("tenantId", String.valueOf(jsonObject.getLong("tenantId")));
+        return postClient.post();
+    }
+
     /* 应用管理后台免登接口实现 */
     /**
      * 服务端通过临时授权码获取授权用户的个人信息

@@ -162,4 +162,11 @@ interface GadABUIApiService {
      * @return java.lang.String
      **/
     String employeeGetMoveEmpPosition(JSONObject jsonObject);
+
+    /**
+     * 获取通讯录权限范围
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    String employeeAuthScopes(JSONObject jsonObject);
 }

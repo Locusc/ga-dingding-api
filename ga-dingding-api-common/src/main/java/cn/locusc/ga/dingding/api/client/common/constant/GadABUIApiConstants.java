@@ -116,4 +116,9 @@ public class GadABUIApiConstants {
      * 移动任职
      **/
     public static final String ABUI_GET_MOVE_EMP_POSITION = "/mozi/employee/moveEmployeePosition";
+
+    /**
+     * 获取通讯录权限范围
+     **/
+    public static final String ABUI_AUTH_SCOPES = "/auth/scopes";
 }
