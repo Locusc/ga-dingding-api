@@ -24,7 +24,8 @@ import javax.annotation.Resource;
 public class GadApiTemplate extends GadClientTemplate implements GadBECBApiService,
         GadChatApiService, GadJsApiAuthService, GadLoginApiService, GadScheduleApiService,
         GadToDoApiService, GadWNMApiService, GadABUIApiService, GadABDIApiService,
-        GadTraceService, GadFileStorageService, GadDingService, GadAMBApiService {
+        GadTraceService, GadFileStorageService, GadDingService, GadAMBApiService,
+        GadYIDAOtherService, GadYIDAProcessService, GadYIDATaskCenterService, GadYIDAFormService {
 
     @Resource
     private GadExecutableClientProperties gadExecutableClientProperties;
@@ -38,7 +39,7 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
     @Override
     public String GovDingIsvSend(JSONObject jsonObject) {
         PostClient postClient = this.newGadPostClient(GadDingConstants.GOV_DING_ISV_SEND)
-                .addParameter("notifyType", jsonObject.getJSONObject("creator").toJSONString())
+                .addParameter("creator", jsonObject.getJSONObject("creator").toJSONString())
                 .addParameter("notifyType", jsonObject.getString("notifyType"))
                 .addParameter("tenantId", String.valueOf(jsonObject.getLong("tenantId")))
                 .addParameter("textType", jsonObject.getString("textType"))
@@ -51,6 +52,513 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
         } else {
             postClient.addParameter("receivers", jsonObject.getJSONObject("receivers").toJSONString());
         }
+        return postClient.post();
+    }
+
+    /* 政务钉钉宜搭其他接口实现 */
+    /**
+     * 获取应用下所有表单页面的列表
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    @Override
+    public String yiDaAppListNavigationByFormType(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadYIDAOtherConstants.YIDA_APP_LIST_NAVIGATION_BY_FORM_TYPE)
+                .addParameter("formType", jsonObject.getString("formType"))
+                .addParameter("appType", jsonObject.getString("appType"))
+                .addParameter("systemToken", jsonObject.getString("systemToken"))
+                .addParameter("language", jsonObject.getString("language"))
+                .addParameter("userId", jsonObject.getString("userId"));
+        return postClient.post();
+    }
+
+    /**
+     * 宜搭附件地址转临时免登地址
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    @Override
+    public String yiDaFileGetOpenUrl(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadYIDAOtherConstants.YIDA_FILE_GET_OPEN_URL)
+                .addParameter("appType", jsonObject.getString("appType"))
+                .addParameter("systemToken", jsonObject.getString("systemToken"))
+                .addParameter("fileUrl", jsonObject.getString("fileUrl"))
+                .addParameter("language", jsonObject.getString("language"))
+                .addParameter("userId", jsonObject.getString("userId"))
+                .addParameter("timeout", String.valueOf(jsonObject.getLong("timeout")));
+        return postClient.post();
+    }
+
+    /**
+     * 增加评论
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    @Override
+    public String yiDaRemarkSave(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadYIDAOtherConstants.YIDA_REMARK_SAVE)
+                .addParameter("appType", jsonObject.getString("appType"))
+                .addParameter("formInstId", jsonObject.getString("formInstId"))
+                .addParameter("replyId", String.valueOf(jsonObject.getLong("replyId")))
+                .addParameter("systemToken", jsonObject.getString("systemToken"))
+                .addParameter("language", jsonObject.getString("language"))
+                .addParameter("atUserId", jsonObject.getString("atUserId"))
+                .addParameter("userId", jsonObject.getString("userId"))
+                .addParameter("content", jsonObject.getString("content"));
+        return postClient.post();
+    }
+
+    /* 政务钉钉宜搭任务中心接口实现 */
+    /**
+     * 查询已完成任务
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    @Override
+    public String yiDaProcessGetDoneTasksInCorp(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadYIDATaskCenterConstants.YIDA_PROCESS_GET_DONE_TASKS_IN_COPY)
+                .addParameter("taskFinishTo", String.valueOf(jsonObject.getLong("taskFinishTo")))
+                .addParameter("corpId", jsonObject.getString("corpId"))
+                .addParameter("instanceCreateFrom", String.valueOf(jsonObject.getLong("instanceCreateFrom")))
+                .addParameter("language", jsonObject.getString("language"))
+                .addParameter("userId", jsonObject.getString("userId"))
+                .addParameter("token", jsonObject.getString("token"))
+                .addParameter("createFrom", String.valueOf(jsonObject.getLong("createFrom")))
+                .addParameter("processCodes", jsonObject.getString("processCodes"))
+                .addParameter("taskFinishFrom", String.valueOf(jsonObject.getLong("taskFinishFrom")))
+                .addParameter("createTo", String.valueOf(jsonObject.getLong("createTo")))
+                .addParameter("limit", String.valueOf(jsonObject.getInteger("limit")))
+                .addParameter("page", String.valueOf(jsonObject.getInteger("page")))
+                .addParameter("appTypes", jsonObject.getString("appTypes"))
+                .addParameter("keyword", jsonObject.getString("keyword"))
+                .addParameter("instanceCreateTo", String.valueOf(jsonObject.getLong("instanceCreateTo")))
+                .addParameter("status", jsonObject.getString("status"));
+        return postClient.post();
+    }
+
+    /**
+     * 查询待办任务
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    @Override
+    public String yiDaProcessGetTodoTasksInCorp(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadYIDATaskCenterConstants.YIDA_PROCESS_GET_TODO_TASKS_IN_COPY)
+                .addParameter("taskFinishTo", String.valueOf(jsonObject.getLong("taskFinishTo")))
+                .addParameter("corpId", jsonObject.getString("corpId"))
+                .addParameter("instanceCreateFrom", String.valueOf(jsonObject.getLong("instanceCreateFrom")))
+                .addParameter("language", jsonObject.getString("language"))
+                .addParameter("userId", jsonObject.getString("userId"))
+                .addParameter("token", jsonObject.getString("token"))
+                .addParameter("createFrom", String.valueOf(jsonObject.getLong("createFrom")))
+                .addParameter("processCodes", jsonObject.getString("processCodes"))
+                .addParameter("taskFinishFrom", String.valueOf(jsonObject.getLong("taskFinishFrom")))
+                .addParameter("createTo", String.valueOf(jsonObject.getLong("createTo")))
+                .addParameter("limit", String.valueOf(jsonObject.getInteger("limit")))
+                .addParameter("page", String.valueOf(jsonObject.getInteger("page")))
+                .addParameter("appTypes", jsonObject.getString("appTypes"))
+                .addParameter("keyword", jsonObject.getString("keyword"))
+                .addParameter("instanceCreateTo", String.valueOf(jsonObject.getLong("instanceCreateTo")))
+                .addParameter("status", jsonObject.getString("status"));
+        return postClient.post();
+    }
+
+    /**
+     * 已提交任务
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    @Override
+    public String yiDaProcessGetMySubmmitInCorp(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadYIDATaskCenterConstants.YIDA_PROCESS_GET_MY_SUBMMIT_IN_COPY)
+                .addParameter("taskFinishTo", String.valueOf(jsonObject.getLong("taskFinishTo")))
+                .addParameter("corpId", jsonObject.getString("corpId"))
+                .addParameter("instanceCreateFrom", String.valueOf(jsonObject.getLong("instanceCreateFrom")))
+                .addParameter("language", jsonObject.getString("language"))
+                .addParameter("userId", jsonObject.getString("userId"))
+                .addParameter("token", jsonObject.getString("token"))
+                .addParameter("createFrom", String.valueOf(jsonObject.getLong("createFrom")))
+                .addParameter("processCodes", jsonObject.getString("processCodes"))
+                .addParameter("taskFinishFrom", String.valueOf(jsonObject.getLong("taskFinishFrom")))
+                .addParameter("createTo", String.valueOf(jsonObject.getLong("createTo")))
+                .addParameter("limit", String.valueOf(jsonObject.getInteger("limit")))
+                .addParameter("page", String.valueOf(jsonObject.getInteger("page")))
+                .addParameter("appTypes", jsonObject.getString("appTypes"))
+                .addParameter("keyword", jsonObject.getString("keyword"))
+                .addParameter("instanceCreateTo", String.valueOf(jsonObject.getLong("instanceCreateTo")))
+                .addParameter("status", jsonObject.getString("status"));
+        return postClient.post();
+    }
+
+    /* 政务钉钉宜搭流程接口实现 */
+    /**
+     * 根据搜索条件获取实例详情列表
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    @Override
+    public String yiDaProcessGetInstances(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadYIDAProcessConstants.YIDA_PROCESS_GET_INSTANCES)
+                .addParameter("modifiedFrom", jsonObject.getString("modifiedFrom"))
+                .addParameter("formUuid", jsonObject.getString("formUuid"))
+                .addParameter("systemToken", jsonObject.getString("systemToken"))
+                .addParameter("pageSize", String.valueOf(jsonObject.getInteger("pageSize")))
+                .addParameter("dynamicOrder", jsonObject.getString("dynamicOrder"))
+                .addParameter("searchFieldJson", jsonObject.getString("searchFieldJson"))
+                .addParameter("useOriginValue", jsonObject.getString("useOriginValue"))
+                .addParameter("language", jsonObject.getString("language"))
+                .addParameter("instanceStatus", jsonObject.getString("instanceStatus"))
+                .addParameter("userId", jsonObject.getString("userId"))
+                .addParameter("createFrom", jsonObject.getString("createFrom"))
+                .addParameter("targetFieldJson", jsonObject.getString("targetFieldJson"))
+                .addParameter("approvedResult", jsonObject.getString("approvedResult"))
+                .addParameter("createTo", jsonObject.getString("createTo"))
+                .addParameter("appType", jsonObject.getString("appType"))
+                .addParameter("originatorId", jsonObject.getString("originatorId"))
+                .addParameter("currentPage", String.valueOf(jsonObject.getInteger("currentPage")))
+                .addParameter("taskId", jsonObject.getString("taskId"))
+                .addParameter("modifiedTo", jsonObject.getString("modifiedTo"));
+        return postClient.post();
+    }
+
+    /**
+     * 获取流程设计节点上的按钮列表
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    @Override
+    public String yiDaProcessGetActivityButtonVOs(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadYIDAProcessConstants.YIDA_PROCESS_GET_ACTIVITY_BUTTON_VOS)
+                .addParameter("activityId", jsonObject.getString("activityId"))
+                .addParameter("processCode", jsonObject.getString("processCode"))
+                .addParameter("appType", jsonObject.getString("appType"))
+                .addParameter("systemToken", jsonObject.getString("systemToken"))
+                .addParameter("language", jsonObject.getString("language"))
+                .addParameter("userId", jsonObject.getString("userId"));
+        return postClient.post();
+    }
+
+    /**
+     * 流程实例更新
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    @Override
+    public String yiDaProcessUpdateInstance(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadYIDAProcessConstants.YIDA_PROCESS_UPDATE_INSTANCE)
+                .addParameter("processInstanceId", jsonObject.getString("processInstanceId"))
+                .addParameter("updateFormDataJson", jsonObject.getString("updateFormDataJson"))
+                .addParameter("appType", jsonObject.getString("appType"))
+                .addParameter("ignoreEmpty", String.valueOf(jsonObject.getBoolean("ignoreEmpty")))
+                .addParameter("systemToken", jsonObject.getString("systemToken"))
+                .addParameter("language", jsonObject.getString("language"))
+                .addParameter("userId", jsonObject.getString("userId"));
+        return postClient.post();
+    }
+
+    /**
+     * 执行虚拟节点任务
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    @Override
+    public String yiDaProcessExecutePlatformTask(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadYIDAProcessConstants.YIDA_PROCESS_EXECUTE_PLATFORM_TASK)
+                .addParameter("outResult", jsonObject.getString("outResult"))
+                .addParameter("noExecuteExpressions", jsonObject.getString("noExecuteExpressions"))
+                .addParameter("appType", jsonObject.getString("appType"))
+                .addParameter("formDataJson", jsonObject.getString("formDataJson"))
+                .addParameter("systemToken", jsonObject.getString("systemToken"))
+                .addParameter("remark", jsonObject.getString("remark"))
+                .addParameter("language", jsonObject.getString("language"))
+                .addParameter("procInstId", jsonObject.getString("procInstId"))
+                .addParameter("userId", jsonObject.getString("userId"));
+        return postClient.post();
+    }
+
+    /**
+     * 获取审批记录
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    @Override
+    public String yiDaProcessGetOperationRecords(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadYIDAProcessConstants.YIDA_PROCESS_GET_OPERATION_RECORDS)
+                .addParameter("processInstanceId", jsonObject.getString("processInstanceId"))
+                .addParameter("appType", jsonObject.getString("appType"))
+                .addParameter("systemToken", jsonObject.getString("systemToken"))
+                .addParameter("language", jsonObject.getString("language"))
+                .addParameter("userId", jsonObject.getString("userId"));
+        return postClient.post();
+    }
+
+    /**
+     * 执行单个任务接口
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    @Override
+    public String yiDaProcessExecuteTask(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadYIDAProcessConstants.YIDA_PROCESS_EXECUTE_TASK)
+                .addParameter("outResult", jsonObject.getString("outResult"))
+                .addParameter("noExecuteExpressions", jsonObject.getString("noExecuteExpressions"))
+                .addParameter("appType", jsonObject.getString("appType"))
+                .addParameter("formDataJson", jsonObject.getString("formDataJson"))
+                .addParameter("systemToken", jsonObject.getString("systemToken"))
+                .addParameter("remark", jsonObject.getString("remark"))
+                .addParameter("language", jsonObject.getString("language"))
+                .addParameter("procInstId", jsonObject.getString("procInstId"))
+                .addParameter("userId", jsonObject.getString("userId"))
+                .addParameter("taskId", jsonObject.getString("taskId"));
+        return postClient.post();
+    }
+
+    /**
+     * 终止流程实例
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    @Override
+    public String yiDaProcessTerminateInstance(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadYIDAProcessConstants.YIDA_PROCESS_TERMINATE_INSTANCE)
+                .addParameter("processInstanceId", jsonObject.getString("processInstanceId"))
+                .addParameter("appType", jsonObject.getString("appType"))
+                .addParameter("systemToken", jsonObject.getString("systemToken"))
+                .addParameter("language", jsonObject.getString("language"))
+                .addParameter("userId", jsonObject.getString("userId"));
+        return postClient.post();
+    }
+
+    /**
+     * 删除流程实例
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    @Override
+    public String yiDaProcessDeleteInstance(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadYIDAProcessConstants.YIDA_PROCESS_DELETE_INSTANCE)
+                .addParameter("processInstanceId", jsonObject.getString("processInstanceId"))
+                .addParameter("appType", jsonObject.getString("appType"))
+                .addParameter("systemToken", jsonObject.getString("systemToken"))
+                .addParameter("language", jsonObject.getString("language"))
+                .addParameter("userId", jsonObject.getString("userId"));
+        return postClient.post();
+    }
+
+    /**
+     * 根据实例ID获取流程实例详情
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    @Override
+    public String yiDaProcessGetInstanceById(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadYIDAProcessConstants.YIDA_PROCESS_GET_INSTANCE_BY_ID)
+                .addParameter("processInstanceId", jsonObject.getString("processInstanceId"))
+                .addParameter("formUuid", jsonObject.getString("formUuid"))
+                .addParameter("appType", jsonObject.getString("appType"))
+                .addParameter("systemToken", jsonObject.getString("systemToken"))
+                .addParameter("useOriginValue", String.valueOf(jsonObject.getBoolean("useOriginValue")))
+                .addParameter("language", jsonObject.getString("language"))
+                .addParameter("userId", jsonObject.getString("userId"));
+        return postClient.post();
+    }
+
+    /**
+     * 搜索流程实例ID
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    @Override
+    public String yiDaProcessGetInstanceIds(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadYIDAProcessConstants.YIDA_PROCESS_GET_INSTANCE_IDS)
+                .addParameter("modifiedFrom", jsonObject.getString("modifiedFrom"))
+                .addParameter("formUuid", jsonObject.getString("formUuid"))
+                .addParameter("systemToken", jsonObject.getString("systemToken"))
+                .addParameter("pageSize", String.valueOf(jsonObject.getInteger("pageSize")))
+                .addParameter("dynamicOrder", jsonObject.getString("dynamicOrder"))
+                .addParameter("searchFieldJson", jsonObject.getString("searchFieldJson"))
+                .addParameter("useOriginValue", jsonObject.getString("useOriginValue"))
+                .addParameter("language", jsonObject.getString("language"))
+                .addParameter("instanceStatus", jsonObject.getString("instanceStatus"))
+                .addParameter("userId", jsonObject.getString("userId"))
+                .addParameter("createFrom", jsonObject.getString("createFrom"))
+                .addParameter("targetFieldJson", jsonObject.getString("targetFieldJson"))
+                .addParameter("approvedResult", jsonObject.getString("approvedResult"))
+                .addParameter("createTo", jsonObject.getString("createTo"))
+                .addParameter("appType", jsonObject.getString("appType"))
+                .addParameter("originatorId", jsonObject.getString("originatorId"))
+                .addParameter("currentPage", String.valueOf(jsonObject.getInteger("currentPage")))
+                .addParameter("taskId", jsonObject.getString("taskId"))
+                .addParameter("modifiedTo", jsonObject.getString("modifiedTo"));
+        return postClient.post();
+    }
+
+    /**
+     * 流程发起
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    @Override
+    public String yiDaProcessStartInstance(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadYIDAProcessConstants.YIDA_PROCESS_START_INSTANCE)
+                .addParameter("instValue", jsonObject.getString("instValue"))
+                .addParameter("formUuid", jsonObject.getString("formUuid"))
+                .addParameter("processCode", jsonObject.getString("processCode"))
+                .addParameter("appType", jsonObject.getString("appType"))
+                .addParameter("formDataJson", jsonObject.getString("formDataJson"))
+                .addParameter("deptId", jsonObject.getString("deptId"))
+                .addParameter("businessId", jsonObject.getString("businessId"))
+                .addParameter("systemToken", jsonObject.getString("systemToken"))
+                .addParameter("language", jsonObject.getString("language"))
+                .addParameter("userId", jsonObject.getString("userId"))
+                .addParameter("useOriginInstValue", String.valueOf(jsonObject.getBoolean("useOriginInstValue")));
+        return postClient.post();
+    }
+
+    /* 政务钉钉宜搭表单接口实现 */
+    /**
+     * 获取表单定义
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    @Override
+    public String yiDaFormDesignGetFormComponentDefinationList(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadYIDAFormConstants.YIDA_FORM_DESIGN_GET_FORM_COMPONENT_DEFINATION_LIST)
+                .addParameter("formUuid", jsonObject.getString("formUuid"))
+                .addParameter("appType", jsonObject.getString("appType"))
+                .addParameter("systemToken", jsonObject.getString("systemToken"))
+                .addParameter("language", jsonObject.getString("language"))
+                .addParameter("version", String.valueOf(jsonObject.getLong("version")))
+                .addParameter("userId", jsonObject.getString("userId"));
+        return postClient.post();
+    }
+
+    /**
+     * 根据条件搜索单据实例详情列表
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    @Override
+    public String yiDaFormSearchFormDatas(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadYIDAFormConstants.YIDA_FORM_SEARCH_FORM_DATAS)
+                .addParameter("modifiedFrom", jsonObject.getString("modifiedFrom"))
+                .addParameter("formUuid", jsonObject.getString("formUuid"))
+                .addParameter("systemToken", jsonObject.getString("systemToken"))
+                .addParameter("pageSize", String.valueOf(jsonObject.getInteger("pageSize")))
+                .addParameter("dynamicOrder", jsonObject.getString("dynamicOrder"))
+                .addParameter("searchFieldJson", jsonObject.getString("searchFieldJson"))
+                .addParameter("useOriginValue", jsonObject.getString("useOriginValue"))
+                .addParameter("language", jsonObject.getString("language"))
+                .addParameter("userId", jsonObject.getString("userId"))
+                .addParameter("createFrom", jsonObject.getString("createFrom"))
+                .addParameter("targetFieldJson", jsonObject.getString("targetFieldJson"))
+                .addParameter("createTo", jsonObject.getString("createTo"))
+                .addParameter("appType", jsonObject.getString("appType"))
+                .addParameter("originatorId", jsonObject.getString("originatorId"))
+                .addParameter("currentPage", String.valueOf(jsonObject.getInteger("currentPage")))
+                .addParameter("modifiedTo", jsonObject.getString("modifiedTo"));
+        return postClient.post();
+    }
+
+    /**
+     * 根据条件搜索单据实例ID列表
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    @Override
+    public String yiDaFormSearchFormDataIds(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadYIDAFormConstants.YIDA_FORM_SEARCH_FORM_DATA_IDS)
+                .addParameter("modifiedFrom", jsonObject.getString("modifiedFrom"))
+                .addParameter("formUuid", jsonObject.getString("formUuid"))
+                .addParameter("systemToken", jsonObject.getString("systemToken"))
+                .addParameter("pageSize", String.valueOf(jsonObject.getInteger("pageSize")))
+                .addParameter("dynamicOrder", jsonObject.getString("dynamicOrder"))
+                .addParameter("searchFieldJson", jsonObject.getString("searchFieldJson"))
+                .addParameter("useOriginValue", jsonObject.getString("useOriginValue"))
+                .addParameter("language", jsonObject.getString("language"))
+                .addParameter("userId", jsonObject.getString("userId"))
+                .addParameter("createFrom", jsonObject.getString("createFrom"))
+                .addParameter("targetFieldJson", jsonObject.getString("targetFieldJson"))
+                .addParameter("createTo", jsonObject.getString("createTo"))
+                .addParameter("appType", jsonObject.getString("appType"))
+                .addParameter("originatorId", jsonObject.getString("originatorId"))
+                .addParameter("currentPage", String.valueOf(jsonObject.getInteger("currentPage")))
+                .addParameter("modifiedTo", jsonObject.getString("modifiedTo"));
+        return postClient.post();
+    }
+
+    /**
+     * 根据单据实例ID查询单据实例详情
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    @Override
+    public String yiDaFormGetFormDataById(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadYIDAFormConstants.YIDA_FORM_SEARCH_FORM_DATA_BY_ID)
+                .addParameter("appType", jsonObject.getString("appType"))
+                .addParameter("formInstId", jsonObject.getString("formInstId"))
+                .addParameter("systemToken", jsonObject.getString("systemToken"))
+                .addParameter("language", jsonObject.getString("language"))
+                .addParameter("userId", jsonObject.getString("userId"))
+                .addParameter("needInstValue", String.valueOf(jsonObject.getBoolean("needInstValue")));
+        return postClient.post();
+    }
+
+    /**
+     * 删除单据实例
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    @Override
+    public String yiDaFormDeleteFormData(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadYIDAFormConstants.YIDA_FORM_DELETE_FORM_DATA)
+                .addParameter("useLatestVersion", String.valueOf(jsonObject.getBoolean("useLatestVersion")))
+                .addParameter("updateFormDataJson", jsonObject.getString("updateFormDataJson"))
+                .addParameter("appType", jsonObject.getString("appType"))
+                .addParameter("formInstId", jsonObject.getString("formInstId"))
+                .addParameter("ignoreEmpty", String.valueOf(jsonObject.getBoolean("ignoreEmpty")))
+                .addParameter("systemToken", jsonObject.getString("systemToken"))
+                .addParameter("language", jsonObject.getString("language"))
+                .addParameter("userId", jsonObject.getString("userId"));
+        return postClient.post();
+    }
+
+    /**
+     * 更新单据中指定组件值
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    @Override
+    public String yiDaFormUpdateFormData(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadYIDAFormConstants.YIDA_FORM_UPDATE_FORM_DATA)
+                .addParameter("useLatestVersion", String.valueOf(jsonObject.getBoolean("useLatestVersion")))
+                .addParameter("updateFormDataJson", jsonObject.getString("updateFormDataJson"))
+                .addParameter("appType", jsonObject.getString("appType"))
+                .addParameter("formInstId", jsonObject.getString("formInstId"))
+                .addParameter("ignoreEmpty", String.valueOf(jsonObject.getBoolean("ignoreEmpty")))
+                .addParameter("systemToken", jsonObject.getString("systemToken"))
+                .addParameter("language", jsonObject.getString("language"))
+                .addParameter("userId", jsonObject.getString("userId"));
+        return postClient.post();
+    }
+
+    /**
+     * 新增单据实例
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    @Override
+    public String yiDaFormSaveFormData(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadYIDAFormConstants.YIDA_FORM_SAVE_FORM_DATA)
+                .addParameter("instValue", jsonObject.getString("instValue"))
+                .addParameter("noExecExp", String.valueOf(jsonObject.getBoolean("noExecExp")))
+                .addParameter("formUuid", jsonObject.getString("formUuid"))
+                .addParameter("appType", jsonObject.getString("appType"))
+                .addParameter("formInstId", jsonObject.getString("formInstId"))
+                .addParameter("formDataJson", jsonObject.getString("formDataJson"))
+                .addParameter("systemToken", jsonObject.getString("systemToken"))
+                .addParameter("language", jsonObject.getString("language"))
+                .addParameter("userId", jsonObject.getString("userId"));
         return postClient.post();
     }
 

@@ -9,7 +9,7 @@ interface GadJsApiAuthService {
 
     /**
      * /get_jsapi_token.json JSAPI鉴权
-     * @param accessToken
+     * @param accessToken accessToken
      * @return java.lang.String
      **/
     String getJsApiToken(String accessToken);
