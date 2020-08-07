@@ -7,7 +7,7 @@
     <dependency>
         <groupId>cn.locusc</groupId>
         <artifactId>ga-dingding-api-client</artifactId>
-        <version>1.1.0</version>
+        <version>1.2.0</version>
     </dependency>
 ```
 ## application.yml 配置：
@@ -34,6 +34,14 @@ gad:
 ## 已完成：
 * [x] 官方请求SDK的功能 
 * [x] DING
+* [x] 评论
+* [x] 电子签章
+* [x] 人脸识别
+* [x] 水印
+* [x] 宜搭其他
+* [x] 宜搭任务中心
+* [x] 宜搭流程
+* [x] 宜搭表单
 * [x] 轨迹服务
 * [x] 消息
 * [x] 业务事件回调
@@ -43,6 +51,7 @@ gad:
 * [x] 工作通知消息
 * [x] 获取通讯录部门信息
 * [x] 获取通讯录用户信息
+* [x] 应用管理后台免登
 * [x] 企业内应用免登
 ## 未完成：
 * [ ] 日程

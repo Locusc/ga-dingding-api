@@ -7,7 +7,7 @@ import com.alibaba.fastjson.JSONObject;
  * 政务钉钉宜搭流程接口
  * 15:48 2020/8/5
  **/
-public interface GadYIDAProcessService {
+interface GadYIDAProcessService {
 
     /**
      * 根据搜索条件获取实例详情列表

@@ -2,7 +2,7 @@ package cn.locusc.ga.dingding.api.client.common.constant;
 
 /**
  * @author Jay Chan
- * 政务钉钉应用管理后台免登接口常量
+ * 政务钉钉应用管理后台免登接口地址常量
  * 15:10 2020/7/25
  **/
 public class GadAMBApiConstants {

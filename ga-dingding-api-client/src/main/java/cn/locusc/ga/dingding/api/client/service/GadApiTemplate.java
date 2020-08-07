@@ -25,7 +25,8 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
         GadChatApiService, GadJsApiAuthService, GadLoginApiService, GadScheduleApiService,
         GadToDoApiService, GadWNMApiService, GadABUIApiService, GadABDIApiService,
         GadTraceService, GadFileStorageService, GadDingService, GadAMBApiService,
-        GadYIDAOtherService, GadYIDAProcessService, GadYIDATaskCenterService, GadYIDAFormService {
+        GadYIDAOtherService, GadYIDAProcessService, GadYIDATaskCenterService, GadYIDAFormService,
+        GadWaterMarkService, GadFaceRecognitionService, GadGESService, GadCommentsServices {
 
     @Resource
     private GadExecutableClientProperties gadExecutableClientProperties;
@@ -47,11 +48,581 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
                 .addParameter("bodyType", jsonObject.getString("bodyType"));
         if(!CollectionUtils.isEmpty(jsonObject.getJSONArray("receivers"))) {
             jsonObject.getJSONArray("receivers").forEach(receiver -> {
-                postClient.addParameter("bodyType", String.valueOf(receiver));
+                postClient.addParameter("receivers", String.valueOf(receiver));
             });
         } else {
             postClient.addParameter("receivers", jsonObject.getJSONObject("receivers").toJSONString());
         }
+        return postClient.post();
+    }
+
+    /* 评论接口实现 */
+    /**
+     * 根据条件删除点赞
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    @Override
+    public String bipLikeDeleteByConditions(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadCommentsConstants.BIP_LIKE_DELETE_BY_CONDITIONS)
+                .addParameter("subjectId", jsonObject.getString("subjectId"))
+                .addParameter("likeAccountId", String.valueOf(jsonObject.getLong("likeAccountId")))
+                .addParameter("likeAccountTenantId", String.valueOf(jsonObject.getLong("likeAccountTenantId")))
+                .addParameter("subjectAccountId", String.valueOf(jsonObject.getLong("subjectAccountId")))
+                .addParameter("subjectAccountTenantId", String.valueOf(jsonObject.getLong("subjectAccountTenantId")))
+                .addParameter("bizCode", jsonObject.getString("bizCode"))
+                .addParameter("id", String.valueOf(jsonObject.getLong("id")));
+        return postClient.post();
+    }
+
+    /**
+     * 根据id查询点赞
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    @Override
+    public String bipLikeGet(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadCommentsConstants.BIP_LIKE_GET)
+                .addParameter("id", String.valueOf(jsonObject.getLong("id")));
+        return postClient.post();
+    }
+
+    /**
+     * 根据条件查询点赞数量
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    @Override
+    public String bipLikeCountLike(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadCommentsConstants.BIP_LIKE_COUNT_LIKE)
+                .addParameter("sortBy", jsonObject.getString("sortBy"))
+                .addParameter("subjectId", jsonObject.getString("subjectId"))
+                .addParameter("likeAccountId", String.valueOf(jsonObject.getLong("likeAccountId")))
+                .addParameter("likeAccountTenantId", String.valueOf(jsonObject.getLong("likeAccountTenantId")))
+                .addParameter("subjectAccountId", String.valueOf(jsonObject.getLong("subjectAccountId")))
+                .addParameter("subjectAccountTenantId", String.valueOf(jsonObject.getLong("subjectAccountTenantId")))
+                .addParameter("bizCode", jsonObject.getString("bizCode"))
+                .addParameter("subjectKeyword", jsonObject.getString("subjectKeyword"));
+        return postClient.post();
+    }
+
+    /**
+     * 根据不同条件查询点赞,并限制返回数量，根据主题id分类
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    @Override
+    public String bipLikeLimitQueryGroupBySubjectId(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadCommentsConstants.BIP_LIKE_LIMIT_QUERY_GROUP_BY_SUBJECT_ID)
+                .addParameter("sortBy", jsonObject.getString("sortBy"))
+                .addParameter("subjectId", jsonObject.getString("subjectId"))
+                .addParameter("subjectIdStr", jsonObject.getString("subjectIdStr"))
+                .addParameter("likeAccountId", String.valueOf(jsonObject.getLong("likeAccountId")))
+                .addParameter("likeAccountTenantId", String.valueOf(jsonObject.getLong("likeAccountTenantId")))
+                .addParameter("subjectAccountId", String.valueOf(jsonObject.getLong("subjectAccountId")))
+                .addParameter("subjectAccountTenantId", String.valueOf(jsonObject.getLong("subjectAccountTenantId")))
+                .addParameter("bizCode", jsonObject.getString("bizCode"))
+                .addParameter("subjectKeyword", jsonObject.getString("subjectKeyword"))
+                .addParameter("limitPerSubject", String.valueOf(jsonObject.getInteger("limitPerSubject")));
+        return postClient.post();
+    }
+
+    /**
+     * 根据不同条件查询点赞
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    @Override
+    public String bipLikeQuery(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadCommentsConstants.BIP_LIKE_QUERY)
+                .addParameter("pageNo", String.valueOf(jsonObject.getInteger("pageNo")))
+                .addParameter("pageSize", String.valueOf(jsonObject.getInteger("pageSize")))
+                .addParameter("sortBy", jsonObject.getString("sortBy"))
+                .addParameter("subjectId", jsonObject.getString("subjectId"))
+                .addParameter("subjectIdStr", jsonObject.getString("subjectIdStr"))
+                .addParameter("likeAccountId", String.valueOf(jsonObject.getLong("likeAccountId")))
+                .addParameter("likeAccountTenantId", String.valueOf(jsonObject.getLong("likeAccountTenantId")))
+                .addParameter("subjectAccountId", String.valueOf(jsonObject.getLong("subjectAccountId")))
+                .addParameter("subjectAccountTenantId", String.valueOf(jsonObject.getLong("subjectAccountTenantId")))
+                .addParameter("bizCode", jsonObject.getString("bizCode"))
+                .addParameter("isPage", String.valueOf(jsonObject.getInteger("isPage")))
+                .addParameter("subjectKeyword", jsonObject.getString("subjectKeyword"));
+        return postClient.post();
+    }
+
+    /**
+     * 更新点赞
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    @Override
+    public String bipLikeUpdate(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadCommentsConstants.BIP_LIKE_UPDATE)
+                .addParameter("id", String.valueOf(jsonObject.getLong("id")))
+                .addParameter("extendedField", jsonObject.getString("extendedField"))
+                .addParameter("subjectKeyword", jsonObject.getString("subjectKeyword"));
+        return postClient.post();
+    }
+
+    /**
+     * 点赞
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    @Override
+    public String bipLikeAdd(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadCommentsConstants.BIP_LIKE_ADD)
+                .addParameter("subjectId", jsonObject.getString("subjectId"))
+                .addParameter("subjectAccountId", String.valueOf(jsonObject.getLong("subjectAccountId")))
+                .addParameter("subjectAccountTenantId", String.valueOf(jsonObject.getLong("subjectAccountTenantId")))
+                .addParameter("extendedField", jsonObject.getString("extendedField"))
+                .addParameter("subjectKeyword", jsonObject.getString("subjectKeyword"));
+        return postClient.post();
+    }
+
+    /**
+     * 根据条件删除评论
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    @Override
+    public String bipCommentDeleteByConditions(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadCommentsConstants.BIP_COMMENT_DELETE_BY_CONDITIONS)
+                .addParameter("subjectId", jsonObject.getString("subjectId"))
+                .addParameter("commentAccountId", String.valueOf(jsonObject.getLong("commentAccountId")))
+                .addParameter("commentAccountTenantId", String.valueOf(jsonObject.getLong("commentAccountTenantId")))
+                .addParameter("subjectAccountId", String.valueOf(jsonObject.getLong("subjectAccountId")))
+                .addParameter("subjectAccountTenantId", String.valueOf(jsonObject.getLong("subjectAccountTenantId")))
+                .addParameter("type", String.valueOf(jsonObject.getInteger("type")))
+                .addParameter("bizCode", jsonObject.getString("bizCode"))
+                .addParameter("id", String.valueOf(jsonObject.getLong("id")))
+                .addParameter("isRecursion", jsonObject.getString("isRecursion"));
+        return postClient.post();
+    }
+
+    /**
+     * 根据评论id查询评论
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    @Override
+    public String bipCommentGet(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadCommentsConstants.BIP_COMMENT_GET)
+                .addParameter("id", String.valueOf(jsonObject.getLong("id")));
+        return postClient.post();
+    }
+
+    /**
+     * 根据条件查询评论数量
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    @Override
+    public String bipCommentCountComments(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadCommentsConstants.BIP_COMMENT_COUNT_COMMENTS)
+                .addParameter("pageNo", String.valueOf(jsonObject.getInteger("pageNo")))
+                .addParameter("pageSize", String.valueOf(jsonObject.getInteger("pageSize")))
+                .addParameter("sortBy", jsonObject.getString("sortBy"))
+                .addParameter("subjectId", jsonObject.getString("subjectId"))
+                .addParameter("subjectIdStr", jsonObject.getString("subjectIdStr"))
+                .addParameter("commentAccountId", String.valueOf(jsonObject.getLong("commentAccountId")))
+                .addParameter("commentAccountTenantId", String.valueOf(jsonObject.getLong("commentAccountTenantId")))
+                .addParameter("subjectAccountId", String.valueOf(jsonObject.getLong("subjectAccountId")))
+                .addParameter("subjectAccountTenantId", String.valueOf(jsonObject.getLong("subjectAccountTenantId")))
+                .addParameter("type", String.valueOf(jsonObject.getInteger("type")))
+                .addParameter("bizCode", jsonObject.getString("bizCode"));
+        return postClient.post();
+    }
+
+    /**
+     * 根据不同条件查询评论/回复评论,并限制返回数量,根据主题id分组返回
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    @Override
+    public String bipCommentLimitQueryGroupBySubjectId(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadCommentsConstants.BIP_COMMENT_LIMIT_QUERY_GROUP_BY_SUBJECT_ID)
+                .addParameter("pageNo", String.valueOf(jsonObject.getInteger("pageNo")))
+                .addParameter("pageSize", String.valueOf(jsonObject.getInteger("pageSize")))
+                .addParameter("sortBy", jsonObject.getString("sortBy"))
+                .addParameter("subjectId", jsonObject.getString("subjectId"))
+                .addParameter("subjectIdStr", jsonObject.getString("subjectIdStr"))
+                .addParameter("commentAccountId", String.valueOf(jsonObject.getLong("commentAccountId")))
+                .addParameter("commentAccountTenantId", String.valueOf(jsonObject.getLong("commentAccountTenantId")))
+                .addParameter("subjectAccountId", String.valueOf(jsonObject.getLong("subjectAccountId")))
+                .addParameter("subjectAccountTenantId", String.valueOf(jsonObject.getLong("subjectAccountTenantId")))
+                .addParameter("type", String.valueOf(jsonObject.getInteger("type")))
+                .addParameter("bizCode", jsonObject.getString("bizCode"))
+                .addParameter("limitPerSubject", String.valueOf(jsonObject.getInteger("limitPerSubject")));
+        return postClient.post();
+    }
+
+    /**
+     * 根据不同条件查询评论/回复评论
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    @Override
+    public String bipCommentQuery(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadCommentsConstants.BIP_COMMENT_QUERY)
+                .addParameter("pageNo", String.valueOf(jsonObject.getInteger("pageNo")))
+                .addParameter("pageSize", String.valueOf(jsonObject.getInteger("pageSize")))
+                .addParameter("sortBy", jsonObject.getString("sortBy"))
+                .addParameter("subjectId", jsonObject.getString("subjectId"))
+                .addParameter("subjectIdStr", jsonObject.getString("subjectIdStr"))
+                .addParameter("commentAccountId", String.valueOf(jsonObject.getLong("commentAccountId")))
+                .addParameter("commentAccountTenantId", String.valueOf(jsonObject.getLong("commentAccountTenantId")))
+                .addParameter("subjectAccountId", String.valueOf(jsonObject.getLong("subjectAccountId")))
+                .addParameter("subjectAccountTenantId", String.valueOf(jsonObject.getLong("subjectAccountTenantId")))
+                .addParameter("type", String.valueOf(jsonObject.getInteger("type")))
+                .addParameter("bizCode", jsonObject.getString("bizCode"))
+                .addParameter("isPage", String.valueOf(jsonObject.getInteger("isPage")));
+        return postClient.post();
+    }
+
+    /**
+     * 更新评论/更新评论回复
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    @Override
+    public String bipCommentUpdate(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadCommentsConstants.BIP_COMMENT_UPDATE)
+                .addParameter("id", String.valueOf(jsonObject.getLong("id")))
+                .addParameter("extendedField", jsonObject.getString("extendedField"));
+        return postClient.post();
+    }
+
+    /**
+     * 评论/评论回复
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    @Override
+    public String bipCommentAdd(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadCommentsConstants.BIP_COMMENT_ADD)
+                .addParameter("subjectId", jsonObject.getString("subjectId"))
+                .addParameter("type", jsonObject.getString("type"))
+                .addParameter("replyCommentId", jsonObject.getString("replyCommentId"))
+                .addParameter("content", jsonObject.getString("content"))
+                .addParameter("subjectAccountId", jsonObject.getString("subjectAccountId"))
+                .addParameter("subjectAccountTenantId", jsonObject.getString("subjectAccountTenantId"))
+                .addParameter("extendedField", jsonObject.getString("extendedField"));
+        return postClient.post();
+    }
+
+    /* 电子签章实现 */
+    /**
+     * 获取签章机构列表
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    @Override
+    public String gesQueryOrganizations(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadGESConstants.GES_QUERY_ORGANIZATIONS)
+                .addParameter("organizationName", jsonObject.getString("organizationName"))
+                .addParameter("essp", jsonObject.getString("essp"))
+                .addParameter("pageSize", String.valueOf(jsonObject.getInteger("pageSize")))
+                .addParameter("currentPage", String.valueOf(jsonObject.getInteger("currentPage")));
+        return postClient.post();
+    }
+
+    /**
+     * 获取签章管理员列表
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    @Override
+    public String gesQuerySealKeepers(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadGESConstants.GES_QUERY_SEAL_KEEPERS)
+                .addParameter("organizationId", jsonObject.getString("organizationId"))
+                .addParameter("essp", jsonObject.getString("essp"));
+        return postClient.post();
+    }
+
+    /**
+     * 获取印章列表
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    @Override
+    public String gesQuerySeals(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadGESConstants.GES_QUERY_SEALS)
+                .addParameter("organizationId", jsonObject.getString("organizationId"))
+                .addParameter("sealKeeperId", jsonObject.getString("sealKeeperId"))
+                .addParameter("essp", jsonObject.getString("essp"));
+        return postClient.post();
+    }
+
+    /**
+     * 发送签章验证码
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    @Override
+    public String gesStampSendVerifyCode(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadGESConstants.GES_STAMP_SEND_VERIFY_CODE)
+                .addParameter("sealKeeperId", jsonObject.getString("sealKeeperId"))
+                .addParameter("essp", jsonObject.getString("essp"))
+                .addParameter("businessId", jsonObject.getString("businessId"));
+        return postClient.post();
+    }
+
+    /**
+     * 验证签章验证码
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    @Override
+    public String gesStampCheckVerifyCode(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadGESConstants.GES_STAMP_CHECK_VERIFY_CODE)
+                .addParameter("sealKeeperId", jsonObject.getString("sealKeeperId"))
+                .addParameter("verifyCode", jsonObject.getString("verifyCode"))
+                .addParameter("essp", jsonObject.getString("essp"))
+                .addParameter("businessId", jsonObject.getString("businessId"));
+        return postClient.post();
+    }
+
+    /**
+     * 签署盖章
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    @Override
+    public String gesStampSign(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadGESConstants.GES_STAMP_SIGN)
+                .addParameter("signPositions", jsonObject.getString("signPositions"))
+                .addParameter("sealKeeperId", jsonObject.getString("sealKeeperId"))
+                .addParameter("verifyCode", jsonObject.getString("verifyCode"))
+                .addParameter("essp", jsonObject.getString("essp"))
+                .addParameter("businessId", jsonObject.getString("businessId"))
+                .addParameter("fileBase64Code", jsonObject.getString("fileBase64Code"));
+        return postClient.post();
+    }
+
+    /* 人脸识别实现 */
+    /**
+     * 图片压缩，按照宽高压缩
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    @Override
+    public String bipFaceCompressForBorder(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadFaceRecognitionConstants.BIP_FACE_COMPRESS_FOR_BORDER)
+                .addParameter("type", String.valueOf(jsonObject.getInteger("type")))
+                .addParameter("content", jsonObject.getString("content"))
+                .addParameter("url", jsonObject.getString("url"))
+                .addParameter("width", jsonObject.getString("width"))
+                .addParameter("height", jsonObject.getString("height"))
+                .addParameter("force", jsonObject.getString("force"));
+        return postClient.post();
+    }
+
+    /**
+     * 图片压缩，按照比例，精度压缩
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    @Override
+    public String bipFaceCompressForScale(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadFaceRecognitionConstants.BIP_FACE_COMPRESS_FOR_SCALE)
+                .addParameter("type", String.valueOf(jsonObject.getInteger("type")))
+                .addParameter("content", jsonObject.getString("content"))
+                .addParameter("url", jsonObject.getString("url"))
+                .addParameter("accuracy", jsonObject.getString("accuracy"))
+                .addParameter("quality", jsonObject.getString("quality"));
+        return postClient.post();
+    }
+
+    /**
+     * 压缩图片，根据需要的字节大小，精度压缩
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    @Override
+    public String bipFaceCompressForSize(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadFaceRecognitionConstants.BIP_FACE_COMPRESS_FOR_SIZE)
+                .addParameter("type", String.valueOf(jsonObject.getInteger("type")))
+                .addParameter("content", jsonObject.getString("content"))
+                .addParameter("url", jsonObject.getString("url"))
+                .addParameter("size", jsonObject.getString("size"))
+                .addParameter("quality", jsonObject.getString("quality"));
+        return postClient.post();
+    }
+
+    /**
+     * 人脸属性识别
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    @Override
+    public String bipFaceAttribute(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadFaceRecognitionConstants.BIP_FACE_ATTRIBUTE)
+                .addParameter("type", String.valueOf(jsonObject.getInteger("type")))
+                .addParameter("imgUrl", jsonObject.getString("imgUrl"))
+                .addParameter("imgBase64", jsonObject.getString("imgBase64"));
+        return postClient.post();
+    }
+
+    /**
+     * 人脸比对（上传两张图片比对）
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    @Override
+    public String bipFaceVerifyWithOriginalImg(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadFaceRecognitionConstants.BIP_FACE_VERIFY_WITH_ORIGINAL_IMG)
+                .addParameter("type", String.valueOf(jsonObject.getInteger("type")))
+                .addParameter("imgUrl", jsonObject.getString("imgUrl"))
+                .addParameter("originalImgUrl", jsonObject.getString("originalImgUrl"))
+                .addParameter("imgBase64", jsonObject.getString("imgBase64"))
+                .addParameter("originalImgBase64", jsonObject.getString("originalImgBase64"));
+        return postClient.post();
+    }
+
+    /**
+     * 人脸比对(服务端事先录入原图)
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    @Override
+    public String bipFaceVerify(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadFaceRecognitionConstants.BIP_FACE_VERIFY)
+                .addParameter("type", String.valueOf(jsonObject.getInteger("type")))
+                .addParameter("imgUrl", jsonObject.getString("imgUrl"))
+                .addParameter("imgBase64", jsonObject.getString("imgBase64"))
+                .addParameter("employeeCode", jsonObject.getString("employeeCode"))
+                .addParameter("bizCode", jsonObject.getString("bizCode"));
+        return postClient.post();
+    }
+
+    /**
+     * 人脸检测
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    @Override
+    public String bipFaceDetect(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadFaceRecognitionConstants.BIP_FACE_DETECT)
+                .addParameter("type", String.valueOf(jsonObject.getInteger("type")))
+                .addParameter("imgUrl", jsonObject.getString("imgUrl"))
+                .addParameter("imgBase64", jsonObject.getString("imgBase64"))
+                .addParameter("isSave", jsonObject.getString("isSave"))
+                .addParameter("employeeCode", jsonObject.getString("employeeCode"));
+        return postClient.post();
+    }
+
+    /* 水印接口实现 */
+    /**
+     * 制作水印
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    @Override
+    public String bipWaterMarkDoWaterMark(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadWaterMarkConstants.BIP_WATERMARK_DO_WATERMARK)
+                .addParameter("lastName", jsonObject.getString("lastName"))
+                .addParameter("employeeCode", jsonObject.getString("employeeCode"))
+                .addParameter("isDefault", String.valueOf(jsonObject.getInteger("isDefault")))
+                .addParameter("isSave", String.valueOf(jsonObject.getInteger("isSave")))
+                .addParameter("wmType", String.valueOf(jsonObject.getInteger("wmType")))
+                .addParameter("fileType", String.valueOf(jsonObject.getInteger("fileType")))
+                .addParameter("srcImgUrl", jsonObject.getString("srcImgUrl"))
+                .addParameter("base64Img", jsonObject.getString("base64Img"))
+                .addParameter("srcFile", jsonObject.getString("srcFile"))
+                .addParameter("templateId", String.valueOf(jsonObject.getLong("templateId")));
+        return postClient.post();
+    }
+
+    /**
+     * 添加水印模板
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    @Override
+    public String bipWaterMarkTemplateSave(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadWaterMarkConstants.BIP_WATERMARK_TEMPLATE_SAVE)
+                .addParameter("position", jsonObject.getString("position"))
+                .addParameter("xDistance", String.valueOf(jsonObject.getDouble("xDistance")))
+                .addParameter("yDistance", String.valueOf(jsonObject.getDouble("yDistance")))
+                .addParameter("templateType", String.valueOf(jsonObject.getInteger("templateType")))
+                .addParameter("isDefault", String.valueOf(jsonObject.getInteger("isDefault")))
+                .addParameter("contentsJson", jsonObject.getString("contentsJson"));
+        return postClient.post();
+    }
+
+    /**
+     * 修改水印模板
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    @Override
+    public String bipWaterMarkTemplateEdit(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadWaterMarkConstants.BIP_WATERMARK_TEMPLATE_EDIT)
+                .addParameter("position", jsonObject.getString("position"))
+                .addParameter("xDistance", String.valueOf(jsonObject.getDouble("xDistance")))
+                .addParameter("yDistance", String.valueOf(jsonObject.getDouble("yDistance")))
+                .addParameter("templateType", String.valueOf(jsonObject.getInteger("templateType")))
+                .addParameter("isDefault", String.valueOf(jsonObject.getInteger("isDefault")))
+                .addParameter("contentsJson", jsonObject.getString("contentsJson"))
+                .addParameter("templateId", String.valueOf(jsonObject.getLong("templateId")));
+        return postClient.post();
+    }
+
+    /**
+     * 水印模板分页查询
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    @Override
+    public String bipWaterMarkTemplatePageQuery(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadWaterMarkConstants.BIP_WATERMARK_TEMPLATE_PAGE_QUERY)
+                .addParameter("pageSize", jsonObject.getString("pageSize"))
+                .addParameter("pageNum", jsonObject.getString("pageNum"));
+        return postClient.post();
+    }
+
+    /**
+     * 删除水印模板
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    @Override
+    public String bipWaterMarkTemplateDel(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadWaterMarkConstants.BIP_WATERMARK_TEMPLATE_PAGE_QUERY);
+        if(!CollectionUtils.isEmpty(jsonObject.getJSONArray("templateIds"))) {
+            jsonObject.getJSONArray("templateIds").forEach(id -> {
+                postClient.addParameter("templateIds", String.valueOf(id));
+            });
+        } else {
+            postClient.addParameter("templateIds", jsonObject.getString("templateIds"));
+        }
+        return postClient.post();
+    }
+
+    /**
+     * 获取云端保存的水印文件（分页）
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    @Override
+    public String bipWaterMarkPage(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadWaterMarkConstants.BIP_WATERMARK_PAGE)
+                .addParameter("pageSize", String.valueOf(jsonObject.getInteger("pageSize")))
+                .addParameter("pageNum", String.valueOf(jsonObject.getInteger("pageNum")))
+                .addParameter("employeeCode", jsonObject.getString("employeeCode"));
+        return postClient.post();
+    }
+
+    /**
+     * 移动端获取水印模板
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    @Override
+    public String bipWaterMarkTemplateQuery(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadWaterMarkConstants.BIP_WATERMARK_TEMPLATE_QUERY)
+                .addParameter("templateId", String.valueOf(jsonObject.getInteger("templateId")));
         return postClient.post();
     }
 

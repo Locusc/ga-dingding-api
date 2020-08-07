@@ -7,7 +7,7 @@ import com.alibaba.fastjson.JSONObject;
  * 政务钉钉宜搭其他接口
  * 15:35 2020/8/5
  **/
-public interface GadYIDAOtherService {
+interface GadYIDAOtherService {
 
     /**
      * 获取应用下所有表单页面的列表

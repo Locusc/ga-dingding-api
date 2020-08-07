@@ -7,7 +7,7 @@ import com.alibaba.fastjson.JSONObject;
  * 政务钉钉宜搭表单接口
  * 15:55 2020/8/5
  **/
-public interface GadYIDAFormService {
+interface GadYIDAFormService {
 
     /**
      * 获取表单定义

@@ -7,7 +7,7 @@ import com.alibaba.fastjson.JSONObject;
  * 政务钉钉宜搭任务中心接口
  * 15:45 2020/8/5
  **/
-public interface GadYIDATaskCenterService {
+interface GadYIDATaskCenterService {
 
     /**
      * 查询已完成任务

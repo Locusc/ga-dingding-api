@@ -2,7 +2,7 @@ package cn.locusc.ga.dingding.api.client.common.constant;
 
 /**
  * @author Jay Chan
- * 政务钉钉轨迹服务地址常量
+ * 政务钉钉轨迹服务接口地址常量
  * 9:48 2020/7/1
  **/
 public class GadTraceConstants {
