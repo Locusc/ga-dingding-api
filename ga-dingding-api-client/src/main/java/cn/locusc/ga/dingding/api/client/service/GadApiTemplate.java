@@ -2164,6 +2164,20 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
         return postClient.post();
     }
 
+    /**
+     * 组织ID转换接口
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    @Override
+    public String deptZzdDeptGetDepMapByType(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadABDIApiConstants.ABDI_ZZD_DEPT_GET_DEP_MAP_BY_TYPE)
+                .addParameter("type", jsonObject.getString("type"))
+                .addParameter("departmentIds", jsonObject.getString("departmentIds"))
+                .addParameter("proxyTenantId", jsonObject.getString("proxyTenantId"));
+        return postClient.post();
+    }
+
     /* 获取通讯录用户信息接口实现 */
     /**
      * 冻结和解冻账号

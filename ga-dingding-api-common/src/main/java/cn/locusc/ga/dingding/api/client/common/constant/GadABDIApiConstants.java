@@ -87,4 +87,9 @@ public class GadABDIApiConstants {
      **/
     public static final String ABDI_LIST_GOV_BUSINESS_STRIPS_BY_CODES = "/mozi/organization/listGovBusinessStripsByCodes";
 
+    /**
+     * 组织ID转换接口
+     **/
+    public static final String ABDI_ZZD_DEPT_GET_DEP_MAP_BY_TYPE = "/zzd/dept/getDepMapByType";
+
 }

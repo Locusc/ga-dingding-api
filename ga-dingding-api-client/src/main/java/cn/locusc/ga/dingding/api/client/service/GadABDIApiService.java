@@ -121,4 +121,11 @@ interface GadABDIApiService {
      **/
     String deptListGovBusinessStripsByCodes(JSONObject jsonObject);
 
+    /**
+     * 组织ID转换接口
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    String deptZzdDeptGetDepMapByType(JSONObject jsonObject);
+
 }
