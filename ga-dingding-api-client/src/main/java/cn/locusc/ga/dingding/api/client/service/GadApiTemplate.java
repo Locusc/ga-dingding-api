@@ -1810,6 +1810,11 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
         return postClient.post();
     }
 
+    /**
+     * 获取APP设置可见的用户Id
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
     @Override
     public String calendarAppQueryAppVisibleList(JSONObject jsonObject) {
         PostClient postClient = this.newGadPostClient(GadScheduleApiConstants.CALENDAR_QUERY_APP_VISIBLE_LIST)
@@ -1823,6 +1828,11 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
         return postClient.post();
     }
 
+    /**
+     * 从可见用户列表中删除指定用户
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
     @Override
     public String calendarAppRemoveUserFromAppVisibleList(JSONObject jsonObject) {
         PostClient postClient = this.newGadPostClient(GadScheduleApiConstants.CALENDAR_REMOVE_USER_FROM_APP_VISIBLE_LIST)
@@ -1839,6 +1849,11 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
         return postClient.post();
     }
 
+    /**
+     * 设置APP的用户可见性
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
     @Override
     public String calendarAppAddUserToAppVisibleList(JSONObject jsonObject) {
         PostClient postClient = this.newGadPostClient(GadScheduleApiConstants.CALENDAR_ADD_USER_TO_APP_VISIBLE_LIST)
@@ -1855,6 +1870,11 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
         return postClient.post();
     }
 
+    /**
+     * 获取用户可用的app
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
     @Override
     public String calendarAppUserVisibleApps(JSONObject jsonObject) {
         PostClient postClient = this.newGadPostClient(GadScheduleApiConstants.CALENDAR_USER_VISIBLE_APPS)
