@@ -28,3 +28,4 @@ hs_err_pid*
 target/
 /ga-dingding-api-client/target/
 /ga-dingding-api-common/target/
+/ga-dingding-api-client/src/test/

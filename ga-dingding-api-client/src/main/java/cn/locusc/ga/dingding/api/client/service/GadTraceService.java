@@ -17,13 +17,6 @@ interface GadTraceService {
     String GbsTraceQueryUserByIsv(JSONObject jsonObject);
 
     /**
-     * 查询用户轨迹
-     * @param jsonObject jsonObject入参
-     * @return java.lang.String
-     **/
-    String GbsTraceQueryUserTrace(JSONObject jsonObject);
-
-    /**
      * 外部服务停止轨迹上报
      * @param jsonObject jsonObject入参
      * @return java.lang.String
@@ -43,27 +36,6 @@ interface GadTraceService {
      * @return java.lang.String
      **/
     String GbsTraceGenerateTraceIdByIsv(JSONObject jsonObject);
-
-    /**
-     * 接收轨迹数据
-     * @param jsonObject jsonObject入参
-     * @return java.lang.String
-     **/
-    String GbsTraceReceiveTraceData(JSONObject jsonObject);
-
-    /**
-     * 停止轨迹上报
-     * @param jsonObject jsonObject入参
-     * @return java.lang.String
-     **/
-    String GbsTraceStopTraceCollect(JSONObject jsonObject);
-
-    /**
-     * 轨迹id生成
-     * @param jsonObject jsonObject入参
-     * @return java.lang.String
-     **/
-    String GbsTraceGenerateTraceId(JSONObject jsonObject);
 
     /**
      * 获取轨迹推送失败消息
@@ -100,4 +72,25 @@ interface GadTraceService {
      * @return java.lang.String
      **/
     String BipRegisterRegisterApp(String eventTag, String callBackUrl);
+
+    /**
+     * 开启轨迹采集
+     * @param jsonObject jsonObject入参
+     * @return java.lang.String
+     **/
+    String GbsTraceStartTraceCollect(JSONObject jsonObject);
+
+    /**
+     * 校验轨迹id
+     * @param jsonObject jsonObject入参
+     * @return java.lang.String
+     **/
+    String GbsTraceCheckTraceId(JSONObject jsonObject);
+
+    /**
+     * 根据位置范围查询用户
+     * @param jsonObject jsonObject入参
+     * @return java.lang.String
+     **/
+    String GbsTraceQueryUserByGeoScope(JSONObject jsonObject);
 }

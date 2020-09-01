@@ -46,12 +46,16 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
                 .addParameter("textType", jsonObject.getString("textType"))
                 .addParameter("body", jsonObject.getString("body"))
                 .addParameter("bodyType", jsonObject.getString("bodyType"));
-        if(!CollectionUtils.isEmpty(jsonObject.getJSONArray("receivers"))) {
-            jsonObject.getJSONArray("receivers").forEach(receiver -> {
-                postClient.addParameter("receivers", String.valueOf(receiver));
-            });
-        } else {
-            postClient.addParameter("receivers", jsonObject.getJSONObject("receivers").toJSONString());
+        try {
+            if(!CollectionUtils.isEmpty(jsonObject.getJSONArray("receivers"))) {
+                jsonObject.getJSONArray("receivers").forEach(receiver -> {
+                    postClient.addParameter("receivers", String.valueOf(receiver));
+                });
+            }
+        } catch (Exception e) {
+            if(jsonObject.getJSONObject("receivers").toJSONString() != null) {
+                postClient.addParameter("receivers", jsonObject.getJSONObject("receivers").toJSONString());
+            }
         }
         return postClient.post();
     }
@@ -590,12 +594,16 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
     @Override
     public String bipWaterMarkTemplateDel(JSONObject jsonObject) {
         PostClient postClient = this.newGadPostClient(GadWaterMarkConstants.BIP_WATERMARK_TEMPLATE_PAGE_QUERY);
-        if(!CollectionUtils.isEmpty(jsonObject.getJSONArray("templateIds"))) {
-            jsonObject.getJSONArray("templateIds").forEach(id -> {
-                postClient.addParameter("templateIds", String.valueOf(id));
-            });
-        } else {
-            postClient.addParameter("templateIds", jsonObject.getString("templateIds"));
+        try {
+            if(!CollectionUtils.isEmpty(jsonObject.getJSONArray("templateIds"))) {
+                jsonObject.getJSONArray("templateIds").forEach(id -> {
+                    postClient.addParameter("templateIds", String.valueOf(id));
+                });
+            }
+        } catch (Exception e) {
+            if(StringUtils.isNotEmpty(jsonObject.getString("templateIds"))) {
+                postClient.addParameter("templateIds", jsonObject.getString("templateIds"));
+            }
         }
         return postClient.post();
     }
@@ -1142,39 +1150,12 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
     @Override
     public String GbsTraceQueryUserByIsv(JSONObject jsonObject) {
         PostClient postClient = this.newGadPostClient(GadTraceConstants.GBS_TRACE_QUERY_USER_BY_ISV)
-                .addParameter("appName", jsonObject.getString("appName"))
-                .addParameter("bizScene", jsonObject.getString("bizScene"))
-                .addParameter("accessToken", jsonObject.getString("accessToken"))
-                .addParameter("deviceId", jsonObject.getString("deviceId"))
-                .addParameter("clientType", jsonObject.getString("clientType"))
-                .addParameter("osType", jsonObject.getString("osType"))
                 .addParameter("traceId", jsonObject.getString("traceId"))
                 .addParameter("tenantId", String.valueOf(jsonObject.getLong("tenantId")))
                 .addParameter("startTime", String.valueOf(jsonObject.getLong("startTime")))
                 .addParameter("endTime", String.valueOf(jsonObject.getLong("endTime")))
                 .addParameter("userId", String.valueOf(jsonObject.getLong("userId")))
                 .addParameter("employeeCode", jsonObject.getString("employeeCode"));
-        return postClient.post();
-    }
-
-    /**
-     * 查询用户轨迹
-     * @param jsonObject jsonObject入参
-     * @return java.lang.String
-     **/
-    @Override
-    public String GbsTraceQueryUserTrace(JSONObject jsonObject) {
-        PostClient postClient = this.newGadPostClient(GadTraceConstants.GBS_TRACE_QUERY_USER_TRACE)
-                .addParameter("appName", jsonObject.getString("appName"))
-                .addParameter("bizScene", jsonObject.getString("bizScene"))
-                .addParameter("accessToken", jsonObject.getString("accessToken"))
-                .addParameter("deviceId", jsonObject.getString("deviceId"))
-                .addParameter("clientType", jsonObject.getString("clientType"))
-                .addParameter("osType", jsonObject.getString("osType"))
-                .addParameter("traceId", jsonObject.getString("traceId"))
-                .addParameter("startTime", String.valueOf(jsonObject.getLong("startTime")))
-                .addParameter("endTime", String.valueOf(jsonObject.getLong("endTime")))
-                .addParameter("userId", String.valueOf(jsonObject.getLong("userId")));
         return postClient.post();
     }
 
@@ -1186,12 +1167,6 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
     @Override
     public String GbsTraceStopTraceCollectByIsv(JSONObject jsonObject) {
         PostClient postClient = this.newGadPostClient(GadTraceConstants.GBS_TRACE_STOP_TRACE_COLLECT_BY_ISV)
-                .addParameter("appName", jsonObject.getString("appName"))
-                .addParameter("bizScene", jsonObject.getString("bizScene"))
-                .addParameter("accessToken", jsonObject.getString("accessToken"))
-                .addParameter("deviceId", jsonObject.getString("deviceId"))
-                .addParameter("clientType", jsonObject.getString("clientType"))
-                .addParameter("osType", jsonObject.getString("osType"))
                 .addParameter("traceId", jsonObject.getString("traceId"))
                 .addParameter("tenantId", String.valueOf(jsonObject.getLong("tenantId")))
                 .addParameter("userId", String.valueOf(jsonObject.getLong("userId")))
@@ -1207,12 +1182,6 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
     @Override
     public String GbsTraceStartTraceCollectByIsv(JSONObject jsonObject) {
         PostClient postClient = this.newGadPostClient(GadTraceConstants.GBS_TRACE_START_TRACE_COLLECT_BY_ISV)
-                .addParameter("appName", jsonObject.getString("appName"))
-                .addParameter("bizScene", jsonObject.getString("bizScene"))
-                .addParameter("accessToken", jsonObject.getString("accessToken"))
-                .addParameter("deviceId", jsonObject.getString("deviceId"))
-                .addParameter("clientType", jsonObject.getString("clientType"))
-                .addParameter("osType", jsonObject.getString("osType"))
                 .addParameter("traceId", jsonObject.getString("traceId"))
                 .addParameter("tenantId", String.valueOf(jsonObject.getLong("tenantId")))
                 .addParameter("userId", String.valueOf(jsonObject.getLong("userId")))
@@ -1221,9 +1190,6 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
                 .addParameter("reportPeriod", String.valueOf(jsonObject.getInteger("reportPeriod")))
                 .addParameter("collectPeriod", String.valueOf(jsonObject.getInteger("collectPeriod")))
                 .addParameter("pushPeriod", String.valueOf(jsonObject.getInteger("pushPeriod")));
-//        jsonObject.forEach((k, v) -> {
-//            postClient.addParameter(k, (String) v);
-//        });
         return postClient.post();
     }
 
@@ -1235,70 +1201,9 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
     @Override
     public String GbsTraceGenerateTraceIdByIsv(JSONObject jsonObject) {
         PostClient postClient = this.newGadPostClient(GadTraceConstants.GBS_TRACE_GENERATE_TRACE_ID_BY_ISV)
-                .addParameter("appName", jsonObject.getString("appName"))
-                .addParameter("bizScene", jsonObject.getString("bizScene"))
-                .addParameter("accessToken", jsonObject.getString("accessToken"))
-                .addParameter("deviceId", jsonObject.getString("deviceId"))
-                .addParameter("clientType", jsonObject.getString("clientType"))
-                .addParameter("osType", jsonObject.getString("osType"))
                 .addParameter("tenantId", String.valueOf(jsonObject.getLong("tenantId")))
                 .addParameter("userId", String.valueOf(jsonObject.getLong("userId")))
                 .addParameter("employeeCode", jsonObject.getString("employeeCode"));
-        return postClient.post();
-    }
-
-    /**
-     * 接收轨迹数据
-     * @param jsonObject jsonObject入参
-     * @return java.lang.String
-     **/
-    @Override
-    public String GbsTraceReceiveTraceData(JSONObject jsonObject) {
-        PostClient postClient = this.newGadPostClient(GadTraceConstants.GBS_TRACE_RECEIVE_TRACE_DATA)
-                .addParameter("appName", jsonObject.getString("appName"))
-                .addParameter("bizScene", jsonObject.getString("bizScene"))
-                .addParameter("accessToken", jsonObject.getString("accessToken"))
-                .addParameter("deviceId", jsonObject.getString("deviceId"))
-                .addParameter("clientType", jsonObject.getString("clientType"))
-                .addParameter("osType", jsonObject.getString("osType"))
-                .addParameter("traceId", jsonObject.getString("traceId"))
-                .addParameter("positions", jsonObject.getString("positions"));
-        return postClient.post();
-    }
-
-    /**
-     * 停止轨迹上报
-     * @param jsonObject jsonObject入参
-     * @return java.lang.String
-     **/
-    @Override
-    public String GbsTraceStopTraceCollect(JSONObject jsonObject) {
-        PostClient postClient = this.newGadPostClient(GadTraceConstants.GBS_TRACE_STOP_TRACE_COLLECT)
-                .addParameter("appName", jsonObject.getString("appName"))
-                .addParameter("bizScene", jsonObject.getString("bizScene"))
-                .addParameter("accessToken", jsonObject.getString("accessToken"))
-                .addParameter("deviceId", jsonObject.getString("deviceId"))
-                .addParameter("clientType", jsonObject.getString("clientType"))
-                .addParameter("osType", jsonObject.getString("osType"))
-                .addParameter("traceId", jsonObject.getString("traceId"))
-                .addParameter("userId", String.valueOf(jsonObject.getLong("userId")));
-        return postClient.post();
-    }
-
-    /**
-     * 轨迹id生成
-     * @param jsonObject jsonObject入参
-     * @return java.lang.String
-     **/
-    @Override
-    public String GbsTraceGenerateTraceId(JSONObject jsonObject) {
-        PostClient postClient = this.newGadPostClient(GadTraceConstants.GBS_TRACE_GENERATE_TRACE_ID)
-                .addParameter("appName", jsonObject.getString("appName"))
-                .addParameter("bizScene", jsonObject.getString("bizScene"))
-                .addParameter("clientType", jsonObject.getString("clientType"))
-                .addParameter("osType", jsonObject.getString("osType"))
-                .addParameter("traceId", jsonObject.getString("traceId"))
-                .addParameter("userId", String.valueOf(jsonObject.getLong("userId")));
         return postClient.post();
     }
 
@@ -1364,6 +1269,65 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
         return postClient.post();
     }
 
+    /**
+     * 开启轨迹采集
+     * @param jsonObject jsonObject入参
+     * @return java.lang.String
+     **/
+    @Override
+    public String GbsTraceStartTraceCollect(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadTraceConstants.GBS_TRACE_START_TRACE_COLLECT)
+                .addParameter("appName", jsonObject.getString("appName"))
+                .addParameter("bizScene", jsonObject.getString("bizScene"))
+                .addParameter("accessToken", jsonObject.getString("accessToken"))
+                .addParameter("deviceId", jsonObject.getString("deviceId"))
+                .addParameter("clientType", jsonObject.getString("clientType"))
+                .addParameter("osType", jsonObject.getString("osType"))
+                .addParameter("traceId", jsonObject.getString("traceId"))
+                .addParameter("userId", String.valueOf(jsonObject.getLong("userId")))
+                .addParameter("frequency", jsonObject.getJSONObject("frequency").toJSONString())
+                .addParameter("reportPeriod", String.valueOf(jsonObject.getInteger("reportPeriod")))
+                .addParameter("collectPeriod", String.valueOf(jsonObject.getInteger("collectPeriod")))
+                .addParameter("pushPeriod", String.valueOf(jsonObject.getInteger("pushPeriod")));
+        return postClient.post();
+    }
+
+    /**
+     * 校验轨迹id
+     * @param jsonObject jsonObject入参
+     * @return java.lang.String
+     **/
+    @Override
+    public String GbsTraceCheckTraceId(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadTraceConstants.GBS_TRACE_CHECK_TRACE_ID)
+                .addParameter("appName", jsonObject.getString("appName"))
+                .addParameter("bizScene", jsonObject.getString("bizScene"))
+                .addParameter("accessToken", jsonObject.getString("accessToken"))
+                .addParameter("deviceId", jsonObject.getString("deviceId"))
+                .addParameter("clientType", jsonObject.getString("clientType"))
+                .addParameter("osType", jsonObject.getString("osType"))
+                .addParameter("traceId", jsonObject.getString("traceId"))
+                .addParameter("userId", String.valueOf(jsonObject.getLong("userId")));
+        return postClient.post();
+    }
+
+    /**
+     * 根据位置范围查询用户
+     * @param jsonObject jsonObject入参
+     * @return java.lang.String
+     **/
+    @Override
+    public String GbsTraceQueryUserByGeoScope(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadTraceConstants.GBS_TRACE_QUERY_USER_BY_GEO_SCOPE)
+                .addParameter("searchLimitTime", String.valueOf(jsonObject.getLong("searchLimitTime")))
+                .addParameter("geoType", String.valueOf(jsonObject.getInteger("geoType")))
+                .addParameter("latitude", String.valueOf(jsonObject.getDouble("latitude")))
+                .addParameter("tenantId", String.valueOf(jsonObject.getLong("tenantId")))
+                .addParameter("radius", String.valueOf(jsonObject.getDouble("radius")))
+                .addParameter("longitude", String.valueOf(jsonObject.getDouble("longitude")));
+        return postClient.post();
+    }
+
     /* 消息会话接口实现 */
     /**
      * 创建群会话
@@ -1378,14 +1342,16 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
                 .addParameter("tenantId", String.valueOf(jsonObject.getLong("tenantId")))
                 .addParameter("name", jsonObject.getString("name"))
                 .addParameter("managementType", String.valueOf(jsonObject.getInteger("managementType")));
-        if(StringUtils.isNotEmpty(jsonObject.getString("useridlist"))) {
-            postClient.addParameter("useridlist", jsonObject.getString("useridlist"));
-        } else if (!CollectionUtils.isEmpty(jsonObject.getJSONArray("useridlist"))) {
-            jsonObject.getJSONArray("useridlist").forEach(uid -> {
-                postClient.addParameter("useridlist", String.valueOf(uid));
-            });
-        } else {
-            throw new GadNullPointerException("useridlist is empty in chatCreate.");
+        try {
+             if (!CollectionUtils.isEmpty(jsonObject.getJSONArray("useridlist"))) {
+                jsonObject.getJSONArray("useridlist").forEach(uid -> {
+                    postClient.addParameter("useridlist", String.valueOf(uid));
+                });
+            }
+        } catch (Exception e) {
+            if(StringUtils.isNotEmpty(jsonObject.getString("useridlist"))) {
+                postClient.addParameter("useridlist", jsonObject.getString("useridlist"));
+            }
         }
         return postClient.post();
     }
@@ -1777,26 +1743,35 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
         } else {
             throw new GadNullPointerException("tenantId is empty in messageWorkNotification");
         }
+
         if(StringUtils.isNotEmpty(jsonObject.getString("msg"))) {
             postClient.addParameter("msg", jsonObject.getString("msg"));
-        } else if(!jsonObject.getJSONObject("msg").isEmpty()) {
-            postClient.addParameter("msg", jsonObject.getJSONObject("msg").toJSONString());
         } else {
             throw new GadNullPointerException("msg is empty in messageWorkNotification");
         }
-        if(!CollectionUtils.isEmpty(jsonObject.getJSONArray("organizationCodes"))) {
-            jsonObject.getJSONArray("organizationCodes").forEach(code -> {
-                postClient.addParameter("organizationCodes", String.valueOf(code));
-            });
-        } else if(StringUtils.isNotEmpty(jsonObject.getString("organizationCodes"))){
-            postClient.addParameter("organizationCodes", jsonObject.getString("organizationCodes"));
+
+        try {
+            if(!CollectionUtils.isEmpty(jsonObject.getJSONArray("organizationCodes"))) {
+                jsonObject.getJSONArray("organizationCodes").forEach(code -> {
+                    postClient.addParameter("organizationCodes", String.valueOf(code));
+                });
+            }
+        } catch (Exception e) {
+            if(StringUtils.isNotEmpty(jsonObject.getString("organizationCodes"))){
+                postClient.addParameter("organizationCodes", jsonObject.getString("organizationCodes"));
+            }
         }
-        if(!CollectionUtils.isEmpty(jsonObject.getJSONArray("receiverIds"))) {
-            jsonObject.getJSONArray("receiverIds").forEach(id -> {
-                postClient.addParameter("receiverIds", String.valueOf(id));
-            });
-        } else if(StringUtils.isNotEmpty(jsonObject.getString("receiverIds"))) {
-            postClient.addParameter("receiverIds", jsonObject.getString("receiverIds"));
+
+        try {
+            if(!CollectionUtils.isEmpty(jsonObject.getJSONArray("receiverIds"))) {
+                jsonObject.getJSONArray("receiverIds").forEach(id -> {
+                    postClient.addParameter("receiverIds", String.valueOf(id));
+                });
+            }
+        } catch (Exception e) {
+            if(StringUtils.isNotEmpty(jsonObject.getString("receiverIds"))) {
+                postClient.addParameter("receiverIds", jsonObject.getString("receiverIds"));
+            }
         }
         return postClient.post();
     }
@@ -1814,12 +1789,16 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
         if(StringUtils.isNotEmpty(jsonObject.getString("addNum"))) {
             postClient.addParameter("addNum", jsonObject.getString("addNum"));
         } else {
-            if(!CollectionUtils.isEmpty(jsonObject.getJSONArray("bizMsgIds"))) {
-                jsonObject.getJSONArray("bizMsgIds").forEach(id -> {
-                    postClient.addParameter("bizMsgIds", (String) id);
-                });
-            } else {
-                postClient.addParameter("bizMsgIds", jsonObject.getString("bizMsgIds"));
+            try {
+                if(!CollectionUtils.isEmpty(jsonObject.getJSONArray("bizMsgIds"))) {
+                    jsonObject.getJSONArray("bizMsgIds").forEach(id -> {
+                        postClient.addParameter("bizMsgIds", (String) id);
+                    });
+                }
+            } catch (Exception e) {
+                if(StringUtils.isNotEmpty(jsonObject.getString("bizMsgIds"))) {
+                    postClient.addParameter("bizMsgIds", jsonObject.getString("bizMsgIds"));
+                }
             }
         }
         return postClient.post();
@@ -1835,12 +1814,16 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
         PostClient postClient = this.newGadPostClient(GadWNMApiConstants.NOTIFICATION_MESSAGE_CLEAR_PORTAL_NOTIFICATION)
                 .addParameter("accountId", String.valueOf(jsonObject.getLong("accountId")))
                 .addParameter("tenantId", String.valueOf(jsonObject.getLong("tenantId")));
-        if(!CollectionUtils.isEmpty(jsonObject.getJSONArray("bizMsgIds"))) {
-            jsonObject.getJSONArray("bizMsgIds").forEach(id -> {
-                postClient.addParameter("bizMsgIds", (String) id);
-            });
-        } else {
-            postClient.addParameter("bizMsgIds", jsonObject.getString("bizMsgIds"));
+        try {
+            if(!CollectionUtils.isEmpty(jsonObject.getJSONArray("bizMsgIds"))) {
+                jsonObject.getJSONArray("bizMsgIds").forEach(id -> {
+                    postClient.addParameter("bizMsgIds", (String) id);
+                });
+            }
+        } catch (Exception e) {
+            if(StringUtils.isNotEmpty(jsonObject.getString("bizMsgIds"))) {
+                postClient.addParameter("bizMsgIds", jsonObject.getString("bizMsgIds"));
+            }
         }
         return postClient.post();
     }
@@ -1913,19 +1896,27 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
                 .addParameter("govContactNumber", jsonObject.getString("govContactNumber"))
                 .addParameter("govAddress", jsonObject.getString("govAddress"))
                 .addParameter("tenantId", String.valueOf(jsonObject.getLong("tenantId")));
-        if(StringUtils.isNotEmpty(jsonObject.getString("govBusinessStripCodes"))) {
-            postClient.addParameter("govBusinessStripCodes", jsonObject.getString("govBusinessStripCodes"));
-        } else if(!CollectionUtils.isEmpty(jsonObject.getJSONArray("govBusinessStripCodes"))) {
-            jsonObject.getJSONArray("govBusinessStripCodes").forEach(code -> {
-                postClient.addParameter("govBusinessStripCodes", String.valueOf(code));
-            });
+        try {
+            if(!CollectionUtils.isEmpty(jsonObject.getJSONArray("govBusinessStripCodes"))) {
+                jsonObject.getJSONArray("govBusinessStripCodes").forEach(code -> {
+                    postClient.addParameter("govBusinessStripCodes", String.valueOf(code));
+                });
+            }
+        } catch (Exception e) {
+            if(StringUtils.isNotEmpty(jsonObject.getString("govBusinessStripCodes"))) {
+                postClient.addParameter("govBusinessStripCodes", jsonObject.getString("govBusinessStripCodes"));
+            }
         }
-        if(StringUtils.isNotEmpty(jsonObject.getString("govResponsibleEmployeeCodes"))) {
-            postClient.addParameter("govResponsibleEmployeeCodes", jsonObject.getString("govResponsibleEmployeeCodes"));
-        } else if(!CollectionUtils.isEmpty(jsonObject.getJSONArray("govResponsibleEmployeeCodes"))) {
-            jsonObject.getJSONArray("govResponsibleEmployeeCodes").forEach(code -> {
-                postClient.addParameter("govResponsibleEmployeeCodes", String.valueOf(code));
-            });
+        try {
+            if(!CollectionUtils.isEmpty(jsonObject.getJSONArray("govResponsibleEmployeeCodes"))) {
+                jsonObject.getJSONArray("govResponsibleEmployeeCodes").forEach(code -> {
+                    postClient.addParameter("govResponsibleEmployeeCodes", String.valueOf(code));
+                });
+            }
+        } catch (Exception e) {
+            if(StringUtils.isNotEmpty(jsonObject.getString("govResponsibleEmployeeCodes"))) {
+                postClient.addParameter("govResponsibleEmployeeCodes", jsonObject.getString("govResponsibleEmployeeCodes"));
+            }
         }
         return postClient.post();
     }
@@ -1956,19 +1947,27 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
                 .addParameter("govAddress", jsonObject.getString("govAddress"))
                 .addParameter("tenantId", String.valueOf(jsonObject.getLong("tenantId")))
                 .addParameter("organizationCode", jsonObject.getString("organizationCode"));
-        if(!CollectionUtils.isEmpty(jsonObject.getJSONArray("govBusinessStripCodes"))) {
-            jsonObject.getJSONArray("govBusinessStripCodes").forEach(code -> {
-                postClient.addParameter("govBusinessStripCodes", String.valueOf(code));
-            });
-        } else if(StringUtils.isNotEmpty(jsonObject.getString("govBusinessStripCodes"))) {
-            postClient.addParameter("govBusinessStripCodes", jsonObject.getString("govBusinessStripCodes"));
+        try {
+            if(!CollectionUtils.isEmpty(jsonObject.getJSONArray("govBusinessStripCodes"))) {
+                jsonObject.getJSONArray("govBusinessStripCodes").forEach(code -> {
+                    postClient.addParameter("govBusinessStripCodes", String.valueOf(code));
+                });
+            }
+        } catch (Exception e) {
+            if(StringUtils.isNotEmpty(jsonObject.getString("govBusinessStripCodes"))) {
+                postClient.addParameter("govBusinessStripCodes", jsonObject.getString("govBusinessStripCodes"));
+            }
         }
-        if(!CollectionUtils.isEmpty(jsonObject.getJSONArray("govResponsibleEmployeeCodes"))) {
-            jsonObject.getJSONArray("govResponsibleEmployeeCodes").forEach(code -> {
-                postClient.addParameter("govResponsibleEmployeeCodes", String.valueOf(code));
-            });
-        } else if(StringUtils.isNotEmpty(jsonObject.getString("govResponsibleEmployeeCodes"))) {
-            postClient.addParameter("govResponsibleEmployeeCodes", jsonObject.getString("govResponsibleEmployeeCodes"));
+        try {
+            if(!CollectionUtils.isEmpty(jsonObject.getJSONArray("govResponsibleEmployeeCodes"))) {
+                jsonObject.getJSONArray("govResponsibleEmployeeCodes").forEach(code -> {
+                    postClient.addParameter("govResponsibleEmployeeCodes", String.valueOf(code));
+                });
+            }
+        } catch (Exception e) {
+            if(StringUtils.isNotEmpty(jsonObject.getString("govResponsibleEmployeeCodes"))) {
+                postClient.addParameter("govResponsibleEmployeeCodes", jsonObject.getString("govResponsibleEmployeeCodes"));
+            }
         }
         return postClient.post();
     }
@@ -1982,12 +1981,16 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
     public String deptListOrganizationByCodes(JSONObject jsonObject) {
         PostClient postClient = this.newGadPostClient(GadABDIApiConstants.ABDI_LIST_ORGANIZATION_BY_CODES)
                 .addParameter("tenantId", String.valueOf(jsonObject.getLong("tenantId")));
-        if(StringUtils.isNotEmpty(jsonObject.getString("organizationCodes"))) {
-            postClient.addParameter("organizationCodes", jsonObject.getString("organizationCodes"));
-        } else if(!CollectionUtils.isEmpty(jsonObject.getJSONArray("organizationCodes"))){
-            jsonObject.getJSONArray("organizationCodes").forEach(code -> {
-                postClient.addParameter("organizationCodes", String.valueOf(code));
-            });
+        try {
+            if(!CollectionUtils.isEmpty(jsonObject.getJSONArray("organizationCodes"))){
+                jsonObject.getJSONArray("organizationCodes").forEach(code -> {
+                    postClient.addParameter("organizationCodes", String.valueOf(code));
+                });
+            }
+        } catch (Exception e) {
+            if(StringUtils.isNotEmpty(jsonObject.getString("organizationCodes"))) {
+                postClient.addParameter("organizationCodes", jsonObject.getString("organizationCodes"));
+            }
         }
         return postClient.post();
     }
@@ -2102,12 +2105,16 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
     public String deptListDivisionsByCodes(JSONObject jsonObject) {
         PostClient postClient = this.newGadPostClient(GadABDIApiConstants.ABDI_LIST_DIVISIONS_BY_CODES)
                 .addParameter("tenantId", String.valueOf(jsonObject.getLong("tenantId")));
-        if(StringUtils.isNotEmpty(jsonObject.getString("divisionCodes"))) {
-            postClient.addParameter("divisionCodes", jsonObject.getString("divisionCodes"));
-        } else if(!CollectionUtils.isEmpty(jsonObject.getJSONArray("divisionCodes"))){
-            jsonObject.getJSONArray("divisionCodes").forEach(code -> {
-                postClient.addParameter("divisionCodes", String.valueOf(code));
-            });
+        try {
+            if(!CollectionUtils.isEmpty(jsonObject.getJSONArray("divisionCodes"))){
+                jsonObject.getJSONArray("divisionCodes").forEach(code -> {
+                    postClient.addParameter("divisionCodes", String.valueOf(code));
+                });
+            }
+        } catch (Exception e) {
+            if(StringUtils.isNotEmpty(jsonObject.getString("divisionCodes"))) {
+                postClient.addParameter("divisionCodes", jsonObject.getString("divisionCodes"));
+            }
         }
         return postClient.post();
     }
@@ -2150,15 +2157,19 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
     public String deptListGovBusinessStripsByCodes(JSONObject jsonObject) {
         PostClient postClient = this.newGadPostClient(GadABDIApiConstants.ABDI_LIST_GOV_BUSINESS_STRIPS_BY_CODES)
                 .addParameter("tenantId", String.valueOf(jsonObject.getLong("tenantId")));
-        if(StringUtils.isNotEmpty(jsonObject.getString("businessStripCodes"))) {
-            postClient.addParameter("businessStripCodes", jsonObject.getString("businessStripCodes"));
-        } else if(!CollectionUtils.isEmpty(jsonObject.getJSONArray("businessStripCodes"))){
-            if(jsonObject.getJSONArray("businessStripCodes").size() <= 100) {
-                jsonObject.getJSONArray("businessStripCodes").forEach(code -> {
-                    postClient.addParameter("businessStripCodes", String.valueOf(code));
-                });
-            } else {
-                throw new GadIndexOutOfBoundsException("The length of the businessStripCodes is over 100 in deptListGovBusinessStripsByCodes");
+        try {
+             if(!CollectionUtils.isEmpty(jsonObject.getJSONArray("businessStripCodes"))){
+                if(jsonObject.getJSONArray("businessStripCodes").size() <= 100) {
+                    jsonObject.getJSONArray("businessStripCodes").forEach(code -> {
+                        postClient.addParameter("businessStripCodes", String.valueOf(code));
+                    });
+                } else {
+                    throw new GadIndexOutOfBoundsException("The length of the businessStripCodes is over 100 in deptListGovBusinessStripsByCodes");
+                }
+            }
+        } catch (Exception e) {
+            if(StringUtils.isNotEmpty(jsonObject.getString("businessStripCodes"))) {
+                postClient.addParameter("businessStripCodes", jsonObject.getString("businessStripCodes"));
             }
         }
         return postClient.post();
@@ -2374,12 +2385,16 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
         PostClient postClient = this.newGadPostClient(GadABUIApiConstants.ABUI_LIST_ORG_EMPLOYEE_POSITION_BY_CODES)
                 .addParameter("tenantId", String.valueOf(jsonObject.getLong("tenantId")))
                 .addParameter("organizationCode", jsonObject.getString("organizationCode"));
-        if(!CollectionUtils.isEmpty(jsonObject.getJSONArray("employeeCodes"))) {
-            jsonObject.getJSONArray("employeeCodes").forEach(code -> {
-                postClient.addParameter("employeeCodes", String.valueOf(code));
-            });
-        } else if(StringUtils.isNotEmpty(jsonObject.getString("employeeCodes"))) {
-            postClient.addParameter("employeeCodes", jsonObject.getString("employeeCodes"));
+        try {
+            if(!CollectionUtils.isEmpty(jsonObject.getJSONArray("employeeCodes"))) {
+                jsonObject.getJSONArray("employeeCodes").forEach(code -> {
+                    postClient.addParameter("employeeCodes", String.valueOf(code));
+                });
+            }
+        } catch (Exception e) {
+            if(StringUtils.isNotEmpty(jsonObject.getString("employeeCodes"))) {
+                postClient.addParameter("employeeCodes", jsonObject.getString("employeeCodes"));
+            }
         }
         return postClient.post();
     }
@@ -2393,12 +2408,16 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
     public String employeeListEmpByCodes(JSONObject jsonObject) {
         PostClient postClient = this.newGadPostClient(GadABUIApiConstants.ABUI_LIST_EMPLOYEES_BY_CODES)
                 .addParameter("tenantId", String.valueOf(jsonObject.getLong("tenantId")));
-        if (StringUtils.isNotEmpty(jsonObject.getString("employeeCodes"))) {
-            postClient.addParameter("employeeCodes", jsonObject.getString("employeeCodes"));
-        } else if(!CollectionUtils.isEmpty(jsonObject.getJSONArray("employeeCodes"))) {
-            jsonObject.getJSONArray("employeeCodes").forEach(code -> {
-                postClient.addParameter("employeeCodes", String.valueOf(code));
-            });
+        try {
+            if(!CollectionUtils.isEmpty(jsonObject.getJSONArray("employeeCodes"))) {
+                jsonObject.getJSONArray("employeeCodes").forEach(code -> {
+                    postClient.addParameter("employeeCodes", String.valueOf(code));
+                });
+            }
+        } catch (Exception e) {
+            if (StringUtils.isNotEmpty(jsonObject.getString("employeeCodes"))) {
+                postClient.addParameter("employeeCodes", jsonObject.getString("employeeCodes"));
+            }
         }
         return postClient.post();
     }
@@ -2440,12 +2459,16 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
     public String employeeListEmpAccountIds(JSONObject jsonObject) {
         PostClient postClient = this.newGadPostClient(GadABUIApiConstants.ABUI_LIST_EMPLOYEE_ACCOUNT_IDS)
                 .addParameter("tenantId", String.valueOf(jsonObject.getLong("tenantId")));
-        if (StringUtils.isNotEmpty(jsonObject.getString("employeeCodes"))) {
-            postClient.addParameter("employeeCodes", jsonObject.getString("employeeCodes"));
-        } else if(!CollectionUtils.isEmpty(jsonObject.getJSONArray("employeeCodes"))) {
-            jsonObject.getJSONArray("employeeCodes").forEach(code -> {
-                postClient.addParameter("employeeCodes", (String) code);
-            });
+        try {
+            if(!CollectionUtils.isEmpty(jsonObject.getJSONArray("employeeCodes"))) {
+                jsonObject.getJSONArray("employeeCodes").forEach(code -> {
+                    postClient.addParameter("employeeCodes", (String) code);
+                });
+            }
+        } catch (Exception e) {
+            if (StringUtils.isNotEmpty(jsonObject.getString("employeeCodes"))) {
+                postClient.addParameter("employeeCodes", jsonObject.getString("employeeCodes"));
+            }
         }
         return postClient.post();
     }
@@ -2460,15 +2483,19 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
         PostClient postClient = this.newGadPostClient(GadABUIApiConstants.ABUI_LIST_ACCOUNT_ORG_BY_ID_AND_CODES)
                 .addParameter("tenantId", String.valueOf(jsonObject.getLong("tenantId")))
                 .addParameter("accountId", String.valueOf(jsonObject.getLong("accountId")));
-        if (StringUtils.isNotEmpty(jsonObject.getString("organizationCodes"))) {
-            postClient.addParameter("organizationCodes", jsonObject.getString("organizationCodes"));
-        } else if(!CollectionUtils.isEmpty(jsonObject.getJSONArray("organizationCodes"))) {
-            if(jsonObject.getJSONArray("organizationCodes").size() <= 100) {
-                jsonObject.getJSONArray("organizationCodes").forEach(code -> {
-                    postClient.addParameter("organizationCodes", (String) code);
-                });
-            } else {
-                throw new GadIndexOutOfBoundsException("The length of the organizationCodes is over 100 in employeeListAccountOrgByIdAndCodes");
+        try {
+            if(!CollectionUtils.isEmpty(jsonObject.getJSONArray("organizationCodes"))) {
+                if(jsonObject.getJSONArray("organizationCodes").size() <= 100) {
+                    jsonObject.getJSONArray("organizationCodes").forEach(code -> {
+                        postClient.addParameter("organizationCodes", (String) code);
+                    });
+                } else {
+                    throw new GadIndexOutOfBoundsException("The length of the organizationCodes is over 100 in employeeListAccountOrgByIdAndCodes");
+                }
+            }
+        } catch (Exception e) {
+            if (StringUtils.isNotEmpty(jsonObject.getString("organizationCodes"))) {
+                postClient.addParameter("organizationCodes", jsonObject.getString("organizationCodes"));
             }
         }
         return postClient.post();
@@ -2506,16 +2533,20 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
         PostClient postClient = this.newGadPostClient(GadABUIApiConstants.ABUI_LIST_GOV_ORG_EMPLOYEE_EMAIL_BY_CODES)
                 .addParameter("tenantId", String.valueOf(jsonObject.getLong("tenantId")))
                 .addParameter("organizationCode", String.valueOf(jsonObject.getLong("organizationCode")));
-        if(!CollectionUtils.isEmpty(jsonObject.getJSONArray("employeeCodes"))) {
-            if(jsonObject.getJSONArray("employeeCodes").size() <= 100) {
-                jsonObject.getJSONArray("employeeCodes").forEach(code -> {
-                    postClient.addParameter("employeeCodes", (String) code);
-                });
-            } else {
-                throw new GadIndexOutOfBoundsException("The length of the employeeCodes is over 100 in employeeListGovOrgEmpEmailByCodes");
+        try {
+            if(!CollectionUtils.isEmpty(jsonObject.getJSONArray("employeeCodes"))) {
+                if(jsonObject.getJSONArray("employeeCodes").size() <= 100) {
+                    jsonObject.getJSONArray("employeeCodes").forEach(code -> {
+                        postClient.addParameter("employeeCodes", (String) code);
+                    });
+                } else {
+                    throw new GadIndexOutOfBoundsException("The length of the employeeCodes is over 100 in employeeListGovOrgEmpEmailByCodes");
+                }
             }
-        } else if(StringUtils.isNotEmpty(jsonObject.getString("employeeCodes"))) {
-            postClient.addParameter("employeeCodes", jsonObject.getString("employeeCodes"));
+        } catch (Exception e) {
+            if(StringUtils.isNotEmpty(jsonObject.getString("employeeCodes"))) {
+                postClient.addParameter("employeeCodes", jsonObject.getString("employeeCodes"));
+            }
         }
         return postClient.post();
     }
@@ -2529,12 +2560,16 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
     public String employeeListGovEmpCodesByAccountIds(JSONObject jsonObject) {
         PostClient postClient = this.newGadPostClient(GadABUIApiConstants.ABUI_LIST_GOV_EMPLOYEE_CODES_BY_ACCOUNT_IDS)
                 .addParameter("tenantId", String.valueOf(jsonObject.getLong("tenantId")));
-        if(!CollectionUtils.isEmpty(jsonObject.getJSONArray("accountIds"))) {
-            jsonObject.getJSONArray("accountIds").forEach(id -> {
-                postClient.addParameter("accountIds", (String) id);
-            });
-        } else if(jsonObject.getLong("accountIds") != null) {
-            postClient.addParameter("accountIds", String.valueOf(jsonObject.getLong("accountIds")));
+        try {
+            if(!CollectionUtils.isEmpty(jsonObject.getJSONArray("accountIds"))) {
+                jsonObject.getJSONArray("accountIds").forEach(id -> {
+                    postClient.addParameter("accountIds", (String) id);
+                });
+            }
+        } catch (Exception e) {
+            if(jsonObject.getLong("accountIds") != null) {
+                postClient.addParameter("accountIds", String.valueOf(jsonObject.getLong("accountIds")));
+            }
         }
         return postClient.post();
     }

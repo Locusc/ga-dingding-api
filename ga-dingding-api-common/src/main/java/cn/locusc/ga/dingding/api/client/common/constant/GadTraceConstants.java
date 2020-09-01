@@ -13,11 +13,6 @@ public class GadTraceConstants {
     public static final String GBS_TRACE_QUERY_USER_BY_ISV = "/gbs/traceQuery/queryUserTraceByIsv";
 
     /**
-     * 外部服务查询用户轨迹
-     **/
-    public static final String GBS_TRACE_QUERY_USER_TRACE = "/gbs/traceQuery/queryUserTrace";
-
-    /**
      * 外部服务停止轨迹上报
      **/
     public static final String GBS_TRACE_STOP_TRACE_COLLECT_BY_ISV = "/gbs/trace/stopTraceCollectByIsv";
@@ -31,21 +26,6 @@ public class GadTraceConstants {
      * isv或外部服务生成轨迹id
      **/
     public static final String GBS_TRACE_GENERATE_TRACE_ID_BY_ISV = "/gbs/trace/generateTraceIdByIsv";
-
-    /**
-     * 接收轨迹数据
-     **/
-    public static final String GBS_TRACE_RECEIVE_TRACE_DATA = "/gbs/trace/receiveTraceData";
-
-    /**
-     * 停止轨迹上报
-     **/
-    public static final String GBS_TRACE_STOP_TRACE_COLLECT = "/gbs/trace/stopTraceCollect";
-
-    /**
-     * 轨迹id生成
-     **/
-    public static final String GBS_TRACE_GENERATE_TRACE_ID = "/gbs/trace/generateTraceId";
 
     /**
      * 获取轨迹推送失败消息
@@ -71,5 +51,20 @@ public class GadTraceConstants {
      * 轨迹推送注册
      **/
     public static final String BIP_REGISTER_REGISTER_APP = "/bip/register/registerApp";
+
+    /**
+     * 开启轨迹采集
+     **/
+    public static final String GBS_TRACE_START_TRACE_COLLECT = "/gbs/trace/startTraceCollect";
+
+    /**
+     * 校验轨迹id
+     **/
+    public static final String GBS_TRACE_CHECK_TRACE_ID = "/gbs/trace/checkTraceId";
+
+    /**
+     * 根据位置范围查询用户
+     **/
+    public static final String GBS_TRACE_QUERY_USER_BY_GEO_SCOPE = "/gbs/traceQuery/queryUserByGeoScope";
 
 }
