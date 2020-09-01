@@ -2230,6 +2230,19 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
         return postClient.post();
     }
 
+    /**
+     * 根据组织code查询组织下的员工人数
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    public String deptGetOrganizationEmployeeCount(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadABDIApiConstants.ABDI_GET_ORGANIZATION_EMPLOYEE_COUNT)
+                .addParameter("organizationCode", jsonObject.getString("organizationCode"))
+                .addParameter("tenantId", String.valueOf(jsonObject.getLong("tenantId")))
+                .addParameter("employeeStatus", jsonObject.getString("employeeStatus"));
+        return postClient.post();
+    }
+
     /* 获取通讯录用户信息接口实现 */
     /**
      * 冻结和解冻账号

@@ -128,4 +128,11 @@ interface GadABDIApiService {
      **/
     String deptZzdDeptGetDepMapByType(JSONObject jsonObject);
 
+    /**
+     * 根据组织code查询组织下的员工人数
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    String deptGetOrganizationEmployeeCount(JSONObject jsonObject);
+
 }

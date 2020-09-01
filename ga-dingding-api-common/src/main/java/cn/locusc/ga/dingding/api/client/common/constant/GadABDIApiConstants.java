@@ -92,4 +92,9 @@ public class GadABDIApiConstants {
      **/
     public static final String ABDI_ZZD_DEPT_GET_DEP_MAP_BY_TYPE = "/zzd/dept/getDepMapByType";
 
+    /**
+     * 根据组织code查询组织下的员工人数
+     **/
+    public static final String ABDI_GET_ORGANIZATION_EMPLOYEE_COUNT = "/mozi/organization/getOrganizationEmployeeCount";
+
 }
