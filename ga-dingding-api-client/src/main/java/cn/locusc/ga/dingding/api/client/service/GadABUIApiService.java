@@ -269,18 +269,18 @@ interface GadABUIApiService {
     String employeeCreateTagGroup(JSONObject jsonObject);
 
     /**
-     * 获取所有标签组
-     * @param jsonObject JSONObject入参
-     * @return java.lang.String
-     **/
-    String employeePageTagGroups(JSONObject jsonObject);
-
-    /**
      * 添加标签
      * @param jsonObject JSONObject入参
      * @return java.lang.String
      **/
     String employeeAddTag(JSONObject jsonObject);
+
+    /**
+     * 获取所有标签组
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    String employeePageTagGroups(JSONObject jsonObject);
 
     /**
      * 根据标签组code获取人员信息列表
