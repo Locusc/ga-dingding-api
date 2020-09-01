@@ -164,6 +164,132 @@ interface GadABUIApiService {
     String employeeGetMoveEmpPosition(JSONObject jsonObject);
 
     /**
+     * 人员排序
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    String employeeReorderEmpPositionsByCodes(JSONObject jsonObject);
+
+    /**
+     * 获取通讯录权限范围 v2
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    String employeeAuthScopesV2(JSONObject jsonObject);
+
+    /**
+     * 查询角色授权详情信息
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    String employeeGetGrantRoleDataDetail(JSONObject jsonObject);
+
+    /**
+     * 查询组织下人员详情
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    String employeePageOrganizationEmployeePositions(JSONObject jsonObject);
+
+    /**
+     * 批量新增人员标签
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    String employeeBatchCreateEmployeeTag(JSONObject jsonObject);
+
+    /**
+     * 批量删除人员标签
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    String employeeBatchDeleteEmployeeTag(JSONObject jsonObject);
+
+    /**
+     * 根据标签code获取人员信息列表
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    String employeePageEmployeesByTagCode(JSONObject jsonObject);
+
+    /**
+     * 启用/停用标签
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    String employeeUpdateTagStatus(JSONObject jsonObject);
+
+    /**
+     * 获取标签列表
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    String employeePageTags(JSONObject jsonObject);
+
+    /**
+     * 删除标签
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    String employeeDeleteTag(JSONObject jsonObject);
+
+    /**
+     * 删除标签组
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    String employeeDeleteTagGroup(JSONObject jsonObject);
+
+    /**
+     * 根据标签组code获取标签列表
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    String employeePagTagsByGroupCode(JSONObject jsonObject);
+
+    /**
+     * 获取标签详情
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    String employeeGetTagDetail(JSONObject jsonObject);
+
+    /**
+     * 根据标签code列表获取标签详情
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    String employeeGetTagsDetailByCodes(JSONObject jsonObject);
+
+    /**
+     * 创建标签组
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    String employeeCreateTagGroup(JSONObject jsonObject);
+
+    /**
+     * 获取所有标签组
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    String employeePageTagGroups(JSONObject jsonObject);
+
+    /**
+     * 添加标签
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    String employeeAddTag(JSONObject jsonObject);
+
+    /**
+     * 根据标签组code获取人员信息列表
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    String employeePageEmployeesByTagGroupCode(JSONObject jsonObject);
+
+    /**
      * 获取通讯录权限范围
      * @param jsonObject JSONObject入参
      * @return java.lang.String

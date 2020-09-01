@@ -118,7 +118,98 @@ public class GadABUIApiConstants {
     public static final String ABUI_GET_MOVE_EMP_POSITION = "/mozi/employee/moveEmployeePosition";
 
     /**
+     * 人员排序
+     **/
+    public static final String ABUI_REORDER_EMP_POSITION_BY_CODES = "/mozi/employee/reorderEmpPositionsByCodes";
+
+    /**
+     * 获取通讯录权限范围 v2
+     **/
+    public static final String ABUI_AUTH_SCOPES_V2 = "/auth/scopesV2";
+
+    /**
+     * 查询角色授权详情信息
+     **/
+    public static final String ABUI_ACL_GET_GRANT_ROLE_DATA_DETAIL = "/mozi/acl/getGrantRoleDataDetail";
+
+    /**
+     * 查询组织下人员详情
+     **/
+    public static final String ABUI_PAGE_ORGANIZATION_EMP_POSITION = "/mozi/organization/pageOrganizationEmployeePositions";
+
+    /**
+     * 批量新增人员标签
+     **/
+    public static final String ABUI_BATCH_CREATE_EMP_TAG = "/mozi/employee/batchCreateEmployeeTag";
+
+    /**
+     * 批量删除人员标签
+     **/
+    public static final String ABUI_BATCH_DELETE_EMP_TAG = "/mozi/employee/batchDeleteEmployeeTag";
+
+    /**
+     * 根据标签code获取人员信息列表
+     **/
+    public static final String ABUI_PAGE_EMP_BY_TAG_CODE = "/mozi/employee/pageEmployeesByTagCode";
+
+    /**
+     * 启用/停用标签
+     **/
+    public static final String ABUI_TAG_UPDATE_TAG_STATUS = "/mozi/tag/updateTagStatus";
+
+    /**
+     * 获取标签列表
+     **/
+    public static final String ABUI_TAG_PAGE_TAGS = "/mozi/tag/pageTags";
+
+    /**
+     * 删除标签
+     **/
+    public static final String ABUI_TAG_DELETE_TAGS = "/mozi/tag/deleteTag";
+
+    /**
+     * 删除标签组
+     **/
+    public static final String ABUI_TAG_DELETE_TAG_GROUP = "/mozi/tag/deleteTagGroup";
+
+    /**
+     * 根据标签组code获取标签列表
+     **/
+    public static final String ABUI_TAG_PAGE_TAGS_BY_GROUP_CODE = "/mozi/tag/pagTagsByGroupCode";
+
+    /**
+     * 获取标签详情
+     **/
+    public static final String ABUI_TAG_GET_TAG_DETAIL = "/mozi/tag/getTagDetail";
+
+    /**
+     * 根据标签code列表获取标签详情
+     **/
+    public static final String ABUI_TAG_GET_TAGS_DETAIL_BY_CODES = "/mozi/tag/getTagsDetailByCodes";
+
+    /**
+     * 创建标签组
+     **/
+    public static final String ABUI_TAG_CREATE_TAG_GROUP = "/mozi/tag/createTagGroup";
+
+    /**
+     * 添加标签
+     **/
+    public static final String ABUI_TAG_ADD_TAG = "/mozi/tag/addTag";
+
+    /**
+     * 获取所有标签组
+     **/
+    public static final String ABUI_TAG_PAGE_TAG_GROUPS = "/mozi/tag/PageTagGroups";
+
+    /**
+     * 根据标签组code获取人员信息列表
+     **/
+    public static final String ABUI_PAGE_EMP_BY_TAG_GROUP_CODE = "/mozi/employee/pageEmployeesByTagGroupCode";
+
+    /**
      * 获取通讯录权限范围
      **/
     public static final String ABUI_AUTH_SCOPES = "/auth/scopes";
+
 }

@@ -2684,6 +2684,322 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
     }
 
     /**
+     * 人员排序
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    public String employeeReorderEmpPositionsByCodes(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadABUIApiConstants.ABUI_REORDER_EMP_POSITION_BY_CODES)
+                .addParameter("organizationCode", jsonObject.getString("fromOrganizationCode"))
+                .addParameter("tenantId", String.valueOf(jsonObject.getLong("tenantId")))
+                .addParameter("operator", jsonObject.getString("operator"));
+        try {
+            if (!CollectionUtils.isEmpty(jsonObject.getJSONArray("employeeCodes"))) {
+                jsonObject.getJSONArray("employeeCodes").forEach(uid -> {
+                    postClient.addParameter("employeeCodes", String.valueOf(uid));
+                });
+            }
+        } catch (Exception e) {
+            if(StringUtils.isNotEmpty(jsonObject.getString("employeeCodes"))) {
+                postClient.addParameter("employeeCodes", jsonObject.getString("employeeCodes"));
+            }
+        }
+        return postClient.post();
+    }
+
+    /**
+     * 获取通讯录权限范围 v2
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    public String employeeAuthScopesV2(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadABUIApiConstants.ABUI_AUTH_SCOPES_V2)
+                .addParameter("tenantId", String.valueOf(jsonObject.getLong("tenantId")));
+        return postClient.post();
+    }
+
+    /**
+     * 查询角色授权详情信息
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    public String employeeGetGrantRoleDataDetail(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadABUIApiConstants.ABUI_ACL_GET_GRANT_ROLE_DATA_DETAIL)
+                .addParameter("roleCode", jsonObject.getString("roleCode"))
+                .addParameter("tenantId", String.valueOf(jsonObject.getLong("tenantId")))
+                .addParameter("employeeCode", jsonObject.getString("employeeCode"));
+        return postClient.post();
+    }
+
+    /**
+     * 查询组织下人员详情
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    public String employeePageOrganizationEmployeePositions(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadABUIApiConstants.ABUI_PAGE_ORGANIZATION_EMP_POSITION)
+                .addParameter("returnTotalSize", String.valueOf(jsonObject.getBoolean("returnTotalSize")))
+                .addParameter("pageSize", String.valueOf(jsonObject.getInteger("pageSize")))
+                .addParameter("employeeStatus", jsonObject.getString("employeeStatus"))
+                .addParameter("organizationCode", jsonObject.getString("organizationCode"))
+                .addParameter("pageNo", String.valueOf(jsonObject.getInteger("pageNo")))
+                .addParameter("tenantId", String.valueOf(jsonObject.getLong("tenantId")));
+        return postClient.post();
+    }
+
+    /**
+     * 批量新增人员标签
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    public String employeeBatchCreateEmployeeTag(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadABUIApiConstants.ABUI_BATCH_CREATE_EMP_TAG)
+                .addParameter("tenantId", String.valueOf(jsonObject.getLong("tenantId")))
+                .addParameter("operator", jsonObject.getString("operator"));
+        try {
+            if (!CollectionUtils.isEmpty(jsonObject.getJSONArray("tagCodes"))) {
+                jsonObject.getJSONArray("tagCodes").forEach(uid -> {
+                    postClient.addParameter("tagCodes", String.valueOf(uid));
+                });
+            }
+        } catch (Exception e) {
+            if(StringUtils.isNotEmpty(jsonObject.getString("tagCodes"))) {
+                postClient.addParameter("tagCodes", jsonObject.getString("tagCodes"));
+            }
+        }
+        try {
+            if (!CollectionUtils.isEmpty(jsonObject.getJSONArray("employeeCodes"))) {
+                jsonObject.getJSONArray("employeeCodes").forEach(uid -> {
+                    postClient.addParameter("employeeCodes", String.valueOf(uid));
+                });
+            }
+        } catch (Exception e) {
+            if(StringUtils.isNotEmpty(jsonObject.getString("employeeCodes"))) {
+                postClient.addParameter("employeeCodes", jsonObject.getString("employeeCodes"));
+            }
+        }
+        return postClient.post();
+    }
+
+    /**
+     * 批量删除人员标签
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    public String employeeBatchDeleteEmployeeTag(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadABUIApiConstants.ABUI_BATCH_DELETE_EMP_TAG)
+                .addParameter("tenantId", String.valueOf(jsonObject.getLong("tenantId")))
+                .addParameter("operator", jsonObject.getString("operator"));
+        try {
+            if (!CollectionUtils.isEmpty(jsonObject.getJSONArray("tagCodes"))) {
+                jsonObject.getJSONArray("tagCodes").forEach(uid -> {
+                    postClient.addParameter("tagCodes", String.valueOf(uid));
+                });
+            }
+        } catch (Exception e) {
+            if(StringUtils.isNotEmpty(jsonObject.getString("tagCodes"))) {
+                postClient.addParameter("tagCodes", jsonObject.getString("tagCodes"));
+            }
+        }
+        try {
+            if (!CollectionUtils.isEmpty(jsonObject.getJSONArray("employeeCodes"))) {
+                jsonObject.getJSONArray("employeeCodes").forEach(uid -> {
+                    postClient.addParameter("employeeCodes", String.valueOf(uid));
+                });
+            }
+        } catch (Exception e) {
+            if(StringUtils.isNotEmpty(jsonObject.getString("employeeCodes"))) {
+                postClient.addParameter("employeeCodes", jsonObject.getString("employeeCodes"));
+            }
+        }
+        return postClient.post();
+    }
+
+    /**
+     * 根据标签code获取人员信息列表
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    public String employeePageEmployeesByTagCode(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadABUIApiConstants.ABUI_PAGE_EMP_BY_TAG_CODE)
+                .addParameter("tagCode", jsonObject.getString("tagCode"))
+                .addParameter("pageSize", String.valueOf(jsonObject.getInteger("pageSize")))
+                .addParameter("pageNo", String.valueOf(jsonObject.getInteger("pageNo")))
+                .addParameter("tenantId", String.valueOf(jsonObject.getLong("tenantId")));
+        return postClient.post();
+    }
+
+    /**
+     * 启用/停用标签
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    public String employeeUpdateTagStatus(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadABUIApiConstants.ABUI_TAG_UPDATE_TAG_STATUS)
+                .addParameter("tagCode", jsonObject.getString("tagCode"))
+                .addParameter("tenantId", String.valueOf(jsonObject.getLong("tenantId")))
+                .addParameter("operator", jsonObject.getString("operator"))
+                .addParameter("status", jsonObject.getString("status"));
+        return postClient.post();
+    }
+
+    /**
+     * 获取标签列表
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    public String employeePageTags(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadABUIApiConstants.ABUI_TAG_PAGE_TAGS)
+                .addParameter("pageSize", String.valueOf(jsonObject.getInteger("pageSize")))
+                .addParameter("pageNo", String.valueOf(jsonObject.getInteger("pageNo")))
+                .addParameter("tenantId", String.valueOf(jsonObject.getLong("tenantId")))
+                .addParameter("keyword", jsonObject.getString("keyword"));
+        return postClient.post();
+    }
+
+    /**
+     * 删除标签
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    public String employeeDeleteTag(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadABUIApiConstants.ABUI_TAG_DELETE_TAGS)
+                .addParameter("tagCode", jsonObject.getString("tagCode"))
+                .addParameter("tenantId", String.valueOf(jsonObject.getLong("tenantId")))
+                .addParameter("operator", jsonObject.getString("operator"));
+        return postClient.post();
+    }
+
+    /**
+     * 删除标签组
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    public String employeeDeleteTagGroup(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadABUIApiConstants.ABUI_TAG_DELETE_TAG_GROUP)
+                .addParameter("tenantId", String.valueOf(jsonObject.getLong("tenantId")))
+                .addParameter("tagGroupCode", jsonObject.getString("tagGroupCode"))
+                .addParameter("operator", jsonObject.getString("operator"));
+        return postClient.post();
+    }
+
+    /**
+     * 根据标签组code获取标签列表
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    public String employeePagTagsByGroupCode(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadABUIApiConstants.ABUI_TAG_PAGE_TAGS_BY_GROUP_CODE)
+                .addParameter("pageSize", String.valueOf(jsonObject.getInteger("pageSize")))
+                .addParameter("tagGroupCode", jsonObject.getString("tagGroupCode"))
+                .addParameter("pageNo", String.valueOf(jsonObject.getInteger("pageNo")))
+                .addParameter("tenantId", String.valueOf(jsonObject.getLong("tenantId")))
+                .addParameter("status", jsonObject.getString("status"));
+        return postClient.post();
+    }
+
+    /**
+     * 获取标签详情
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    public String employeeGetTagDetail(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadABUIApiConstants.ABUI_TAG_GET_TAG_DETAIL)
+                .addParameter("tagCode", jsonObject.getString("tagCode"))
+                .addParameter("tenantId", String.valueOf(jsonObject.getLong("tenantId")));
+        return postClient.post();
+    }
+
+    /**
+     * 根据标签code列表获取标签详情
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    public String employeeGetTagsDetailByCodes(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadABUIApiConstants.ABUI_TAG_GET_TAGS_DETAIL_BY_CODES)
+                .addParameter("tenantId", String.valueOf(jsonObject.getLong("tenantId")));
+        try {
+            if (!CollectionUtils.isEmpty(jsonObject.getJSONArray("tagCodes"))) {
+                jsonObject.getJSONArray("tagCodes").forEach(uid -> {
+                    postClient.addParameter("tagCodes", String.valueOf(uid));
+                });
+            }
+        } catch (Exception e) {
+            if(StringUtils.isNotEmpty(jsonObject.getString("tagCodes"))) {
+                postClient.addParameter("tagCodes", jsonObject.getString("tagCodes"));
+            }
+        }
+        return postClient.post();
+    }
+
+    /**
+     * 创建标签组
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    public String employeeCreateTagGroup(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadABUIApiConstants.ABUI_TAG_CREATE_TAG_GROUP)
+                .addParameter("creator", jsonObject.getString("creator"))
+                .addParameter("tagGroupDescription", jsonObject.getString("tagGroupDescription"))
+                .addParameter("tenantId", String.valueOf(jsonObject.getLong("tenantId")))
+                .addParameter("tagGroupName", jsonObject.getString("tagGroupName"));
+        return postClient.post();
+    }
+
+    /**
+     * 添加标签
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    public String employeeAddTag(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadABUIApiConstants.ABUI_TAG_ADD_TAG)
+                .addParameter("tagName", jsonObject.getString("tagName"))
+                .addParameter("operator", jsonObject.getString("operator"))
+                .addParameter("tenantId", String.valueOf(jsonObject.getLong("tenantId")))
+                .addParameter("tagDescription", jsonObject.getString("tagDescription"));
+        try {
+            if (!CollectionUtils.isEmpty(jsonObject.getJSONArray("tagGroupCodes"))) {
+                jsonObject.getJSONArray("tagGroupCodes").forEach(uid -> {
+                    postClient.addParameter("tagGroupCodes", String.valueOf(uid));
+                });
+            }
+        } catch (Exception e) {
+            if(StringUtils.isNotEmpty(jsonObject.getString("tagGroupCodes"))) {
+                postClient.addParameter("tagGroupCodes", jsonObject.getString("tagGroupCodes"));
+            }
+        }
+        return postClient.post();
+    }
+
+    /**
+     * 获取所有标签组
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    public String employeePageTagGroups(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadABUIApiConstants.ABUI_TAG_PAGE_TAG_GROUPS)
+                .addParameter("returnTotalSize", String.valueOf(jsonObject.getBoolean("returnTotalSize")))
+                .addParameter("pageNo", String.valueOf(jsonObject.getInteger("pageNo")))
+                .addParameter("tenantId", String.valueOf(jsonObject.getLong("tenantId")))
+                .addParameter("pageSize", String.valueOf(jsonObject.getInteger("pageSize")));
+        return postClient.post();
+    }
+
+    /**
+     * 根据标签组code获取人员信息列表
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    public String employeePageEmployeesByTagGroupCode(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadABUIApiConstants.ABUI_PAGE_EMP_BY_TAG_GROUP_CODE)
+                .addParameter("pageSize", String.valueOf(jsonObject.getInteger("pageSize")))
+                .addParameter("tagGroupCode", jsonObject.getString("tagGroupCode"))
+                .addParameter("pageNo", String.valueOf(jsonObject.getInteger("pageNo")))
+                .addParameter("tenantId", String.valueOf(jsonObject.getLong("tenantId")));
+        return postClient.post();
+    }
+
+    /**
      * 获取通讯录权限范围
      * @param jsonObject JSONObject入参
      * @return java.lang.String
