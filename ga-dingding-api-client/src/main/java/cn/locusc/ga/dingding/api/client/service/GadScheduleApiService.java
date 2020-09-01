@@ -23,4 +23,32 @@ interface GadScheduleApiService {
      **/
     String calendarCreateCalendarEvent(JSONObject jsonObject);
 
+    /**
+     * 获取APP设置可见的用户Id
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    String calendarAppQueryAppVisibleList(JSONObject jsonObject);
+
+    /**
+     * 从可见用户列表中删除指定用户
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    String calendarAppRemoveUserFromAppVisibleList(JSONObject jsonObject);
+
+    /**
+     * 设置APP的用户可见性
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    String calendarAppAddUserToAppVisibleList(JSONObject jsonObject);
+
+    /**
+     * 获取用户可用的app
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    String calendarAppUserVisibleApps(JSONObject jsonObject);
+
 }

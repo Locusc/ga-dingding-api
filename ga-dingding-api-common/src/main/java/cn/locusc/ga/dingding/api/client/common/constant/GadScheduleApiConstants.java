@@ -18,7 +18,22 @@ public class GadScheduleApiConstants {
     public static final String CALENDAR_CREATE_CALENDAR = "/calendar/createCalendar";
 
     /**
-     * 日程：获取日历详情
+     * 获取APP设置可见的用户Id
      **/
-    public static final String CALENDAR_GET_CALENDAR_DETAIL = "/calendar/getCalendarDetail";
+    public static final String CALENDAR_QUERY_APP_VISIBLE_LIST = "/app/queryAppVisibleList";
+
+    /**
+     * 从可见用户列表中删除指定用户
+     **/
+    public static final String CALENDAR_REMOVE_USER_FROM_APP_VISIBLE_LIST = "/app/removeUserFromAppVisibleList";
+
+    /**
+     * 设置APP的用户可见性
+     **/
+    public static final String CALENDAR_ADD_USER_TO_APP_VISIBLE_LIST = "/app/addUserToAppVisibleList";
+
+    /**
+     * 获取用户可用的app
+     **/
+    public static final String CALENDAR_USER_VISIBLE_APPS = "/app/userVisibleApps";
 }

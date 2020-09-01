@@ -7,7 +7,7 @@
     <dependency>
         <groupId>cn.locusc</groupId>
         <artifactId>ga-dingding-api-client</artifactId>
-        <version>1.2.1</version>
+        <version>1.3.0</version>
     </dependency>
 ```
 ## application.yml 配置：
@@ -47,6 +47,7 @@ gad:
 * [x] 业务事件回调
 * [x] JSAPI鉴权
 * [x] 文件存储
+* [x] 日程
 * [x] 待办
 * [x] 工作通知消息
 * [x] 获取通讯录部门信息
@@ -54,7 +55,6 @@ gad:
 * [x] 应用管理后台免登
 * [x] 企业内应用免登
 ## 未完成：
-* [ ] 日程
 * [ ] 一些其他的接口 比如: 获取所有的部门code以及部门详情，获取部门下所有用户code以及用户详情
 * [ ] Python版本
 ## 欢迎提交issue

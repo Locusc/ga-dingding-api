@@ -48,8 +48,8 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
                 .addParameter("bodyType", jsonObject.getString("bodyType"));
         try {
             if(!CollectionUtils.isEmpty(jsonObject.getJSONArray("receivers"))) {
-                jsonObject.getJSONArray("receivers").forEach(receiver -> {
-                    postClient.addParameter("receivers", String.valueOf(receiver));
+                jsonObject.getJSONArray("receivers").forEach(item -> {
+                    postClient.addParameter("receivers", String.valueOf(item));
                 });
             }
         } catch (Exception e) {
@@ -596,8 +596,8 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
         PostClient postClient = this.newGadPostClient(GadWaterMarkConstants.BIP_WATERMARK_TEMPLATE_PAGE_QUERY);
         try {
             if(!CollectionUtils.isEmpty(jsonObject.getJSONArray("templateIds"))) {
-                jsonObject.getJSONArray("templateIds").forEach(id -> {
-                    postClient.addParameter("templateIds", String.valueOf(id));
+                jsonObject.getJSONArray("templateIds").forEach(item -> {
+                    postClient.addParameter("templateIds", String.valueOf(item));
                 });
             }
         } catch (Exception e) {
@@ -1344,8 +1344,8 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
                 .addParameter("managementType", String.valueOf(jsonObject.getInteger("managementType")));
         try {
              if (!CollectionUtils.isEmpty(jsonObject.getJSONArray("useridlist"))) {
-                jsonObject.getJSONArray("useridlist").forEach(uid -> {
-                    postClient.addParameter("useridlist", String.valueOf(uid));
+                jsonObject.getJSONArray("useridlist").forEach(item -> {
+                    postClient.addParameter("useridlist", String.valueOf(item));
                 });
             }
         } catch (Exception e) {
@@ -1419,8 +1419,8 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
                 .addParameter("silenceAll", String.valueOf(jsonObject.getInteger("silenceAll")));
         try {
             if (!CollectionUtils.isEmpty(jsonObject.getJSONArray("addUserIdList"))) {
-                jsonObject.getJSONArray("addUserIdList").forEach(uid -> {
-                    postClient.addParameter("addUserIdList", String.valueOf(uid));
+                jsonObject.getJSONArray("addUserIdList").forEach(item -> {
+                    postClient.addParameter("addUserIdList", String.valueOf(item));
                 });
             }
         } catch (Exception e) {
@@ -1430,8 +1430,8 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
         }
         try {
             if (!CollectionUtils.isEmpty(jsonObject.getJSONArray("delUserIdList"))) {
-                jsonObject.getJSONArray("delUserIdList").forEach(uid -> {
-                    postClient.addParameter("delUserIdList", String.valueOf(uid));
+                jsonObject.getJSONArray("delUserIdList").forEach(item -> {
+                    postClient.addParameter("delUserIdList", String.valueOf(item));
                 });
             }
         } catch (Exception e) {
@@ -1617,7 +1617,97 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
      **/
     @Override
     public String calendarCancelCalendarEvent(JSONObject jsonObject) {
-        return null;
+        PostClient postClient = this.newGadPostClient(GadScheduleApiConstants.CALENDAR_CANCEL_CALENDAR)
+                .addParameter("appName", jsonObject.getString("appName"))
+                .addParameter("bizScene", jsonObject.getString("bizScene"))
+                .addParameter("clientType", jsonObject.getString("clientType"))
+                .addParameter("osType", jsonObject.getString("osType"))
+                .addParameter("summary", jsonObject.getString("summary"))
+                .addParameter("creator", jsonObject.getJSONObject("creator").toJSONString())
+                .addParameter("start", jsonObject.getJSONObject("start").toJSONString())
+                .addParameter("description", jsonObject.getString("description"))
+                .addParameter("eventType", jsonObject.getString("eventType"))
+                .addParameter("calendarId", String.valueOf(jsonObject.getLong("calendarId")))
+                .addParameter("attendeeNum", String.valueOf(jsonObject.getLong("attendeeNum")))
+                .addParameter("sourceType", jsonObject.getString("sourceType"))
+                .addParameter("bizId", jsonObject.getString("bizId"))
+                .addParameter("confirmStatus", jsonObject.getString("confirmStatus"))
+                .addParameter("acceptedNum", String.valueOf(jsonObject.getLong("acceptedNum")))
+                .addParameter("end", jsonObject.getJSONObject("end").toJSONString())
+                .addParameter("pageQueryDto", jsonObject.getJSONObject("pageQueryDto").toJSONString())
+                .addParameter("sourceName", jsonObject.getString("sourceName"))
+                .addParameter("event", jsonObject.getJSONObject("event").toJSONString())
+                .addParameter("accountId", String.valueOf(jsonObject.getLong("accountId")))
+                .addParameter("image", jsonObject.getString("image"))
+                .addParameter("phone", jsonObject.getString("phone"))
+                .addParameter("displayName", jsonObject.getString("displayName"))
+                .addParameter("tenantId", jsonObject.getString("tenantId"))
+                .addParameter("position", jsonObject.getString("position"))
+                .addParameter("accountId", String.valueOf(jsonObject.getLong("accountId")))
+                .addParameter("image", jsonObject.getString("image"))
+                .addParameter("phone", jsonObject.getString("phone"))
+                .addParameter("displayName", jsonObject.getString("displayName"))
+                .addParameter("tenantId", jsonObject.getString("tenantId"))
+                .addParameter("position", jsonObject.getString("position"))
+                .addParameter("timeStamp", String.valueOf(jsonObject.getLong("timeStamp")))
+                .addParameter("dateTime", jsonObject.getString("dateTime"))
+                .addParameter("timeZone", jsonObject.getString("timeZone"))
+                .addParameter("organizationId", String.valueOf(jsonObject.getLong("organizationId")))
+                .addParameter("accountId", String.valueOf(jsonObject.getLong("accountId")))
+                .addParameter("image", jsonObject.getString("image"))
+                .addParameter("phone", jsonObject.getString("phone"))
+                .addParameter("displayName", jsonObject.getString("displayName"))
+                .addParameter("tenantId", jsonObject.getString("tenantId"))
+                .addParameter("position", jsonObject.getString("position"))
+                .addParameter("attendeeType", jsonObject.getString("attendeeType"))
+                .addParameter("organizationId", String.valueOf(jsonObject.getLong("organizationId")))
+                .addParameter("accountId", String.valueOf(jsonObject.getLong("accountId")))
+                .addParameter("image", jsonObject.getString("image"))
+                .addParameter("phone", jsonObject.getString("phone"))
+                .addParameter("displayName", jsonObject.getString("displayName"))
+                .addParameter("tenantId", jsonObject.getString("tenantId"))
+                .addParameter("position", jsonObject.getString("position"))
+                .addParameter("attendeeType", jsonObject.getString("attendeeType"))
+                .addParameter("timeStamp", String.valueOf(jsonObject.getLong("timeStamp")))
+                .addParameter("dateTime", jsonObject.getString("dateTime"))
+                .addParameter("timeZone", jsonObject.getString("timeZone"))
+                .addParameter("returnTotalSize", String.valueOf(jsonObject.getBoolean("returnTotalSize")))
+                .addParameter("pageNo", String.valueOf(jsonObject.getInteger("pageNo")))
+                .addParameter("pageNoSize", String.valueOf(jsonObject.getInteger("pageNoSize")));
+        try {
+            if(!CollectionUtils.isEmpty(jsonObject.getJSONArray("attendees"))) {
+                jsonObject.getJSONArray("attendees").forEach(item -> {
+                    postClient.addParameter("attendees", String.valueOf(item));
+                });
+            }
+        } catch (Exception e) {
+            if(jsonObject.getJSONObject("attendees").toJSONString() != null) {
+                postClient.addParameter("attendees", jsonObject.getJSONObject("attendees").toJSONString());
+            }
+        }
+        try {
+            if(!CollectionUtils.isEmpty(jsonObject.getJSONArray("attendeesAdd"))) {
+                jsonObject.getJSONArray("attendeesAdd").forEach(item -> {
+                    postClient.addParameter("attendeesAdd", String.valueOf(item));
+                });
+            }
+        } catch (Exception e) {
+            if(jsonObject.getJSONObject("attendeesAdd").toJSONString() != null) {
+                postClient.addParameter("attendeesAdd", jsonObject.getJSONObject("attendeesAdd").toJSONString());
+            }
+        }
+        try {
+            if(!CollectionUtils.isEmpty(jsonObject.getJSONArray("attendeesDel"))) {
+                jsonObject.getJSONArray("attendeesDel").forEach(item -> {
+                    postClient.addParameter("attendeesDel", String.valueOf(item));
+                });
+            }
+        } catch (Exception e) {
+            if(jsonObject.getJSONObject("attendeesDel").toJSONString() != null) {
+                postClient.addParameter("attendeesDel", jsonObject.getJSONObject("attendeesDel").toJSONString());
+            }
+        }
+        return postClient.post();
     }
 
     /**
@@ -1627,7 +1717,152 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
      **/
     @Override
     public String calendarCreateCalendarEvent(JSONObject jsonObject) {
-        return null;
+        PostClient postClient = this.newGadPostClient(GadScheduleApiConstants.CALENDAR_CREATE_CALENDAR)
+                .addParameter("appName", jsonObject.getString("appName"))
+                .addParameter("bizScene", jsonObject.getString("bizScene"))
+                .addParameter("clientType", jsonObject.getString("clientType"))
+                .addParameter("osType", jsonObject.getString("osType"))
+                .addParameter("summary", jsonObject.getString("summary"))
+                .addParameter("creator", jsonObject.getJSONObject("creator").toJSONString())
+                .addParameter("start", jsonObject.getJSONObject("start").toJSONString())
+                .addParameter("description", jsonObject.getString("description"))
+                .addParameter("eventType", jsonObject.getString("eventType"))
+                .addParameter("calendarId", String.valueOf(jsonObject.getLong("calendarId")))
+                .addParameter("attendeeNum", String.valueOf(jsonObject.getLong("attendeeNum")))
+                .addParameter("sourceType", jsonObject.getString("sourceType"))
+                .addParameter("bizId", jsonObject.getString("bizId"))
+                .addParameter("confirmStatus", jsonObject.getString("confirmStatus"))
+                .addParameter("acceptedNum", String.valueOf(jsonObject.getLong("acceptedNum")))
+                .addParameter("end", jsonObject.getJSONObject("end").toJSONString())
+                .addParameter("pageQueryDto", jsonObject.getJSONObject("pageQueryDto").toJSONString())
+                .addParameter("sourceName", jsonObject.getString("sourceName"))
+                .addParameter("event", jsonObject.getJSONObject("event").toJSONString())
+                .addParameter("accountId", String.valueOf(jsonObject.getLong("accountId")))
+                .addParameter("image", jsonObject.getString("image"))
+                .addParameter("phone", jsonObject.getString("phone"))
+                .addParameter("displayName", jsonObject.getString("displayName"))
+                .addParameter("tenantId", jsonObject.getString("tenantId"))
+                .addParameter("position", jsonObject.getString("position"))
+                .addParameter("accountId", String.valueOf(jsonObject.getLong("accountId")))
+                .addParameter("image", jsonObject.getString("image"))
+                .addParameter("phone", jsonObject.getString("phone"))
+                .addParameter("displayName", jsonObject.getString("displayName"))
+                .addParameter("tenantId", jsonObject.getString("tenantId"))
+                .addParameter("position", jsonObject.getString("position"))
+                .addParameter("timeStamp", String.valueOf(jsonObject.getLong("timeStamp")))
+                .addParameter("dateTime", jsonObject.getString("dateTime"))
+                .addParameter("timeZone", jsonObject.getString("timeZone"))
+                .addParameter("organizationId", String.valueOf(jsonObject.getLong("organizationId")))
+                .addParameter("accountId", String.valueOf(jsonObject.getLong("accountId")))
+                .addParameter("image", jsonObject.getString("image"))
+                .addParameter("phone", jsonObject.getString("phone"))
+                .addParameter("displayName", jsonObject.getString("displayName"))
+                .addParameter("tenantId", jsonObject.getString("tenantId"))
+                .addParameter("position", jsonObject.getString("position"))
+                .addParameter("attendeeType", jsonObject.getString("attendeeType"))
+                .addParameter("organizationId", String.valueOf(jsonObject.getLong("organizationId")))
+                .addParameter("accountId", String.valueOf(jsonObject.getLong("accountId")))
+                .addParameter("image", jsonObject.getString("image"))
+                .addParameter("phone", jsonObject.getString("phone"))
+                .addParameter("displayName", jsonObject.getString("displayName"))
+                .addParameter("tenantId", jsonObject.getString("tenantId"))
+                .addParameter("position", jsonObject.getString("position"))
+                .addParameter("attendeeType", jsonObject.getString("attendeeType"))
+                .addParameter("timeStamp", String.valueOf(jsonObject.getLong("timeStamp")))
+                .addParameter("dateTime", jsonObject.getString("dateTime"))
+                .addParameter("timeZone", jsonObject.getString("timeZone"))
+                .addParameter("returnTotalSize", String.valueOf(jsonObject.getBoolean("returnTotalSize")))
+                .addParameter("pageNo", String.valueOf(jsonObject.getInteger("pageNo")))
+                .addParameter("pageNoSize", String.valueOf(jsonObject.getInteger("pageNoSize")));
+        try {
+            if(!CollectionUtils.isEmpty(jsonObject.getJSONArray("attendees"))) {
+                jsonObject.getJSONArray("attendees").forEach(item -> {
+                    postClient.addParameter("attendees", String.valueOf(item));
+                });
+            }
+        } catch (Exception e) {
+            if(jsonObject.getJSONObject("attendees").toJSONString() != null) {
+                postClient.addParameter("attendees", jsonObject.getJSONObject("attendees").toJSONString());
+            }
+        }
+        try {
+            if(!CollectionUtils.isEmpty(jsonObject.getJSONArray("attendeesAdd"))) {
+                jsonObject.getJSONArray("attendeesAdd").forEach(item -> {
+                    postClient.addParameter("attendeesAdd", String.valueOf(item));
+                });
+            }
+        } catch (Exception e) {
+            if(jsonObject.getJSONObject("attendeesAdd").toJSONString() != null) {
+                postClient.addParameter("attendeesAdd", jsonObject.getJSONObject("attendeesAdd").toJSONString());
+            }
+        }
+        try {
+            if(!CollectionUtils.isEmpty(jsonObject.getJSONArray("attendeesDel"))) {
+                jsonObject.getJSONArray("attendeesDel").forEach(item -> {
+                    postClient.addParameter("attendeesDel", String.valueOf(item));
+                });
+            }
+        } catch (Exception e) {
+            if(jsonObject.getJSONObject("attendeesDel").toJSONString() != null) {
+                postClient.addParameter("attendeesDel", jsonObject.getJSONObject("attendeesDel").toJSONString());
+            }
+        }
+        return postClient.post();
+    }
+
+    @Override
+    public String calendarAppQueryAppVisibleList(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadScheduleApiConstants.CALENDAR_QUERY_APP_VISIBLE_LIST)
+                .addParameter("appName", jsonObject.getString("appName"))
+                .addParameter("bizScene", jsonObject.getString("bizScene"))
+                .addParameter("clientType", jsonObject.getString("clientType"))
+                .addParameter("osType", jsonObject.getString("osType"))
+                .addParameter("tenantId", String.valueOf(jsonObject.getLong("tenantId")))
+                .addParameter("pageSize", String.valueOf(jsonObject.getInteger("pageSize")))
+                .addParameter("currentPage", String.valueOf(jsonObject.getInteger("currentPage")));
+        return postClient.post();
+    }
+
+    @Override
+    public String calendarAppRemoveUserFromAppVisibleList(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadScheduleApiConstants.CALENDAR_REMOVE_USER_FROM_APP_VISIBLE_LIST)
+                .addParameter("appName", jsonObject.getString("appName"))
+                .addParameter("bizScene", jsonObject.getString("bizScene"))
+                .addParameter("clientType", jsonObject.getString("clientType"))
+                .addParameter("osType", jsonObject.getString("osType"))
+                .addParameter("tenantId", String.valueOf(jsonObject.getLong("tenantId")));
+        if(!CollectionUtils.isEmpty(jsonObject.getJSONArray("accountIds"))) {
+            jsonObject.getJSONArray("accountIds").forEach(item -> {
+                postClient.addParameter("accountIds", String.valueOf(item));
+            });
+        }
+        return postClient.post();
+    }
+
+    @Override
+    public String calendarAppAddUserToAppVisibleList(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadScheduleApiConstants.CALENDAR_ADD_USER_TO_APP_VISIBLE_LIST)
+                .addParameter("appName", jsonObject.getString("appName"))
+                .addParameter("bizScene", jsonObject.getString("bizScene"))
+                .addParameter("clientType", jsonObject.getString("clientType"))
+                .addParameter("osType", jsonObject.getString("osType"))
+                .addParameter("tenantId", String.valueOf(jsonObject.getLong("tenantId")));
+        if(!CollectionUtils.isEmpty(jsonObject.getJSONArray("accountIds"))) {
+            jsonObject.getJSONArray("accountIds").forEach(item -> {
+                postClient.addParameter("accountIds", String.valueOf(item));
+            });
+        }
+        return postClient.post();
+    }
+
+    @Override
+    public String calendarAppUserVisibleApps(JSONObject jsonObject) {
+        PostClient postClient = this.newGadPostClient(GadScheduleApiConstants.CALENDAR_USER_VISIBLE_APPS)
+                .addParameter("accountId", String.valueOf(jsonObject.getLong("accountId")))
+                .addParameter("tenantId", String.valueOf(jsonObject.getLong("tenantId")))
+                .addParameter("pageSize", String.valueOf(jsonObject.getInteger("pageSize")))
+                .addParameter("currentPage", String.valueOf(jsonObject.getInteger("currentPage")));
+        return postClient.post();
     }
 
     /* 待办接口实现 */
@@ -1755,16 +1990,16 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
         }
         if(!CollectionUtils.isEmpty(messageWorkNotificationObject.getOrganizationCodes())) {
             if(messageWorkNotificationObject.getOrganizationCodes().size() <= 20) {
-                messageWorkNotificationObject.getOrganizationCodes().forEach(code -> {
-                    postClient.addParameter("organizationCodes", code);
+                messageWorkNotificationObject.getOrganizationCodes().forEach(item -> {
+                    postClient.addParameter("organizationCodes", item);
                 });
             } else {
                 throw new GadIndexOutOfBoundsException("The length of the organizationCodes is over 20 in messageWorkNotification");
             }
         }
         if(!CollectionUtils.isEmpty(messageWorkNotificationObject.getReceiverIds())) {
-            messageWorkNotificationObject.getOrganizationCodes().forEach(id -> {
-                postClient.addParameter("receiverIds", id);
+            messageWorkNotificationObject.getOrganizationCodes().forEach(item -> {
+                postClient.addParameter("receiverIds", item);
             });
         }
         return postClient.post();
@@ -1793,8 +2028,8 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
 
         try {
             if(!CollectionUtils.isEmpty(jsonObject.getJSONArray("organizationCodes"))) {
-                jsonObject.getJSONArray("organizationCodes").forEach(code -> {
-                    postClient.addParameter("organizationCodes", String.valueOf(code));
+                jsonObject.getJSONArray("organizationCodes").forEach(item -> {
+                    postClient.addParameter("organizationCodes", String.valueOf(item));
                 });
             }
         } catch (Exception e) {
@@ -1805,8 +2040,8 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
 
         try {
             if(!CollectionUtils.isEmpty(jsonObject.getJSONArray("receiverIds"))) {
-                jsonObject.getJSONArray("receiverIds").forEach(id -> {
-                    postClient.addParameter("receiverIds", String.valueOf(id));
+                jsonObject.getJSONArray("receiverIds").forEach(item -> {
+                    postClient.addParameter("receiverIds", String.valueOf(item));
                 });
             }
         } catch (Exception e) {
@@ -1832,8 +2067,8 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
         } else {
             try {
                 if(!CollectionUtils.isEmpty(jsonObject.getJSONArray("bizMsgIds"))) {
-                    jsonObject.getJSONArray("bizMsgIds").forEach(id -> {
-                        postClient.addParameter("bizMsgIds", (String) id);
+                    jsonObject.getJSONArray("bizMsgIds").forEach(item -> {
+                        postClient.addParameter("bizMsgIds", (String) item);
                     });
                 }
             } catch (Exception e) {
@@ -1857,8 +2092,8 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
                 .addParameter("tenantId", String.valueOf(jsonObject.getLong("tenantId")));
         try {
             if(!CollectionUtils.isEmpty(jsonObject.getJSONArray("bizMsgIds"))) {
-                jsonObject.getJSONArray("bizMsgIds").forEach(id -> {
-                    postClient.addParameter("bizMsgIds", (String) id);
+                jsonObject.getJSONArray("bizMsgIds").forEach(item -> {
+                    postClient.addParameter("bizMsgIds", (String) item);
                 });
             }
         } catch (Exception e) {
@@ -1939,8 +2174,8 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
                 .addParameter("tenantId", String.valueOf(jsonObject.getLong("tenantId")));
         try {
             if(!CollectionUtils.isEmpty(jsonObject.getJSONArray("govBusinessStripCodes"))) {
-                jsonObject.getJSONArray("govBusinessStripCodes").forEach(code -> {
-                    postClient.addParameter("govBusinessStripCodes", String.valueOf(code));
+                jsonObject.getJSONArray("govBusinessStripCodes").forEach(item -> {
+                    postClient.addParameter("govBusinessStripCodes", String.valueOf(item));
                 });
             }
         } catch (Exception e) {
@@ -1950,8 +2185,8 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
         }
         try {
             if(!CollectionUtils.isEmpty(jsonObject.getJSONArray("govResponsibleEmployeeCodes"))) {
-                jsonObject.getJSONArray("govResponsibleEmployeeCodes").forEach(code -> {
-                    postClient.addParameter("govResponsibleEmployeeCodes", String.valueOf(code));
+                jsonObject.getJSONArray("govResponsibleEmployeeCodes").forEach(item -> {
+                    postClient.addParameter("govResponsibleEmployeeCodes", String.valueOf(item));
                 });
             }
         } catch (Exception e) {
@@ -1990,8 +2225,8 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
                 .addParameter("organizationCode", jsonObject.getString("organizationCode"));
         try {
             if(!CollectionUtils.isEmpty(jsonObject.getJSONArray("govBusinessStripCodes"))) {
-                jsonObject.getJSONArray("govBusinessStripCodes").forEach(code -> {
-                    postClient.addParameter("govBusinessStripCodes", String.valueOf(code));
+                jsonObject.getJSONArray("govBusinessStripCodes").forEach(item -> {
+                    postClient.addParameter("govBusinessStripCodes", String.valueOf(item));
                 });
             }
         } catch (Exception e) {
@@ -2001,8 +2236,8 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
         }
         try {
             if(!CollectionUtils.isEmpty(jsonObject.getJSONArray("govResponsibleEmployeeCodes"))) {
-                jsonObject.getJSONArray("govResponsibleEmployeeCodes").forEach(code -> {
-                    postClient.addParameter("govResponsibleEmployeeCodes", String.valueOf(code));
+                jsonObject.getJSONArray("govResponsibleEmployeeCodes").forEach(item -> {
+                    postClient.addParameter("govResponsibleEmployeeCodes", String.valueOf(item));
                 });
             }
         } catch (Exception e) {
@@ -2024,8 +2259,8 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
                 .addParameter("tenantId", String.valueOf(jsonObject.getLong("tenantId")));
         try {
             if(!CollectionUtils.isEmpty(jsonObject.getJSONArray("organizationCodes"))){
-                jsonObject.getJSONArray("organizationCodes").forEach(code -> {
-                    postClient.addParameter("organizationCodes", String.valueOf(code));
+                jsonObject.getJSONArray("organizationCodes").forEach(item -> {
+                    postClient.addParameter("organizationCodes", String.valueOf(item));
                 });
             }
         } catch (Exception e) {
@@ -2148,8 +2383,8 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
                 .addParameter("tenantId", String.valueOf(jsonObject.getLong("tenantId")));
         try {
             if(!CollectionUtils.isEmpty(jsonObject.getJSONArray("divisionCodes"))){
-                jsonObject.getJSONArray("divisionCodes").forEach(code -> {
-                    postClient.addParameter("divisionCodes", String.valueOf(code));
+                jsonObject.getJSONArray("divisionCodes").forEach(item -> {
+                    postClient.addParameter("divisionCodes", String.valueOf(item));
                 });
             }
         } catch (Exception e) {
@@ -2201,8 +2436,8 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
         try {
              if(!CollectionUtils.isEmpty(jsonObject.getJSONArray("businessStripCodes"))){
                 if(jsonObject.getJSONArray("businessStripCodes").size() <= 100) {
-                    jsonObject.getJSONArray("businessStripCodes").forEach(code -> {
-                        postClient.addParameter("businessStripCodes", String.valueOf(code));
+                    jsonObject.getJSONArray("businessStripCodes").forEach(item -> {
+                        postClient.addParameter("businessStripCodes", String.valueOf(item));
                     });
                 } else {
                     throw new GadIndexOutOfBoundsException("The length of the businessStripCodes is over 100 in deptListGovBusinessStripsByCodes");
@@ -2441,8 +2676,8 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
                 .addParameter("organizationCode", jsonObject.getString("organizationCode"));
         try {
             if(!CollectionUtils.isEmpty(jsonObject.getJSONArray("employeeCodes"))) {
-                jsonObject.getJSONArray("employeeCodes").forEach(code -> {
-                    postClient.addParameter("employeeCodes", String.valueOf(code));
+                jsonObject.getJSONArray("employeeCodes").forEach(item -> {
+                    postClient.addParameter("employeeCodes", String.valueOf(item));
                 });
             }
         } catch (Exception e) {
@@ -2464,8 +2699,8 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
                 .addParameter("tenantId", String.valueOf(jsonObject.getLong("tenantId")));
         try {
             if(!CollectionUtils.isEmpty(jsonObject.getJSONArray("employeeCodes"))) {
-                jsonObject.getJSONArray("employeeCodes").forEach(code -> {
-                    postClient.addParameter("employeeCodes", String.valueOf(code));
+                jsonObject.getJSONArray("employeeCodes").forEach(item -> {
+                    postClient.addParameter("employeeCodes", String.valueOf(item));
                 });
             }
         } catch (Exception e) {
@@ -2515,8 +2750,8 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
                 .addParameter("tenantId", String.valueOf(jsonObject.getLong("tenantId")));
         try {
             if(!CollectionUtils.isEmpty(jsonObject.getJSONArray("employeeCodes"))) {
-                jsonObject.getJSONArray("employeeCodes").forEach(code -> {
-                    postClient.addParameter("employeeCodes", (String) code);
+                jsonObject.getJSONArray("employeeCodes").forEach(item -> {
+                    postClient.addParameter("employeeCodes", (String) item);
                 });
             }
         } catch (Exception e) {
@@ -2540,8 +2775,8 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
         try {
             if(!CollectionUtils.isEmpty(jsonObject.getJSONArray("organizationCodes"))) {
                 if(jsonObject.getJSONArray("organizationCodes").size() <= 100) {
-                    jsonObject.getJSONArray("organizationCodes").forEach(code -> {
-                        postClient.addParameter("organizationCodes", (String) code);
+                    jsonObject.getJSONArray("organizationCodes").forEach(item -> {
+                        postClient.addParameter("organizationCodes", (String) item);
                     });
                 } else {
                     throw new GadIndexOutOfBoundsException("The length of the organizationCodes is over 100 in employeeListAccountOrgByIdAndCodes");
@@ -2590,8 +2825,8 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
         try {
             if(!CollectionUtils.isEmpty(jsonObject.getJSONArray("employeeCodes"))) {
                 if(jsonObject.getJSONArray("employeeCodes").size() <= 100) {
-                    jsonObject.getJSONArray("employeeCodes").forEach(code -> {
-                        postClient.addParameter("employeeCodes", (String) code);
+                    jsonObject.getJSONArray("employeeCodes").forEach(item -> {
+                        postClient.addParameter("employeeCodes", (String) item);
                     });
                 } else {
                     throw new GadIndexOutOfBoundsException("The length of the employeeCodes is over 100 in employeeListGovOrgEmpEmailByCodes");
@@ -2616,8 +2851,8 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
                 .addParameter("tenantId", String.valueOf(jsonObject.getLong("tenantId")));
         try {
             if(!CollectionUtils.isEmpty(jsonObject.getJSONArray("accountIds"))) {
-                jsonObject.getJSONArray("accountIds").forEach(id -> {
-                    postClient.addParameter("accountIds", (String) id);
+                jsonObject.getJSONArray("accountIds").forEach(item -> {
+                    postClient.addParameter("accountIds", (String) item);
                 });
             }
         } catch (Exception e) {
@@ -2688,6 +2923,7 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
      * @param jsonObject JSONObject入参
      * @return java.lang.String
      **/
+    @Override
     public String employeeReorderEmpPositionsByCodes(JSONObject jsonObject) {
         PostClient postClient = this.newGadPostClient(GadABUIApiConstants.ABUI_REORDER_EMP_POSITION_BY_CODES)
                 .addParameter("organizationCode", jsonObject.getString("fromOrganizationCode"))
@@ -2695,8 +2931,8 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
                 .addParameter("operator", jsonObject.getString("operator"));
         try {
             if (!CollectionUtils.isEmpty(jsonObject.getJSONArray("employeeCodes"))) {
-                jsonObject.getJSONArray("employeeCodes").forEach(uid -> {
-                    postClient.addParameter("employeeCodes", String.valueOf(uid));
+                jsonObject.getJSONArray("employeeCodes").forEach(item -> {
+                    postClient.addParameter("employeeCodes", String.valueOf(item));
                 });
             }
         } catch (Exception e) {
@@ -2712,6 +2948,7 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
      * @param jsonObject JSONObject入参
      * @return java.lang.String
      **/
+    @Override
     public String employeeAuthScopesV2(JSONObject jsonObject) {
         PostClient postClient = this.newGadPostClient(GadABUIApiConstants.ABUI_AUTH_SCOPES_V2)
                 .addParameter("tenantId", String.valueOf(jsonObject.getLong("tenantId")));
@@ -2723,6 +2960,7 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
      * @param jsonObject JSONObject入参
      * @return java.lang.String
      **/
+    @Override
     public String employeeGetGrantRoleDataDetail(JSONObject jsonObject) {
         PostClient postClient = this.newGadPostClient(GadABUIApiConstants.ABUI_ACL_GET_GRANT_ROLE_DATA_DETAIL)
                 .addParameter("roleCode", jsonObject.getString("roleCode"))
@@ -2736,6 +2974,7 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
      * @param jsonObject JSONObject入参
      * @return java.lang.String
      **/
+    @Override
     public String employeePageOrganizationEmployeePositions(JSONObject jsonObject) {
         PostClient postClient = this.newGadPostClient(GadABUIApiConstants.ABUI_PAGE_ORGANIZATION_EMP_POSITION)
                 .addParameter("returnTotalSize", String.valueOf(jsonObject.getBoolean("returnTotalSize")))
@@ -2752,14 +2991,15 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
      * @param jsonObject JSONObject入参
      * @return java.lang.String
      **/
+    @Override
     public String employeeBatchCreateEmployeeTag(JSONObject jsonObject) {
         PostClient postClient = this.newGadPostClient(GadABUIApiConstants.ABUI_BATCH_CREATE_EMP_TAG)
                 .addParameter("tenantId", String.valueOf(jsonObject.getLong("tenantId")))
                 .addParameter("operator", jsonObject.getString("operator"));
         try {
             if (!CollectionUtils.isEmpty(jsonObject.getJSONArray("tagCodes"))) {
-                jsonObject.getJSONArray("tagCodes").forEach(uid -> {
-                    postClient.addParameter("tagCodes", String.valueOf(uid));
+                jsonObject.getJSONArray("tagCodes").forEach(item -> {
+                    postClient.addParameter("tagCodes", String.valueOf(item));
                 });
             }
         } catch (Exception e) {
@@ -2769,8 +3009,8 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
         }
         try {
             if (!CollectionUtils.isEmpty(jsonObject.getJSONArray("employeeCodes"))) {
-                jsonObject.getJSONArray("employeeCodes").forEach(uid -> {
-                    postClient.addParameter("employeeCodes", String.valueOf(uid));
+                jsonObject.getJSONArray("employeeCodes").forEach(item -> {
+                    postClient.addParameter("employeeCodes", String.valueOf(item));
                 });
             }
         } catch (Exception e) {
@@ -2786,14 +3026,15 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
      * @param jsonObject JSONObject入参
      * @return java.lang.String
      **/
+    @Override
     public String employeeBatchDeleteEmployeeTag(JSONObject jsonObject) {
         PostClient postClient = this.newGadPostClient(GadABUIApiConstants.ABUI_BATCH_DELETE_EMP_TAG)
                 .addParameter("tenantId", String.valueOf(jsonObject.getLong("tenantId")))
                 .addParameter("operator", jsonObject.getString("operator"));
         try {
             if (!CollectionUtils.isEmpty(jsonObject.getJSONArray("tagCodes"))) {
-                jsonObject.getJSONArray("tagCodes").forEach(uid -> {
-                    postClient.addParameter("tagCodes", String.valueOf(uid));
+                jsonObject.getJSONArray("tagCodes").forEach(item -> {
+                    postClient.addParameter("tagCodes", String.valueOf(item));
                 });
             }
         } catch (Exception e) {
@@ -2803,8 +3044,8 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
         }
         try {
             if (!CollectionUtils.isEmpty(jsonObject.getJSONArray("employeeCodes"))) {
-                jsonObject.getJSONArray("employeeCodes").forEach(uid -> {
-                    postClient.addParameter("employeeCodes", String.valueOf(uid));
+                jsonObject.getJSONArray("employeeCodes").forEach(item -> {
+                    postClient.addParameter("employeeCodes", String.valueOf(item));
                 });
             }
         } catch (Exception e) {
@@ -2820,6 +3061,7 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
      * @param jsonObject JSONObject入参
      * @return java.lang.String
      **/
+    @Override
     public String employeePageEmployeesByTagCode(JSONObject jsonObject) {
         PostClient postClient = this.newGadPostClient(GadABUIApiConstants.ABUI_PAGE_EMP_BY_TAG_CODE)
                 .addParameter("tagCode", jsonObject.getString("tagCode"))
@@ -2834,6 +3076,7 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
      * @param jsonObject JSONObject入参
      * @return java.lang.String
      **/
+    @Override
     public String employeeUpdateTagStatus(JSONObject jsonObject) {
         PostClient postClient = this.newGadPostClient(GadABUIApiConstants.ABUI_TAG_UPDATE_TAG_STATUS)
                 .addParameter("tagCode", jsonObject.getString("tagCode"))
@@ -2848,6 +3091,7 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
      * @param jsonObject JSONObject入参
      * @return java.lang.String
      **/
+    @Override
     public String employeePageTags(JSONObject jsonObject) {
         PostClient postClient = this.newGadPostClient(GadABUIApiConstants.ABUI_TAG_PAGE_TAGS)
                 .addParameter("pageSize", String.valueOf(jsonObject.getInteger("pageSize")))
@@ -2862,6 +3106,7 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
      * @param jsonObject JSONObject入参
      * @return java.lang.String
      **/
+    @Override
     public String employeeDeleteTag(JSONObject jsonObject) {
         PostClient postClient = this.newGadPostClient(GadABUIApiConstants.ABUI_TAG_DELETE_TAGS)
                 .addParameter("tagCode", jsonObject.getString("tagCode"))
@@ -2875,6 +3120,7 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
      * @param jsonObject JSONObject入参
      * @return java.lang.String
      **/
+    @Override
     public String employeeDeleteTagGroup(JSONObject jsonObject) {
         PostClient postClient = this.newGadPostClient(GadABUIApiConstants.ABUI_TAG_DELETE_TAG_GROUP)
                 .addParameter("tenantId", String.valueOf(jsonObject.getLong("tenantId")))
@@ -2888,6 +3134,7 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
      * @param jsonObject JSONObject入参
      * @return java.lang.String
      **/
+    @Override
     public String employeePagTagsByGroupCode(JSONObject jsonObject) {
         PostClient postClient = this.newGadPostClient(GadABUIApiConstants.ABUI_TAG_PAGE_TAGS_BY_GROUP_CODE)
                 .addParameter("pageSize", String.valueOf(jsonObject.getInteger("pageSize")))
@@ -2903,6 +3150,7 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
      * @param jsonObject JSONObject入参
      * @return java.lang.String
      **/
+    @Override
     public String employeeGetTagDetail(JSONObject jsonObject) {
         PostClient postClient = this.newGadPostClient(GadABUIApiConstants.ABUI_TAG_GET_TAG_DETAIL)
                 .addParameter("tagCode", jsonObject.getString("tagCode"))
@@ -2915,13 +3163,14 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
      * @param jsonObject JSONObject入参
      * @return java.lang.String
      **/
+    @Override
     public String employeeGetTagsDetailByCodes(JSONObject jsonObject) {
         PostClient postClient = this.newGadPostClient(GadABUIApiConstants.ABUI_TAG_GET_TAGS_DETAIL_BY_CODES)
                 .addParameter("tenantId", String.valueOf(jsonObject.getLong("tenantId")));
         try {
             if (!CollectionUtils.isEmpty(jsonObject.getJSONArray("tagCodes"))) {
-                jsonObject.getJSONArray("tagCodes").forEach(uid -> {
-                    postClient.addParameter("tagCodes", String.valueOf(uid));
+                jsonObject.getJSONArray("tagCodes").forEach(item -> {
+                    postClient.addParameter("tagCodes", String.valueOf(item));
                 });
             }
         } catch (Exception e) {
@@ -2937,6 +3186,7 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
      * @param jsonObject JSONObject入参
      * @return java.lang.String
      **/
+    @Override
     public String employeeCreateTagGroup(JSONObject jsonObject) {
         PostClient postClient = this.newGadPostClient(GadABUIApiConstants.ABUI_TAG_CREATE_TAG_GROUP)
                 .addParameter("creator", jsonObject.getString("creator"))
@@ -2951,6 +3201,7 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
      * @param jsonObject JSONObject入参
      * @return java.lang.String
      **/
+    @Override
     public String employeeAddTag(JSONObject jsonObject) {
         PostClient postClient = this.newGadPostClient(GadABUIApiConstants.ABUI_TAG_ADD_TAG)
                 .addParameter("tagName", jsonObject.getString("tagName"))
@@ -2959,8 +3210,8 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
                 .addParameter("tagDescription", jsonObject.getString("tagDescription"));
         try {
             if (!CollectionUtils.isEmpty(jsonObject.getJSONArray("tagGroupCodes"))) {
-                jsonObject.getJSONArray("tagGroupCodes").forEach(uid -> {
-                    postClient.addParameter("tagGroupCodes", String.valueOf(uid));
+                jsonObject.getJSONArray("tagGroupCodes").forEach(item -> {
+                    postClient.addParameter("tagGroupCodes", String.valueOf(item));
                 });
             }
         } catch (Exception e) {
@@ -2976,6 +3227,7 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
      * @param jsonObject JSONObject入参
      * @return java.lang.String
      **/
+    @Override
     public String employeePageTagGroups(JSONObject jsonObject) {
         PostClient postClient = this.newGadPostClient(GadABUIApiConstants.ABUI_TAG_PAGE_TAG_GROUPS)
                 .addParameter("returnTotalSize", String.valueOf(jsonObject.getBoolean("returnTotalSize")))
@@ -2990,6 +3242,7 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
      * @param jsonObject JSONObject入参
      * @return java.lang.String
      **/
+    @Override
     public String employeePageEmployeesByTagGroupCode(JSONObject jsonObject) {
         PostClient postClient = this.newGadPostClient(GadABUIApiConstants.ABUI_PAGE_EMP_BY_TAG_GROUP_CODE)
                 .addParameter("pageSize", String.valueOf(jsonObject.getInteger("pageSize")))
