@@ -25,7 +25,12 @@ public class GadChatApiConstants {
     /**
      * 获取消息已读人数
      **/
-    public static final String CHAT_GROUP_MESSAGE_READ_USERS= "/chat/group/messageReadUsers";
+    public static final String CHAT_GROUP_MESSAGE_READ_USERS = "/chat/group/messageReadUsers";
+
+    /**
+     * 更新群会话
+     **/
+    public static final String CHAT_GROUP_UPDATE = "/chat/group/update";
 
 
 }

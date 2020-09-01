@@ -37,4 +37,11 @@ interface GadChatApiService {
      **/
     String chatGroupMessageReadUsers(JSONObject jsonObject);
 
+    /**
+     * 更新群会话
+     * @param jsonObject JSONObject入参
+     * @return java.lang.String
+     **/
+    String chatGroupUpdate(JSONObject jsonObject);
+
 }
