@@ -593,7 +593,7 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
      **/
     @Override
     public String bipWaterMarkTemplateDel(JSONObject jsonObject) {
-        PostClient postClient = this.newGadPostClient(GadWaterMarkConstants.BIP_WATERMARK_TEMPLATE_PAGE_QUERY);
+        PostClient postClient = this.newGadPostClient(GadWaterMarkConstants.BIP_WATERMARK_TEMPLATE_DEL);
         try {
             if(!CollectionUtils.isEmpty(jsonObject.getJSONArray("templateIds"))) {
                 jsonObject.getJSONArray("templateIds").forEach(item -> {
@@ -1603,7 +1603,7 @@ public class GadApiTemplate extends GadClientTemplate implements GadBECBApiServi
      **/
     @Override
     public String mediaDownload(String accessToken, String mediaId) {
-        PostClient postClient = this.newGadPostClient(GadJsApiAuthConstants.GET_JS_API_TOKEN)
+        PostClient postClient = this.newGadPostClient(GadFileStorageConstants.MEDIA_DOWNLOAD)
                 .addParameter("access_token", accessToken)
                 .addParameter("media_id", mediaId);
         return postClient.post();
