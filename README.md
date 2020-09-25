@@ -3,6 +3,7 @@
 </p>
 
 ## maven 引用：
+1. 引用报错是因为官方SDK没有开源协议无法编译到官方仓库 请自行编译到Nexus或者本地仓库
 ```xml
     <dependency>
         <groupId>cn.locusc</groupId>
