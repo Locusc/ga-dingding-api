@@ -70,7 +70,7 @@
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
-            <version>1.2.73</version>
+            <version>1.2.83</version>
         </dependency>
         <!-- 政务钉钉官方请求SDK -->
         <dependency>
